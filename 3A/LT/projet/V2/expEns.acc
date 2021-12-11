@@ -1,0 +1,60 @@
+/* Fichier expEns.acc */
+
+%prelude{ /* Code C */
+   /* Inclusion de bibliotheques C */
+   #include <stdio.h>
+   #include <malloc.h>
+   #include "yystype.h" /* Redefinition du type yylval */
+   
+   /* Action de fin d analyse */
+   void fin_analyse(){
+        printf("Syntaxe correcte\n");
+   }
+   
+   void cmp_ens(char lettre_h, char val_nomEns) {
+        if (lettre_h == val_nomEns) {
+            yyerror("Error : Un ensemble ne peut pas être défini par lui-même.\n");
+        }
+    }
+   
+}
+
+/* Declaration des tokens */
+%token RC, LETTRE, ENTIER, UNI, INT, COM, DIF, AFF, ACCOUV, ACCFER, PAROUV, PARFER, VIR;
+
+// Grammaire
+D : listeAffExp RC { fin_analyse(); }
+;
+
+listeAffExp : listeAffExp RC affExp
+            | affExp
+;
+
+affExp : LETTRE <val> { printf("Un ensemble reconnu : %c\n", val.nomEns); } AFF { lettre_h = val.nomEns ; } ensemble <lettre_h>
+;
+
+ensemble <%in char lettre_h> : ACCOUV listeEntiers ACCFER
+                             | ACCOUV ACCFER
+                             | LETTRE <val> { printf("Un ensemble reconnu : %c  ->  ", val.nomEns); printf("%c, %c\n", lettre_h, val.nomEns); cmp_ens(lettre_h, val.nomEns); }
+                             | { lettre1_h = lettre_h ; } expr <lettre1_h>
+;
+
+listeEntiers : listeEntiers VIR ENTIER
+             | ENTIER
+;
+
+expr <%in char lettre_h> : PAROUV opNaire {lettre1_h = lettre_h ; } ensemble <lettre1_h> {lettre2_h = lettre_h ; } ensemble <lettre2_h> {lettre3_h = lettre_h ; } listeEnsemble <lettre3_h> PARFER
+                         | PAROUV opBinaire {lettre4_h = lettre_h ; } ensemble <lettre4_h> {lettre5_h = lettre_h ; } ensemble <lettre5_h> PARFER
+;
+
+listeEnsemble <%in char lettre_h> : { lettre1_h = lettre_h ; } listeEnsemble <lettre1_h> {lettre2_h = lettre_h ; } ensemble <lettre2_h>
+                                  | 
+;
+
+opNaire : UNI
+        | INT
+;
+
+opBinaire : COM
+          | DIF
+;

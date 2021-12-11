@@ -1,0 +1,141 @@
+"Id";"Name";"Gender";"Job";"House";"Patronus";"Species";"Hair_colour";"Eye_colour";"Sorts";"Points"
+"1";"Harry James Potter";"Male";"Student";"Gryffindor";"Stag";"Human";"Black";"Bright green";226;78
+"2";"Ronald Bilius Weasley";"Male";"Student";"Gryffindor";"Jack Russell terrier";"Human";"Red";"Blue";42;86
+"3";"Hermione Jean Granger";"Female";"Student";"Gryffindor";"Otter";"Human";"Brown";"Brown";230;33
+"4";"Albus Percival Wulfric Brian Dumbledore";"Male";"Headmaster";"Gryffindor";"Phoenix";"Human";"Silver| formerly auburn";"Blue";129;-1
+"5";"Rubeus Hagrid";"Male";"Keeper of Keys and Grounds | Professor of Care of Magical Creatures";"Gryffindor";"None";"Half-Human/Half-Giant";"Black";"Black";127;-1
+"6";"Neville Longbottom";"Male";"Student";"Gryffindor";"Non-corporeal";"Human";"Blond";NA;130;95
+"7";"Fred Weasley";"Male";"Student";"Gryffindor";"Unknown";"Human";"Red";"Brown";245;79
+"8";"George Weasley";"Male";"Student";"Gryffindor";"Unknown";"Human";"Red";"Brown";312;17
+"9";"Ginevra (Ginny) Molly Weasley";"Female";"Student";"Gryffindor";"Horse";"Human";"Red";"Bright brown";146;24
+"10";"Dean Thomas";"Male";"Student";"Gryffindor";"Unknown";"Human";"Black";"Brown";354;89
+"11";"Seamus Finnigan";"Male";"Student";"Gryffindor";"Fox";"Human";"Sandy";NA;131;57
+"12";"Lily J. Potter";"Female";NA;"Gryffindor";"Doe";"Human";"Auburn";"Bright green";327;35
+"13";"James Potter";"Male";NA;"Gryffindor";"Stag";"Human";"Black";"Hazel";36;97
+"14";"Sirius Black";"Male";NA;"Gryffindor";"Unknown";"Human";"Black";"Grey";34;39
+"15";"Remus John Lupin";"Male";"Professor<U+00A0>of<U+00A0>Defence Against the Dark Arts<U+00A0>";"Gryffindor";"Wolf";"Werewolf";"Light brown flecked with grey";"Green";135;-1
+"16";"Peter Pettigrew";"Male";"The Servant of Lord Voldemort";"Gryffindor";"None";"Human";"Colourless and balding";"Blue";329;-1
+"17";"Percy Ignatius Weasley";"Male";"Student|Prefect|  Personal assistant to Barty Crouch Snr";"Gryffindor";"Unknown";"Human";"Red";"Blue";106;-1
+"18";"(Bill) William Arthur Weasley";"Male";"Curse-Breaker<U+00A0>for<U+00A0>Gringotts Bank";"Gryffindor";"Unknown";"Human<U+00A0>(Werewolf<U+00A0>traits)";"Red";"Blue";54;-1
+"19";"Charles Weasley";"Male";"Dragonologist";"Gryffindor";"Unknown";"Human";"Red";"Grey";133;-1
+"20";"Lee Jordan<U+00A0>";"Male";"Student";"Gryffindor";"Unknown";"Human";"Black";"Brown";19;13
+"21";"Oliver Wood";"Male";"Student";"Gryffindor";"Unknown";"Human";NA;NA;47;38
+"22";"Angelina Johnson";"Female";"Student";"Gryffindor";"Unknown";"Human";"Brown";"Brown";267;61
+"23";"Katie Bell";"Female";"Student";"Gryffindor";"Unknown";"Human";"Brown";"Brown";161;22
+"24";"Alicia Spinnet";"Female";"Student";"Gryffindor";"Unknown";"Human";"Brown";"Brown";38;29
+"25";"Lavender Brown";"Female";"Student";"Gryffindor";"Unknown";"Human";"Blond";"Blue";266;31
+"26";"Parvati Patil";"Female";"Student";"Gryffindor";"Unknown";"Human";"Dark";"Dark";240;46
+"27";"Romilda Vane";"Female";"Student";"Gryffindor";"Unknown";"Human";"Black";"Dark";284;83
+"28";"Colin Creevey";"Male";"Student";"Gryffindor";"Unknown";"Human";"Mousy";NA;23;58
+"29";"Cormac McLaggen";"Male";"Student";"Gryffindor";"Unknown";"Human";"Blond";NA;237;62
+"30";"Minerva McGonagall";"Female";"Professor<U+00A0>of<U+00A0>Transfiguration<U+00A0>| Head of Gryffindor";"Gryffindor";"Cat";"Human";"Black";"Green";45;-1
+"31";"Molly Weasley";"Female";NA;"Gryffindor";"Unknown";"Human";"Red";"Bright brown";61;50
+"32";"Arthur Weasley";"Male";"Head of the<U+00A0>Misuse of Muggle Artefacts Office";"Gryffindor";"Weasel";"Human";"Red";"Green";335;-1
+"33";"Quirinus Quirrell";"Male";"Defence Against the Dark Arts(1991-1992)";"Ravenclaw";"Non-corporeal";"Human";NA;NA;93;-1
+"34";"Cho Chang";"Female";"Student";"Ravenclaw";"Swan";"Human";"Black";"Dark";21;39
+"35";"Luna Lovegood";"Female";"Student";"Ravenclaw";"Hare";"Human";"Dirty-blonde";"Pale silvery";194;31
+"975";"Gilderoy Lockhart";"Male";"Defence Against the Dark Arts(1992-1993)";"Ravenclaw";"Non-corporeal";"Human";"Blond";"Blue";133;-1
+"37";"Filius Flitwick";"Male";"Professor of Charms | Head of Ravenclaw";"Ravenclaw";"Non-corporeal";"Human(goblin ancestry)";"White";NA;136;-1
+"38";"Sybill Patricia Trelawney";"Female";"Professor<U+00A0>of<U+00A0>Divination";"Ravenclaw";"Non-corporeal";"Human";NA;NA;37;-1
+"39";"Garrick Ollivander";"Male";"Wandmaker";"Ravenclaw";"Non-corporeal";"Human";NA;"Silvery";287;-1
+"40";"Myrtle Elizabeth Warren (Moaning Myrtle)";"Female";"Student";"Ravenclaw";"Unknown";"Ghost";NA;NA;66;70
+"41";"Padma Patil";"Female";"Student";"Ravenclaw";"Non-corporeal";"Human";"Dark";"Dark";229;87
+"42";"Michael Corner";"Male";"Student";"Ravenclaw";"Squirrel";"Human";"Black";"Brown";161;91
+"43";"Marietta Edgecombe";"Female";"Student";"Ravenclaw";"Unknown";"Human";"Reddish-blonde";"Grey";131;82
+"44";"Terry Boot";"Male";"Student";"Ravenclaw";"Unknown";"Human";NA;NA;143;95
+"45";"Anthony Goldstein";"Male";"Student";"Ravenclaw";"Non-corporeal";"Human";"Blonde";"Grey";195;60
+"46";"Severus Snape";"Male";"Professor of Potions | Head of Slytherin";"Slytherin";"Doe";"Human";"Black";"Black";3;-1
+"47";"Draco Malfoy";"Male";"Student";"Slytherin";"Unknown";"Human";"White-blond";"Grey";26;27
+"48";"Vincent Crabbe";"Male";"Student";"Slytherin";"Unknown";"Human";"Black";"Black";192;31
+"49";"Gregory Goyle";"Male";"Student";"Slytherin";"Unknown";"Human";"Brown";NA;218;11
+"50";"Bellatrix Lestrange";"Female";NA;"Slytherin";NA;"Human";"Black";NA;32;75
+"51";"Dolores Jane Umbridge";"Female";"Professor<U+00A0>of<U+00A0>Defence Against the Dark Arts<U+00A0>| Department of Magical Law Enforcement";"Slytherin";"Cat";"Human";"Iron grey";NA;239;-1
+"52";"Horace Eugene Flaccus Slughorn";NA;"Professor of Potions";"Slytherin";"Non-corporeal";"Human";"Bald";"Gooseberry";18;-1
+"53";"Lucius Malfoy";"Male";"School Governor";"Slytherin";"Unknown";"Human";"White-blond";"Grey";331;-1
+"54";"Narcissa Malfoy";"Female";NA;"Slytherin";"Unknown";"Human";"Blonde";"Blue";196;24
+"55";"Regulus Arcturus Black";"Male";NA;"Slytherin";"Non-corporeal";"Human";"Black";NA;110;18
+"56";"Pansy Parkinson";"Female";"Student";"Slytherin";"Unknown";"Human";NA;NA;323;31
+"57";"Blaise Zabini";"Male";"Student";"Slytherin";"Unknown";"Human";"Black";"Brown";254;85
+"58";"Tom Marvolo Riddle";"Male";"Student";"Slytherin";"Unknown";"Human";"Bald";"Scarlet<U+00A0>";31;93
+"59";"Theodore Nott";"Male";"Student";"Slytherin";"Unknown";"Human";"Brown";NA;311;89
+"60";"Rodolphus Lestrange";"Male";NA;"Slytherin";"Unknown";"Human";"Dark";"Dark";111;88
+"61";"Millicent Bulstrode";"Female";"Student";"Slytherin";"Unknown";"Human";"Black";NA;42;84
+"62";"Graham Montague";"Male";"Student";"Slytherin";"Unknown";"Human";"Brown";"Brown";120;27
+"63";"Bloody Baron";"Male";"Slytherin House Ghost";"Slytherin";"Unknown";"Ghost";NA;NA;305;-1
+"64";"Marcus Flint";"Male";"Student";"Slytherin";"Unknown";"Human";"Black";NA;73;66
+"65";"Penelope Clearwater";"Female";"Student";"Ravenclaw";"Non-corporeal";"Human";"Blonde";NA;189;9
+"66";"Roger Davies";"Male";"Student";"Ravenclaw";"Unknown";"Human";"Dark";"Dark";289;58
+"67";"Marcus Belby";"Male";"Student";"Ravenclaw";"Unknown";"Human";"Brown";"Dark";69;7
+"68";"Salazar Slytherin";"Male";"Founder of Slytherin";"Slytherin";"Unknown";"Human";"Grey";"Dark";114;-1
+"69";"Godric Gryffindor";"Male";"Founder of Gryffindor";"Gryffindor";"Unknown";"Human";"Red";"Green";228;-1
+"70";"Rowena Ravenclaw";"Female";"Founder of Ravenclaw";"Ravenclaw";"Unknown";"Human";"Black";"Dark";323;-1
+"71";"Nicholas de Mimsy-Porpington";"Male";"Gryffindor House Ghost";"Gryffindor";"Unknown";"Ghost";"Grey";NA;32;-1
+"72";"Cuthbert Binns";"Male";"Professor<U+00A0>of<U+00A0>History of Magic<U+00A0>";NA;"Unknown";"Ghost";"White (balding)";"Black";53;-1
+"73";"Barty Crouch Jr.";"Male";"Professor<U+00A0>of<U+00A0>Defence Against the Dark Arts<U+00A0>(as Alastor Moody)<U+00A0>";NA;"Unknown";"Human";"Straw blond";"Pale, freckled";74;-1
+"74";"Charity Burbage";"Female";"Professor of Muggle Studies";NA;"Non-corporeal";"Human";"Blonde";NA;286;-1
+"75";"Firenze";"Male";"Professor<U+00A0>of<U+00A0>Divination";NA;NA;"Centaur";"White-blond";"Astonishingly blue";140;-1
+"76";"Alecto Carrow";"Female";"Professor<U+00A0>of<U+00A0>Muggle Studies";"Slytherin";"Unknown";"Human";NA;NA;199;-1
+"77";"Amycus Carrow";"Male";"Professor<U+00A0>of<U+00A0>Dark Arts";"Slytherin";"Unknown";"Human";NA;NA;107;-1
+"78";"Helga Hufflepuff";"Female";"Founder of Hufflepuff";"Hufflepuff";"Unknown";"Human";"Brown";"Blue";276;-1
+"79";"Fat Friar";"Male";"Hufflepuff House Ghost";"Hufflepuff";"Unknown";"Ghost";"Brown";NA;32;-1
+"80";"Helena Ravenclaw";"Female";"Ravenclaw House Ghost";"Ravenclaw";"Unknown";"Ghost";"Black";"Grey";140;-1
+"81";"Nymphadora Tonks";"Female";"Auror";"Hufflepuff";"Jack rabbit, Wolf";"Human";"Variable";"Variable";305;-1
+"82";"Pomona Sprout";"Female";"Professor of Herbology | Head of Hufflepuff House";"Hufflepuff";"Non-corporeal";"Human";NA;"Grey";346;-1
+"83";"Newton Scamander";"Male";"Employee in the<U+00A0>Beast Division<U+00A0>of the<U+00A0>Department for the Regulation and Control of Magical Creatures";"Hufflepuff";"Unknown";"Human";"Red brown";"Blue";254;-1
+"84";"Cedric Diggory";"Male";"Student";"Hufflepuff";"Unknown";"Human";"Dark";"Grey";259;36
+"85";"Justin Finch-Fletchley";"Male";"Student";"Hufflepuff";"Non-corporeal";"Human";"Red";NA;9;83
+"86";"Zacharias Smith";"Male";"Student";"Hufflepuff";"Unknown";"Human";"Blonde";NA;131;60
+"87";"Hannah Abbott";"Female";"Student";"Hufflepuff";"Non-corporeal";"Human";"Blonde";"Brown";334;85
+"88";"Ernest Macmillan";"Male";"Student";"Hufflepuff";"Boar";"Human";"Blond";NA;147;26
+"89";"Susan Bones";"Female";"Student";"Hufflepuff";"Unknown";"Human";NA;NA;330;54
+"90";"Walden Macnair";"Male";"Executioner<U+00A0>for the<U+00A0>Committee for the Disposal of Dangerous Creatures";"Slytherin";"Unknown";"Human";"Black";NA;325;-1
+"91";"Augustus Rookwood";"Male";"Unspeakable";"Slytherin";"None";"Human";"Brown/greying";NA;246;-1
+"92";"Antonin Dolohov";"Male";"Death Eater";"Slytherin";"None";"Human";"Dark";NA;168;-1
+"93";"Corban Yaxley";"Male";"Head of the<U+00A0>Department of Magical Law Enforcement";"Slytherin";"None";"Human";"Blonde";"Blue";15;-1
+"94";"Igor Karkaroff";"Male";"Headmaster of<U+00A0>Durmstrang Institute";NA;"None";"Human";"Silver| formerly black";NA;338;-1
+"95";"Kingsley Shacklebolt";"Male";"Auror  | Minister for Magic";NA;"Lynx";"Human";"Bald";"Black";152;-1
+"96";"Alastor Moody";"Male";"Auror";NA;"Non-corporeal";"Human";"Grey";"One dark,<U+00A0>one electric blue";346;-1
+"97";"Alice Longbottom";"Female";"Auror";NA;"Unknown";"Human";"Blonde";NA;48;-1
+"98";"Frank Longbottom";"Male";"Auror";"Gryffindor";"Unknown";"Human";"Blonde";NA;33;-1
+"99";"Rufus Scrimgeour";"Male";"Head of<U+00A0>Auror Office| Minister for Magic";NA;"Non-corporeal";"Human";"Tawny";"Yellowish";157;-1
+"100";"Cornelius Oswald Fudge";"Male";"Minister for Magic";NA;"Non-corporeal";"Human";"Grey";NA;207;-1
+"101";"Barty Crouch Sr.";"Male";"Head of the<U+00A0>Department of International Magical Cooperation";NA;"Non-corporeal";"Human";"Grey";NA;192;-1
+"102";"Amos Diggory";"Male";"Employee of the<U+00A0>Department for the Regulation and Control of Magical Creatures[";NA;"Non-corporeal";"Human";"Brown";"Ruddy";275;-1
+"103";"Dedalus Diggle";"Male";NA;NA;"Non-corporeal";"Human";NA;NA;354;36
+"104";"Elphias Doge";"Male";"Special Advisor to the Wizengamot";NA;"Non-corporeal";"Human";"Silver";"Grey/Blue[";184;-1
+"106";"Aberforth Dumbledore";"Male";"Owner and Barman of the<U+00A0>Hog's Head Inn";NA;"Goat";"Human";"Grey";"Bright Blue";242;-1
+"107";"Mundungus Fletcher";"Male";"Dealer of wizarding artifacts";NA;"Non-corporeal";"Human";"Ginger";"Brown";266;-1
+"108";"Sturgis Podmore";"Male";"Advance Guard";NA;"Unknown";"Human";"Straw-coloured";"Brown";172;-1
+"109";"Hestia Jones";"Female";"Advance Guard";NA;"Unknown";"Human";"Black";NA;207;-1
+"110";"Marlene McKinnon";"Female";NA;NA;"Unknown";"Human";"Red";"Brown";189;10
+"111";"Fabian Prewett";"Male";NA;NA;"Unknown";"Human";"Red";"Grey";159;91
+"112";"Gideon Prewett";"Male";NA;NA;"Unknown";"Human";"Red";"Dark Grey";12;27
+"113";"Emmeline Vance";"Female";"Advance Guard";NA;"Unknown";"Human";NA;NA;109;-1
+"114";"Edgar Bones";"Male";NA;"Hufflepuff";"Unknown";"Human";"Reddish-brown";"Grey";145;25
+"115";"Dorcas Meadowes";"Female";NA;NA;"Unknown";"Human";"Black";"Brown";307;30
+"116";"Benjy Fenwick";"Male";NA;NA;"Unknown";"Human";"Black";"Black";116;31
+"120";"Petunia Dursley";"Female";NA;NA;NA;"Human<U+00A0>";"Blonde";NA;289;57
+"121";"Vernon Dursley";"Male";"Director at<U+00A0>Grunnings";NA;NA;"Human<U+00A0>";"Black";NA;320;-1
+"122";"Dudley Dursley";"Male";NA;NA;NA;"Human<U+00A0>";"Blond";"Blue";101;95
+"123";"Marge Dursley";"Female";"Dog breeder";NA;NA;"Human<U+00A0>";"Grey";NA;131;-1
+"124";"Dennis Creevey";"Male";"Student";"Gryffindor";"Unknown";"Human<U+00A0>";"Mousy brown";NA;229;38
+"125";"Albus Severus Potter";"Male";"Student";"Slytherin";"Unknown";"Human<U+00A0>";"Jet-black";"Bright green";192;59
+"126";"Scorpius Hyperion Malfoy";"Male";"Student";"Slytherin";"Unknown";"Human<U+00A0>";"White blond";"Grey";17;70
+"127";"Edward Remus Lupin";"Male";"Student";"Hufflepuff";"Unknown";"Human<U+00A0>(Metamorphmagus)";"Variable";"Variable";168;23
+"128";"James Sirius Potter";"Male";"Student";"Gryffindor";"Unknown";"Human<U+00A0>";NA;NA;256;36
+"129";"Rose Granger-Weasley";"Female";"Student";"Gryffindor";"Unknown";"Human<U+00A0>";"Red";NA;45;54
+"130";"Argus Filch";"Male";"Caretaker of<U+00A0>Hogwarts";NA;NA;"Human<U+00A0>";"Grey";"Pale";38;-1
+"131";"Poppy Pomfrey";"Female";"Matron at<U+00A0>Hogwarts School";NA;"Non-corporeal";"Human<U+00A0>";NA;NA;52;-1
+"132";"Rolanda Hooch";"Female";"Flying Instructor at Hogwarts";NA;"Non-corporeal";"Human<U+00A0>";"Grey";"Yellow";12;-1
+"133";"Irma Pince";"Female";"Librarian at Hogwarts";NA;"Non-corporeal";"Human<U+00A0>";NA;NA;77;-1
+"134";"Aurora Sinistra";"Female";"Astronomer at Hogwarts";NA;"Unknown";"Human<U+00A0>";"Dark";"Dark";168;-1
+"135";"Septima Vector";"Female";"Professor<U+00A0>of<U+00A0>Arithmancyat<U+00A0>Hogwarts";NA;"Unknown";"Human<U+00A0>";"Black";NA;107;-1
+"136";"Wilhelmina Grubbly-Plank";"Female";"Substitute professor<U+00A0>of<U+00A0>Care of Magical Creatures<U+00A0>at<U+00A0>Hogwarts";NA;"Non-corporeal";"Human<U+00A0>";"Grey";NA;22;-1
+"137";"Fenrir Greyback";"Male";NA;NA;"None";"Werewolf";"Grey";NA;50;86
+"138";"Gellert Grindelwald";"Male";"Revolutionary leader(c.<U+00A0>1920s[6]<U+00A0><U+0096><U+00A0>1945)";NA;NA;"Human<U+00A0>";"Blond";"Blue";97;-1
+"139";"Dobby";"Male";"Malfoy family's house-elf (? - 1993),
+Hogwarts kitchens worker (December 1994 - 1998)";NA;NA;"House elf";"Green";NA;269;-1
+"140";"Kreacher";"Male";"
+Black family's house-elf (?-1996), 
+Harry Potter's house-elf, 
+Hogwarts kitchen worker";NA;NA;"House elf";"White";NA;137;-1

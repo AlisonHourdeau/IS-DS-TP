@@ -1,0 +1,21 @@
+Hourdeau Alison IS2A4
+
+TP1 - Exercice 2:
+
+- afficher les titres des livres parus après 2010
+code : livre(_,ref(_,ANNEE),TITRE) , ANNEE>2010.
+réponse : 
+ANNEE = 2011
+TITRE = 'Prolog Programming for Artificial Intelligence' ? ;
+
+ANNEE = 2011
+TITRE = 'Semantic Web for the Working Ontologist' ? ;
+
+ANNEE = 2013
+TITRE = 'Learning Sparql,2nd edition'
+
+- afficher le nom et le prénom de l'auteur du livre 'Learning Sparql,2nd edition'
+code : livre(auteur(NOM,PRENOM),ref(_,_), 'Learning Sparql,2nd edition').
+réponse : 
+NOM = ducharme
+PRENOM = bob

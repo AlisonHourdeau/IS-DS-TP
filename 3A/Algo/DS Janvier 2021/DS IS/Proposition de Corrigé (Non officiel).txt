@@ -1,0 +1,125 @@
+Loterie
+Premiere Partie
+
+Question 1
+
+Fonction findNbTirages(Lotterie) :Entier
+	D: Lotterie:Matrice [NbMax][NbNum]
+	L: i : Entier, stop : Boolean
+	i=1
+	stop=false
+	Tantque i<=NbMax et stop=false:
+		Si loterie[i][1]=-1 Alors
+			stop=true
+		FinSi
+		i++
+	FinTantque
+	retourner(i-1)
+FinFonction
+
+Question 2
+
+
+Action FindMinMaxTirage(Lotterie,tirage,min,max)
+	D:Lotterie:Matrice [NbMax][NbNum],tirage :Entier
+	D/R:min,max :Entier
+	min=Lotterie[tirage][1]
+	max=Lotterie[tirage][Nbnum]
+FinAction
+
+Question 3
+
+Action FindMinMax(Lotterie,min,max)
+	D:Lotterie:Matrice [NbMax][NbNum]
+	D/R:min,max : Entier
+	L: nbtirages,minlocal,maxlocal,i : Entier
+	nbtirages = findNbTirages(Lotterie)
+	FindMinMaxTirage(Lotterie,1,min,max)
+	Pour i allant de 2 a nbTirages
+		FindMinMaxTirage(Lotterie,i,minlocal,maxlocal)
+		Si minlocal<min Alors
+			min=minlocal
+		FinSi
+		Si maxlocal>max Alors
+			max=maxlocal
+		FinSi
+	FinPour
+FinAction
+
+Question 4
+
+Fonction ValueExistsinTirage(Lotterie,nbt,num) :Boolean
+	D:Lotterie:Matrice [NbMax][NbNum]; nbt,num : Entier
+	L:i :Entier
+	i=1
+	found=Faux
+	Tantque i <= NbNum et found=Faux:
+		Si num = lotterie[nbt][i] Alors
+			found=Vrai
+		FinSi
+	FinTantque
+	retourner(found)
+FinFonction
+
+Question 5
+
+Fonction nbOccurenceJeuLotterieTirage(Lotterie,jeu,nbt) :Entier
+	D: Lotterie:Matrice [NbMax][NbNum], jeu : Tableau d'entier [NbNum], nbt :Entier
+	L: i,occ: Entier ; found : Boolean
+	i=1
+	Tantque i <= NbNum:
+		j=1
+		Tantque j <= NbNum et found=false:
+			Si lotterie[nbt][j]=jeu[i] Alors
+				found=true
+				occ++
+			FinSi
+			j++
+		FinTantque
+		i++
+	FinTantque
+	retourner(occ)
+FinFonction
+
+Deuxieme Partie
+
+Question 6
+
+Fonction calculateGain(jo) :Reel
+	D:jo : Structure type stJoueur
+	L:gain : Reel, i: Entier
+	gain=0
+	Pour i allant de 1 a jo.nbTirages
+		gain=gain+jo.vecRes[i].gain
+	FinPour
+	retourner(gain)
+FinFonction
+	
+Question 7
+
+Action ajoutres(jo,jeu)
+	D:jeu: structure du type stJeu
+	D/R: jo : Structure du type stJoueur
+	L: i,j : Entier, found: Boolean
+	i=1
+	found=false
+	Tantque i<=NbTirages et found=false:
+		Si jo.vecRes[i].numTirage > jeu.numTirage Alors
+			found=true
+		FinSi
+		i++
+	FinTantque
+	jo.nbTirages++
+	Si found = True Alors
+		i--
+		Pour j allant de 0 a jo.nbTirages-i-1
+			jo.vecRes[jo.nbTirages-j]=jo.vecRes[jo.nbTirages-j-1]
+		FinPour
+		jo.vecRes[i]=jeu
+	Sinon
+		jo.vecRes[jo.nbTirages]=jeu
+	FinSi
+FinAction
+		
+			
+	

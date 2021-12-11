@@ -1,0 +1,11 @@
+base
+knitr
+dplyr
+plyr
+xtable
+corrplot
+cluster
+ggplot2
+factoextra
+dendextend
+data.table

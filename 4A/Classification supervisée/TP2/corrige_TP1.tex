@@ -1,0 +1,1707 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Classification supervisée : fiche TP1, corrigé},
+  pdfauthor={Vincent Vandewalle, Cristian Preda},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+\title{Classification supervisée : fiche TP1, corrigé}
+\author{Vincent Vandewalle, Cristian Preda}
+\date{}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{error =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{reprise-des-exemples-du-cours}{%
+\section{Reprise des exemples du
+cours}\label{reprise-des-exemples-du-cours}}
+
+Lancer les commandes suivantes pour retrouver les résultats des
+exercices de la première séance de cours.
+
+\hypertarget{test-du-chi-deux}{%
+\subsection{Test du Chi-deux}\label{test-du-chi-deux}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{V3V1<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{30}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{30}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{),}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DataTypeTok{byrow=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{V3V1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   30   20
+## [2,]   30   20
+## [3,]   10   15
+## [4,]   10   15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi2 =}\StringTok{ }\KeywordTok{chisq.test}\NormalTok{(V3V1)}
+\KeywordTok{str}\NormalTok{(chi2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 9
+##  $ statistic: Named num 5.36
+##   ..- attr(*, "names")= chr "X-squared"
+##  $ parameter: Named int 3
+##   ..- attr(*, "names")= chr "df"
+##  $ p.value  : num 0.147
+##  $ method   : chr "Pearson's Chi-squared test"
+##  $ data.name: chr "V3V1"
+##  $ observed : num [1:4, 1:2] 30 30 10 10 20 20 15 15
+##  $ expected : num [1:4, 1:2] 26.7 26.7 13.3 13.3 23.3 ...
+##  $ residuals: num [1:4, 1:2] 0.645 0.645 -0.913 -0.913 -0.69 ...
+##  $ stdres   : num [1:4, 1:2] 1.16 1.16 -1.46 -1.46 -1.16 ...
+##  - attr(*, "class")= chr "htest"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  V3V1
+## X-squared = 5.3571, df = 3, p-value = 0.1474
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\OperatorTok{-}\KeywordTok{pchisq}\NormalTok{(}\FloatTok{5.3571}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1474399
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(chi2}\OperatorTok{$}\NormalTok{residuals}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.357143
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Commenter code et résultats : ici on réalise un test du Chi-deux
+  d'indépendance, on ne rejetterai pas l'hypothèse d'indépendance au
+  risque \(\alpha = 0,05\).
+\end{enumerate}
+
+\hypertarget{test-de-fisher}{%
+\subsection{Test de Fisher}\label{test-de-fisher}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\KeywordTok{cbind}\NormalTok{(x,y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       x y
+##  [1,] 4 0
+##  [2,] 5 0
+##  [3,] 7 0
+##  [4,] 8 0
+##  [5,] 9 0
+##  [6,] 2 1
+##  [7,] 3 1
+##  [8,] 4 1
+##  [9,] 6 1
+## [10,] 7 1
+## [11,] 8 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lm}\NormalTok{(x}\OperatorTok{~}\KeywordTok{factor}\NormalTok{(y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = x ~ factor(y))
+## 
+## Coefficients:
+## (Intercept)   factor(y)1  
+##         6.6         -1.6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{factor}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0 0 0 0 0 1 1 1 1 1 1
+## Levels: 0 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(}\KeywordTok{lm}\NormalTok{(x}\OperatorTok{~}\NormalTok{y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: x
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## y          1  6.982  6.9818  1.3902 0.2686
+## Residuals  9 45.200  5.0222
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SCF <-}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(x[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{])}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(x))}\OperatorTok{^}\DecValTok{2}\OperatorTok{*}\DecValTok{5}\OperatorTok{+}\NormalTok{(}\KeywordTok{mean}\NormalTok{(x[}\DecValTok{6}\OperatorTok{:}\DecValTok{11}\NormalTok{])}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(x))}\OperatorTok{^}\DecValTok{2}\OperatorTok{*}\DecValTok{6}
+\NormalTok{SCR <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{c}\NormalTok{((x[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{]}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(x[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{]))}\OperatorTok{^}\DecValTok{2}\NormalTok{,(x[}\DecValTok{6}\OperatorTok{:}\DecValTok{11}\NormalTok{]}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(x[}\DecValTok{6}\OperatorTok{:}\DecValTok{11}\NormalTok{]))}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+\NormalTok{Fstat <-}\StringTok{ }\NormalTok{(SCF}\OperatorTok{/}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\NormalTok{(SCR}\OperatorTok{/}\DecValTok{9}\NormalTok{)}
+\NormalTok{pval <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(Fstat,}\DecValTok{1}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DataTypeTok{lower.tail=}\OtherTok{FALSE}\NormalTok{)}
+\NormalTok{pval}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2686035
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rsq <-}\StringTok{ }\NormalTok{SCF}\OperatorTok{/}\NormalTok{(SCF}\OperatorTok{+}\NormalTok{SCR)}
+\NormalTok{Rsq}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1337979
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(SCF,SCR,Fstat,pval,Rsq)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  6.9818182 45.2000000  1.3901850  0.2686035  0.1337979
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(x}\OperatorTok{~}\NormalTok{y))}\OperatorTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1337979
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pchisq}\NormalTok{(}\FloatTok{6.585}\OperatorTok{^}\DecValTok{2}\NormalTok{,}\DataTypeTok{df =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.548854e-11
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Commenter code et résultats : Ici on a réalisé un test de l'ANOVA,
+  sous \(H_0\) la statistique de test suit une loi de Fisher a \(K-1\),
+  \(n-K\) degré de liberté, avec \(K\) le nombre de classes et \(n\) le
+  nombre de données. Ici la probabilité critique est de \(0,2686\) donc
+  la variable \(y\) n'a pas d'effet significatif sur la variable \(x\)
+  au risque \(\alpha = 0,05\).
+\end{enumerate}
+
+\textbf{Attention} : en classification supervisée on veut prédire \(y\)
+à partir de \(x\) ! Mais le fait que la variance de \(x\) soit bien
+expliquée par \(y\) nous donne un bon indicateur du pouvoir prédictif
+\(x\) sur \(y\).
+
+\hypertarget{analyse-pruxe9liminaire-du-jeu-de-donnuxe9es-iris-anova-et-manova}{%
+\section{\texorpdfstring{Analyse préliminaire du jeu de données
+\texttt{iris}, ANOVA et
+MANOVA}{Analyse préliminaire du jeu de données iris, ANOVA et MANOVA}}\label{analyse-pruxe9liminaire-du-jeu-de-donnuxe9es-iris-anova-et-manova}}
+
+\hypertarget{analyse-pruxe9liminaire-du-jeu-de-donnuxe9es-iris}{%
+\subsection{\texorpdfstring{Analyse préliminaire du jeu de données
+\texttt{iris}}{Analyse préliminaire du jeu de données iris}}\label{analyse-pruxe9liminaire-du-jeu-de-donnuxe9es-iris}}
+
+Dans cette partie on utilisera les données \texttt{iris}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Faire \texttt{data("iris")} dans R.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"iris"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Renommer les variables ``Sepal.Length'', ``Sepal.Width'',
+  ``Petal.Length'', ``Petal.Width'',``Species'' en ``X1'', ``X2'',
+  ``X3'', ``X4'', ``Y''.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(iris) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"X1"}\NormalTok{,}\StringTok{"X2"}\NormalTok{,}\StringTok{"X3"}\NormalTok{,}\StringTok{"X4"}\NormalTok{,}\StringTok{"Y"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Représenter graphiquement le lien entre X1 et Y :
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\NormalTok{iris }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Y, }\DataTypeTok{y =}\NormalTok{ X1)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{corrige_TP1_files/figure-latex/boxplot X1 sachant Y-1.pdf}
+
+Puis faire de même pour les autres variables :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{)}
+\NormalTok{iris }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{gather}\NormalTok{(}\StringTok{"variable"}\NormalTok{,}\StringTok{"mesure"}\NormalTok{,}\OperatorTok{-}\NormalTok{Y) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Y, }\DataTypeTok{y =}\NormalTok{ mesure)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{variable, }\DataTypeTok{scales =} \StringTok{"free_y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{corrige_TP1_files/figure-latex/boxplot des X en fonction de Y-1.pdf}
+
+Commenter : On voit que les variable pour lesquelles les classes sont
+les mieux séparées sont les variable \(X_3\) et \(X_4\).
+
+\hypertarget{anova}{%
+\subsection{ANOVA}\label{anova}}
+
+Réaliser l'ANOVA de X1 en fonction de Y et obtenir le \(R^2\) associé,
+faire de même pour les autres variables. A partir des p-values, indiquer
+si la variable Y a une influence sur l'ensemble des variables. Quelle
+est la variable la mieux expliquée par Y ?
+
+Ajustement du modèle linéaire pour X1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lm}\NormalTok{(X1 }\OperatorTok{~}\StringTok{ }\NormalTok{Y, }\DataTypeTok{data =}\NormalTok{ iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = X1 ~ Y, data = iris)
+## 
+## Coefficients:
+## (Intercept)  Yversicolor   Yvirginica  
+##       5.006        0.930        1.582
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{(iris}\OperatorTok{$}\NormalTok{X1[iris}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ "setosa"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  iris$X1[iris$Y == "setosa"]
+## W = 0.9777, p-value = 0.4595
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Test de normalité groupe par groupe : }
+\KeywordTok{by}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ iris}\OperatorTok{$}\NormalTok{X1, }\DataTypeTok{INDICES =}\NormalTok{ iris}\OperatorTok{$}\NormalTok{Y, shapiro.test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## iris$Y: setosa
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dd[x, ]
+## W = 0.9777, p-value = 0.4595
+## 
+## ------------------------------------------------------------ 
+## iris$Y: versicolor
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dd[x, ]
+## W = 0.97784, p-value = 0.4647
+## 
+## ------------------------------------------------------------ 
+## iris$Y: virginica
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dd[x, ]
+## W = 0.97118, p-value = 0.2583
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Ici accepte l'hypothèse de normalité dans chacune des classes}
+
+\CommentTok{# Test d'homogénité des variances : }
+\KeywordTok{bartlett.test}\NormalTok{(iris}\OperatorTok{$}\NormalTok{X1, iris}\OperatorTok{$}\NormalTok{Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  iris$X1 and iris$Y
+## Bartlett's K-squared = 16.006, df = 2, p-value = 0.0003345
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# p-value = 0.0003345}
+\CommentTok{# On rejette l'homogénéité des variances}
+\CommentTok{# Attention : conclusion du test de l'ANOVA possiblement erronnées}
+
+\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(X1 }\OperatorTok{~}\StringTok{ }\NormalTok{Y, }\DataTypeTok{data =}\NormalTok{ iris)) }\CommentTok{# Résumé}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = X1 ~ Y, data = iris)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.6880 -0.3285 -0.0060  0.3120  1.3120 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   5.0060     0.0728  68.762  < 2e-16 ***
+## Yversicolor   0.9300     0.1030   9.033 8.77e-16 ***
+## Yvirginica    1.5820     0.1030  15.366  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.5148 on 147 degrees of freedom
+## Multiple R-squared:  0.6187, Adjusted R-squared:  0.6135 
+## F-statistic: 119.3 on 2 and 147 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(X1 }\OperatorTok{~}\StringTok{ }\NormalTok{Y, }\DataTypeTok{data =}\NormalTok{ iris))}\OperatorTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6187057
+\end{verbatim}
+
+Extension à chacune des variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sapply}\NormalTok{(}\KeywordTok{names}\NormalTok{(iris)[}\OperatorTok{-}\DecValTok{5}\NormalTok{], }
+       \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(}\KeywordTok{as.formula}\NormalTok{(}\KeywordTok{paste}\NormalTok{(x,}\StringTok{"~ Y"}\NormalTok{)), }
+                              \DataTypeTok{data =}\NormalTok{ iris))}\OperatorTok{$}\NormalTok{r.squared)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        X1        X2        X3        X4 
+## 0.6187057 0.4007828 0.9413717 0.9288829
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Commenter ces résultats : Ici la variable que dont la variance est la
+  mieux expliquée par \(Y\) est la variable \(X_4\)
+\end{enumerate}
+
+\[
+R^2_{X_4 / Y} = \frac{\mbox{Variance de }X_4 \mbox{ expliquée par } Y }{\mbox{Variance de }X_4} = 92,8\%
+\]
+
+Calcul de l'ANOVA (calcul de la p-value du test)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(}\KeywordTok{lm}\NormalTok{(X1}\OperatorTok{~}\NormalTok{Y,}\DataTypeTok{data=}\NormalTok{iris)) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: X1
+##            Df Sum Sq Mean Sq F value    Pr(>F)    
+## Y           2 63.212  31.606  119.26 < 2.2e-16 ***
+## Residuals 147 38.956   0.265                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(}\KeywordTok{lm}\NormalTok{(X1}\OperatorTok{~}\NormalTok{Y,}\DataTypeTok{data=}\NormalTok{iris))}\OperatorTok{$}\StringTok{`}\DataTypeTok{Pr(>F)}\StringTok{`}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.669669e-31           NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(}\KeywordTok{lm}\NormalTok{(X1}\OperatorTok{~}\NormalTok{Y,}\DataTypeTok{data=}\NormalTok{iris))}\OperatorTok{$}\StringTok{`}\DataTypeTok{Pr(>F)}\StringTok{`}\NormalTok{[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.669669e-31
+\end{verbatim}
+
+Extension à chacune des variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sapply}\NormalTok{(}\KeywordTok{names}\NormalTok{(iris)[}\OperatorTok{-}\DecValTok{5}\NormalTok{], }
+       \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{anova}\NormalTok{(}\KeywordTok{lm}\NormalTok{(}\KeywordTok{as.formula}\NormalTok{(}\KeywordTok{paste}\NormalTok{(x,}\StringTok{"~ Y"}\NormalTok{)), }
+                            \DataTypeTok{data =}\NormalTok{ iris))}\OperatorTok{$}\StringTok{`}\DataTypeTok{Pr(>F)}\StringTok{`}\NormalTok{[}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           X1           X2           X3           X4 
+## 1.669669e-31 4.492017e-17 2.856777e-91 4.169446e-85
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Commentez ces résultats : la sous-espèce a-t'elle un effet
+  significatif sur l'espérance de X1 ? de X2 ? de X3 ? de X4 ? Sur
+  l'espérance de
+  \(X = \begin{pmatrix} X_1 \\ X_2 \\ X_3 \\ X_4 \end{pmatrix}\) ?
+\end{enumerate}
+
+Oui la sous-espéce à un effet significatif sur chacune des variables
+explicatives.
+
+Ici vous avez testé : \[
+H_{0j} = \{ \mu_{1j} = \mu_{2j} = \mu_{3j} \} \mbox{ contre } H_{1j} = \{\exists i \neq i'|  \mu_{ij} \neq \mu_{i'j} \},
+\] pour \(j \in \{1,2,3,4\}\), c'est-à-dire pour chacune des variables
+séparément.
+
+Mais, ce que nous souhaitons tester ici est : y-a-t'il une différence
+entre groupes pour au moins une des variables ? : \[
+H_{0} = \{ \mu_{1} = \mu_{2} = \mu_{3} \} \mbox{ contre } H_{1} = \{\exists j \in \{1,2,3,4\}, \exists i \neq i'|  \mu_{ij} \neq \mu_{i'j} \}
+\] avec
+\(\mu_i = \begin{pmatrix} \mu_{i1} \\ \mu_{i2} \\ \mu_{i3} \\ \mu_{i4}\end{pmatrix}\).
+
+Comment recoller les morceaux ???
+
+Remarquons d'abord que : \[
+H_0 = \cap_{j=1}^{4} H_{0j} = H_{01} \cap H_{02} \cap H_{03} \cap H_{04}
+\]
+
+Ainsi \(H_0\) est fausse du moment qu'au moins une des \(H_{0j}\) est
+fausse. La question est alors quel est le risque de première espèce
+\(\alpha_{global}\) de rejeter \(H_0\) à tord quand on se donne un
+risque de première espèce \(\alpha\) de rejeter \(H_{0j}\) à tord pour
+\(j \in \{1,2,3,4\}\) ? Et comment choisir \(\alpha\) de manière à
+maintenir un risque global \(\alpha_{global}\) ?
+
+On note \(p_j\) les probabilités critiques associées à chacune de
+\(H_{0j}\). Sous \(H_{0j}\) on sait que \(p_j\) suit une loi uniforme
+sur \([0;1]\) (\(p_j \sim U([0;1])\)). En notant \(A_j\) l'événement
+\(H_{0j}\) est rejeté, \(A_j = \{p_j \leq \alpha \}\).
+
+\[
+P_{H_0}(\mbox{rejet de } H_0 \mbox{ à tord}) =  P_{H_0}(\cup_{j=1}^{d} A_j) = P_{H_0}(\cup_{j=1}^{d}\{p_j \leq \alpha\}) 
+\leq \sum_{j = 1}^{d}P_{H_{0j}}\left(p_j \leq \alpha\right) = d \times \alpha
+\]
+
+Ainsi, si on veut s'assurer que
+\(P_{H_0}(\mbox{rejet de } H_0 \mbox{ à tord}) \leq \alpha_{global}\),
+on peut choisir \(\alpha = \frac{\alpha_{global}}{d}\). Il s'agit de la
+correction de \textbf{Bonferroni} (cette correction est plutôt frustre
+et on peu parfois lui préférer d'autres corrections comme l'utilisation
+du False Discovery Rate (FDR) qui vise à controler le pourcentage de
+faux positifs).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  On se donne un risque de première espèce \(\alpha_{global} = 0,05\),
+  réaliser l'ajustement de Bonferroni. Rejettez-vous \(H_0\) ?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha_glo =}\StringTok{ }\FloatTok{0.05}
+\NormalTok{d =}\StringTok{ }\DecValTok{4}
+\NormalTok{alpha =}\StringTok{ }\NormalTok{alpha_glo}\OperatorTok{/}\NormalTok{d}
+\NormalTok{alpha}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0125
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pvalue =}\StringTok{ }\KeywordTok{sapply}\NormalTok{(}\KeywordTok{names}\NormalTok{(iris)[}\OperatorTok{-}\DecValTok{5}\NormalTok{], }
+       \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{anova}\NormalTok{(}\KeywordTok{lm}\NormalTok{(}\KeywordTok{as.formula}\NormalTok{(}\KeywordTok{paste}\NormalTok{(x,}\StringTok{"~ Y"}\NormalTok{)), }
+                            \DataTypeTok{data =}\NormalTok{ iris))}\OperatorTok{$}\StringTok{`}\DataTypeTok{Pr(>F)}\StringTok{`}\NormalTok{[}\DecValTok{1}\NormalTok{])}
+\NormalTok{pvalue}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           X1           X2           X3           X4 
+## 1.669669e-31 4.492017e-17 2.856777e-91 4.169446e-85
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{any}\NormalTok{(pvalue }\OperatorTok{<}\StringTok{ }\NormalTok{alpha) }\CommentTok{# TRUE : moins une des }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# p-valeurs est inférieure à 0,0125 donc on rejette H_0 au risque global alpha = 0,05 ! La distribution de X varie en fonction du groupe Y.}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{manova}{%
+\subsection{MANOVA}\label{manova}}
+
+Contrairement à la situation précédente on souhaite tester directement
+\(H_0\) contre \(H_1\), ce qui impose un modèle sur la distribution du
+vecteur \(X\) sachant la classe \(Y\) :
+
+\begin{itemize}
+\tightlist
+\item
+  \(X | Y = k \sim \mathcal{N}_d(\mu_i;\Sigma_i)\) : Hypothèse de
+  normalité sachant la classe
+\item
+  \(\Sigma_1 = \Sigma_2 = \cdots = \Sigma_K = \Sigma\) : Hypothèse
+  d'homogénéité des variances
+\end{itemize}
+
+En utilisant la fonction \texttt{ggpairs} du package \texttt{GGally} on
+représente les corrélations deux à deux entre les différentes variables
+en fonction de la variable \texttt{Y} comme suit :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(GGally)}
+\KeywordTok{ggpairs}\NormalTok{(iris, }\DataTypeTok{columns =} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ Y, }\DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{corrige_TP1_files/figure-latex/Nuages de point deux a deux-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Commenter le graphique obtenus, que dire des hypothèses de normalité
+  et d'homogénéité des variances ?
+\end{enumerate}
+
+Ici à l'allure du nuage de point on peut éventuellement admettre un
+normalité classe par classe, cependant l'hypothèse d'homogénéité des
+variance ne semble pas vérifiée (allure du nuage de point différente
+d'une classe à l'autre).
+
+A l'aide de la fonction \texttt{mshapiro.test} de la librairie
+\texttt{mvnormtest} réaliser un test de normalité pour chacune des
+classes :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# install.packages("mvnormtest")}
+\KeywordTok{library}\NormalTok{(mvnormtest)}
+\KeywordTok{mshapiro.test}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{t}\NormalTok{(iris[iris}\OperatorTok{$}\NormalTok{Y}\OperatorTok{==}\StringTok{"versicolor"}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  Z
+## W = 0.93043, p-value = 0.005739
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mshapiro.test}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{t}\NormalTok{(iris[iris}\OperatorTok{$}\NormalTok{Y}\OperatorTok{==}\StringTok{"setosa"}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  Z
+## W = 0.95878, p-value = 0.07906
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mshapiro.test}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{t}\NormalTok{(iris[iris}\OperatorTok{$}\NormalTok{Y}\OperatorTok{==}\StringTok{"virginica"}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  Z
+## W = 0.93414, p-value = 0.007955
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Commenter : Ici on rejetterai l'hypothèse de normalité, sauf pour la
+  classe setosa
+\end{enumerate}
+
+A l'aide de la fonction contenue dans le fichier \texttt{BoxMTest.R} on
+réalise le test d'égalité des matrices de variances-covariances.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{source}\NormalTok{(}\StringTok{"BoxMTest.R"}\NormalTok{) }\CommentTok{# Fichier à récupérer sur moodle}
+\KeywordTok{BoxMTest}\NormalTok{(iris[,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{],iris}\OperatorTok{$}\NormalTok{Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ------------------------------------------------
+##  MBox Chi-sqr. df P
+## ------------------------------------------------
+##   146.6632   140.9430          20       0.0000
+## ------------------------------------------------
+## Covariance matrices are significantly different.
+\end{verbatim}
+
+\begin{verbatim}
+## $MBox
+##   setosa 
+## 146.6632 
+## 
+## $ChiSq
+##  setosa 
+## 140.943 
+## 
+## $df
+## [1] 20
+## 
+## $pValue
+##       setosa 
+## 3.352034e-20
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  Commenter : Ici on rejette l'hypothèse d'homogénéité des variances.
+  Par conséquent nous ne somme pas sous les conditions d'application du
+  test de la MANOVA, on peut alors lui des versions non paramètriques ne
+  reposant pas sur l'hypothèse de normalité, comme par exemple de le
+  test de Kruskal-Wallis multivarié.
+\end{enumerate}
+
+A l'aide de la fonction \texttt{manova} de R tester l'égalité des
+espérances des groupes :
+\texttt{manova(cbind(X1,X2,X3,X4)\ \textasciitilde{}\ Y,\ data\ =\ iris)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_manova =}\StringTok{ }\KeywordTok{manova}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(X1,X2,X3,X4)}\OperatorTok{~}\NormalTok{Y,}\DataTypeTok{data=}\NormalTok{iris)}
+\end{Highlighting}
+\end{Shaded}
+
+Obtenir les résumés à partir de la fonction \texttt{summary} appliquée à
+l'objet précédent :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(iris_manova) }\CommentTok{# compléter}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Df Pillai approx F num Df den Df    Pr(>F)    
+## Y           2 1.1919   53.466      8    290 < 2.2e-16 ***
+## Residuals 147                                            
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\item
+  Commenter : Ici la statistique de test utilisée est la statistique de
+  Pillai, une transformation appliquée à la statistique de test suit
+  approximativement une loi de Fisher à \(8\) et \(290\) dgegrés de
+  liberté. Ici on rejette \(H_0\).
+\item
+  Aller voir dans l'aide de la fonction \texttt{summary.manova} pour
+  modifier la statistique de test utilisée
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{help}\NormalTok{(}\StringTok{"summary.manova"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## starting httpd help server ... done
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(iris_manova,}\StringTok{"Pillai"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Df Pillai approx F num Df den Df    Pr(>F)    
+## Y           2 1.1919   53.466      8    290 < 2.2e-16 ***
+## Residuals 147                                            
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(iris_manova,}\StringTok{"Wilks"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Df    Wilks approx F num Df den Df    Pr(>F)    
+## Y           2 0.023439   199.15      8    288 < 2.2e-16 ***
+## Residuals 147                                              
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(iris_manova,}\StringTok{"Hotelling-Lawley"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Df Hotelling-Lawley approx F num Df den Df    Pr(>F)    
+## Y           2           32.477   580.53      8    286 < 2.2e-16 ***
+## Residuals 147                                                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(iris_manova,}\StringTok{"Roy"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Df    Roy approx F num Df den Df    Pr(>F)    
+## Y           2 32.192     1167      4    145 < 2.2e-16 ***
+## Residuals 147                                            
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+  Commenter les résultats obtenus : Dans chacun des cas on rejette
+  \(H_0\).
+\end{enumerate}
+
+Par la suite on va calculer les matrices \(W\) et \(B\) qui pourraient
+être utilisées pour récalculer les statistiques de test ci-dessus.
+
+\hypertarget{analyse-factorielle-discriminante-iris-de-fisher}{%
+\section{Analyse factorielle discriminante (iris de
+Fisher)}\label{analyse-factorielle-discriminante-iris-de-fisher}}
+
+\hypertarget{calcul-des-matrices}{%
+\subsection{Calcul des matrices}\label{calcul-des-matrices}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  Calculer \(V\) la matrice de variance-covariance globale, à partir de
+  la fonction \texttt{cov.wt} en utilisant l'option
+  \texttt{method = "ML"}. Expliquer à quoi sert cette option.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{V =}\StringTok{ }\KeywordTok{cov.wt}\NormalTok{(iris[,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{],}\DataTypeTok{method =} \StringTok{"ML"}\NormalTok{)}\OperatorTok{$}\NormalTok{cov}
+\end{Highlighting}
+\end{Shaded}
+
+Attention on prendra garde de récupérer le bon élément de sortie de la
+fonction \texttt{cov.wt}, fonction qui ressort une liste contenant entre
+autres \texttt{cov}, \texttt{center}, \ldots{}
+
+On calcule les vecteurs des moyennes pour chaque groupe \(\bar{X}_{i}\)
+en s'aidant de la fonction \texttt{by}, et en restructurant le résultat
+sous forme d'un tableau.
+
+Constituez la matrice \(G\) de centres des classes composée d'une
+colonne par variable et d'une ligne par sous-espèce (on rappelle que la
+fonction \texttt{t} permet de transposer un tableau)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{by}\NormalTok{(iris[,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{],iris}\OperatorTok{$}\NormalTok{Y, colMeans)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## iris$Y: setosa
+##    X1    X2    X3    X4 
+## 5.006 3.428 1.462 0.246 
+## ------------------------------------------------------------ 
+## iris$Y: versicolor
+##    X1    X2    X3    X4 
+## 5.936 2.770 4.260 1.326 
+## ------------------------------------------------------------ 
+## iris$Y: virginica
+##    X1    X2    X3    X4 
+## 6.588 2.974 5.552 2.026
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{simplify2array}\NormalTok{(}\KeywordTok{by}\NormalTok{(iris[,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{],iris}\OperatorTok{$}\NormalTok{Y, colMeans))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    setosa versicolor virginica
+## X1  5.006      5.936     6.588
+## X2  3.428      2.770     2.974
+## X3  1.462      4.260     5.552
+## X4  0.246      1.326     2.026
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{G =}\StringTok{ }\KeywordTok{t}\NormalTok{(}\KeywordTok{simplify2array}\NormalTok{(}\KeywordTok{by}\NormalTok{(iris[,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{],iris}\OperatorTok{$}\NormalTok{Y, colMeans)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\tightlist
+\item
+  En déduire : \[
+  B = \sum_{i=1}^{K}\frac{n_i}{n}(\bar{X}_{i}-\bar{X})(\bar{X}_{i}-\bar{X})^T
+  \] où \(\bar{X}_{i}\), \(\bar{X}\) sont respectivement les vecteurs
+  colonnes des moyennes intra-classes et de la moyenne globale. Pour
+  cela on pourra remarquer que \(B\) est la matrice de covariance des
+  centres des classes pondérés par leurs effectifs (penser à
+  \texttt{cov.wt} et à son argument \texttt{wt}).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B =}\StringTok{ }\KeywordTok{cov.wt}\NormalTok{(G, }\DataTypeTok{wt =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{table}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Y)) , }\DataTypeTok{method =} \StringTok{"ML"}\NormalTok{)}\OperatorTok{$}\NormalTok{cov}
+\end{Highlighting}
+\end{Shaded}
+
+Calcul de W :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Wi =}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\KeywordTok{levels}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Y), }\ControlFlowTok{function}\NormalTok{(k)}
+  \KeywordTok{cov.wt}\NormalTok{(iris[iris}\OperatorTok{$}\NormalTok{Y}\OperatorTok{==}\StringTok{ }\NormalTok{k,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{],}\DataTypeTok{method=}\StringTok{"ML"}\NormalTok{)}\OperatorTok{$}\NormalTok{cov) }\CommentTok{# Liste de Wi}
+\NormalTok{ni =}\StringTok{ }\KeywordTok{table}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Y)  }\CommentTok{# Vecteur de ni}
+
+\NormalTok{W =}\StringTok{ }\KeywordTok{Reduce}\NormalTok{(}\StringTok{'+'}\NormalTok{,}\KeywordTok{Map}\NormalTok{(}\StringTok{'*'}\NormalTok{,Wi,ni))}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(ni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\tightlist
+\item
+  Vérifier qu'on retrouve bien : \(V = W + B\)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Proposer un indicateur synthétique du fait que V = W + B}
+\KeywordTok{norm}\NormalTok{(V }\OperatorTok{-}\StringTok{ }\NormalTok{(W }\OperatorTok{+}\StringTok{ }\NormalTok{B)) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.942091e-15
+\end{verbatim}
+
+\hypertarget{ruxe9alisation-de-lafd}{%
+\subsection{Réalisation de l'AFD}\label{ruxe9alisation-de-lafd}}
+
+On rappelle que dans R l'ACP peut se réaliser à la main comme suit :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{eigen}\NormalTok{(V) }\CommentTok{# Decomposition en valeurs propres}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## eigen() decomposition
+## $values
+## [1] 4.20005343 0.24105294 0.07768810 0.02367619
+## 
+## $vectors
+##             [,1]        [,2]        [,3]       [,4]
+## [1,]  0.36138659 -0.65658877 -0.58202985  0.3154872
+## [2,] -0.08452251 -0.73016143  0.59791083 -0.3197231
+## [3,]  0.85667061  0.17337266  0.07623608 -0.4798390
+## [4,]  0.35828920  0.07548102  0.54583143  0.7536574
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{eigen}\NormalTok{(V)}\OperatorTok{$}\NormalTok{values}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.20005343 0.24105294 0.07768810 0.02367619
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ACP=}\KeywordTok{eigen}\NormalTok{(V)}\OperatorTok{$}\NormalTok{vectors}
+\NormalTok{c=}\KeywordTok{as.matrix}\NormalTok{(iris[,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])}\OperatorTok{%*%}\NormalTok{ACP[,}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]}
+\KeywordTok{plot}\NormalTok{(c,}\DataTypeTok{col=}\NormalTok{iris}\OperatorTok{$}\NormalTok{Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{corrige_TP1_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{c =}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(c)}
+\KeywordTok{names}\NormalTok{(c) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"C1"}\NormalTok{,}\StringTok{"C2"}\NormalTok{)}
+\NormalTok{c }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Y =}\NormalTok{ iris}\OperatorTok{$}\NormalTok{Y) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ C1, }\DataTypeTok{y =}\NormalTok{ C2, }\DataTypeTok{color =}\NormalTok{ Y, }\DataTypeTok{shape =}\NormalTok{ Y)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{corrige_TP1_files/figure-latex/unnamed-chunk-10-2.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{17}
+\tightlist
+\item
+  Commenter, quel est le pourcentage d'inertie expliqué par chacun des
+  axes ? Pour les deux premiers axes
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l =}\StringTok{ }\KeywordTok{eigen}\NormalTok{(V)}\OperatorTok{$}\NormalTok{values}
+\NormalTok{l}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.20005343 0.24105294 0.07768810 0.02367619
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prop_var =}\StringTok{ }\NormalTok{l}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(l) }\CommentTok{# 0.924618723 0.053066483 0.017102610 0.005212184}
+\KeywordTok{cumsum}\NormalTok{(prop_var)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9246187 0.9776852 0.9947878 1.0000000
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{18}
+\tightlist
+\item
+  Calculer les coordonnées \(d_1\) et \(d_2\) des points projetés sur
+  les deux premières composantes discriminantes, sachant qu'en AFD on
+  diagonalise la matrice \(V^{-1}B\). Adapter le code pour réaliser
+  l'AFD, et commenter les résultats (on rappelle que l'inverse s'obtient
+  avec la fonction \texttt{solve} et le produit matriciel avec
+  l'opérateur \texttt{\%*\%}) :
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M =}\StringTok{ }\KeywordTok{solve}\NormalTok{(V) }\OperatorTok{%*%}\StringTok{ }\NormalTok{B}
+\KeywordTok{eigen}\NormalTok{(M) }\CommentTok{# Decomposition en valeurs propres}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## eigen() decomposition
+## $values
+## [1]  9.698722e-01  2.220266e-01  5.441883e-15 -5.292628e-16
+## 
+## $vectors
+##            [,1]         [,2]       [,3]       [,4]
+## [1,]  0.2087418 -0.006531964  0.2106843 -0.8850525
+## [2,]  0.3862037 -0.586610553 -0.3962378  0.2969366
+## [3,] -0.5540117  0.252561540 -0.4591404  0.2754433
+## [4,] -0.7073504 -0.769453092  0.7666797  0.2294377
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{eigen}\NormalTok{(M)}\OperatorTok{$}\NormalTok{values}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  9.698722e-01  2.220266e-01  5.441883e-15 -5.292628e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{AFD=}\KeywordTok{eigen}\NormalTok{(M)}\OperatorTok{$}\NormalTok{vectors}
+\NormalTok{d=}\KeywordTok{as.matrix}\NormalTok{(iris[,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])}\OperatorTok{%*%}\NormalTok{AFD[,}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]}
+\KeywordTok{plot}\NormalTok{(d,}\DataTypeTok{col=}\NormalTok{iris}\OperatorTok{$}\NormalTok{Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{corrige_TP1_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d =}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(d)}
+\KeywordTok{names}\NormalTok{(d) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"D1"}\NormalTok{,}\StringTok{"D2"}\NormalTok{)}
+\NormalTok{d }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Y =}\NormalTok{ iris}\OperatorTok{$}\NormalTok{Y) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ D1, }\DataTypeTok{y =}\NormalTok{ D2, }\DataTypeTok{color =}\NormalTok{ Y, }\DataTypeTok{shape =}\NormalTok{ Y)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{corrige_TP1_files/figure-latex/unnamed-chunk-12-2.pdf}
+
+Quels est la part de variance de \(d_1\) expliquée par la classe ? De
+\(d_2\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{19}
+\tightlist
+\item
+  Reprendre le code précédent en remplaçant \(V^{-1}B\) par \(W^{-1}B\).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{eigen}\NormalTok{(}\KeywordTok{solve}\NormalTok{(V) }\OperatorTok{%*%}\StringTok{ }\NormalTok{B)}\OperatorTok{$}\NormalTok{vectors }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]         [,2]       [,3]       [,4]
+## [1,]  0.2087418 -0.006531964  0.2106843 -0.8850525
+## [2,]  0.3862037 -0.586610553 -0.3962378  0.2969366
+## [3,] -0.5540117  0.252561540 -0.4591404  0.2754433
+## [4,] -0.7073504 -0.769453092  0.7666797  0.2294377
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{eigen}\NormalTok{(}\KeywordTok{solve}\NormalTok{(W) }\OperatorTok{%*%}\StringTok{ }\NormalTok{B)}\OperatorTok{$}\NormalTok{vectors}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]         [,2]        [,3]       [,4]
+## [1,] -0.2087418 -0.006531964 -0.69871384  0.3910846
+## [2,] -0.3862037 -0.586610553  0.02318900 -0.4306213
+## [3,]  0.5540117  0.252561540 -0.03791239 -0.4836812
+## [4,]  0.7073504 -0.769453092  0.71401953  0.6539653
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l =}\StringTok{ }\KeywordTok{eigen}\NormalTok{(}\KeywordTok{solve}\NormalTok{(V) }\OperatorTok{%*%}\StringTok{ }\NormalTok{B)}\OperatorTok{$}\NormalTok{values }\CommentTok{# lambda}
+\KeywordTok{eigen}\NormalTok{(}\KeywordTok{solve}\NormalTok{(W) }\OperatorTok{%*%}\StringTok{ }\NormalTok{B)}\OperatorTok{$}\NormalTok{values }\CommentTok{# lambda/(1-lambda)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  3.219193e+01  2.853910e-01 -6.565242e-15  4.298805e-15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{l)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  3.219193e+01  2.853910e-01  5.441883e-15 -5.292628e-16
+\end{verbatim}
+
+Que dire ? Quel est le lien entre les différents vecteurs propres et
+valeurs propres ?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{20}
+\tightlist
+\item
+  Comparer les résultats obtenus à ceux obtenus en ACP.
+\end{enumerate}
+
+\hypertarget{calcul-des-scores-discriminants}{%
+\subsection{Calcul des scores
+discriminants}\label{calcul-des-scores-discriminants}}
+
+On souhaite calculer les fonctions de score pour chacun des groupes, ces
+fonctions nous serviront ensuite à affecter chaque individu au groupe de
+plus grand score (équivalent à la minimisation de la distance de
+Mahalanobis).
+
+On rappelle que le calcul des fonctions de score pour chaque groupe
+s'effectue comme suit : \[
+s_i(x) = \alpha_{i0} + \alpha_{i1}x_1 + \alpha_{i2}x_2 + \alpha_{i3}x_3 + \alpha_{i4}x_4 
+\] avec \(\alpha_{i0} = - \bar{X}_i^T W^{-1} \bar{X}_i\) et \[
+\begin{pmatrix} \alpha_{i1} \\ \vdots \\ \alpha_{ip} \end{pmatrix} = 2 W^{-1} \bar{X}_i
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{21}
+\tightlist
+\item
+  Construire le tableau des coefficients :
+\end{enumerate}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+& Setosa & Versicolor & Virginica\tabularnewline
+\midrule
+\endhead
+Constante & \(\alpha_{10}\) & \(\alpha_{20}\) &
+\(\alpha_{30}\)\tabularnewline
+\(X_1\) & \(\alpha_{11}\) & \(\alpha_{21}\) &
+\(\alpha_{31}\)\tabularnewline
+\(X_2\) & \(\alpha_{12}\) & \(\alpha_{22}\) &
+\(\alpha_{32}\)\tabularnewline
+\(X_3\) & \(\alpha_{13}\) & \(\alpha_{23}\) &
+\(\alpha_{33}\)\tabularnewline
+\(X_4\) & \(\alpha_{14}\) & \(\alpha_{24}\) &
+\(\alpha_{34}\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+Exemple à la main :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{i =}\StringTok{ }\DecValTok{1} \CommentTok{# Classe 1 (setosa)}
+\KeywordTok{dim}\NormalTok{(G[i,])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(G[i,,}\DataTypeTok{drop =} \OtherTok{FALSE}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Xi <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(G[i,],}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\CommentTok{# Xi <- t(G[i,,drop = FALSE])}
+\OperatorTok{-}\StringTok{ }\KeywordTok{t}\NormalTok{(Xi) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{solve}\NormalTok{(W) }\OperatorTok{%*%}\StringTok{ }\NormalTok{Xi  }\CommentTok{# Premier alpha_\{i0\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           [,1]
+## [1,] -173.8977
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \OperatorTok{*}\StringTok{ }\KeywordTok{solve}\NormalTok{(W) }\OperatorTok{%*%}\StringTok{ }\NormalTok{Xi }\CommentTok{# Les 4 autres ! }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         [,1]
+## X1  48.04932
+## X2  48.13851
+## X3 -33.53192
+## X4 -35.50696
+\end{verbatim}
+
+Mise en production !
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha=}\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\KeywordTok{rownames}\NormalTok{(alpha) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"intercept"}\NormalTok{,}\StringTok{"X1"}\NormalTok{,}\StringTok{"X2"}\NormalTok{,}\StringTok{"X3"}\NormalTok{,}\StringTok{"X4"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(alpha) =}\StringTok{ }\KeywordTok{levels}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Y)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{) \{}
+\NormalTok{  barXi=}\KeywordTok{matrix}\NormalTok{(G[i,],}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{) }\CommentTok{# centres de Xj pour Y=i}
+\NormalTok{  alpha[}\DecValTok{1}\NormalTok{,i]=}\OperatorTok{-}\KeywordTok{t}\NormalTok{(barXi)}\OperatorTok{%*%}\KeywordTok{solve}\NormalTok{(W)}\OperatorTok{%*%}\NormalTok{barXi}
+\NormalTok{  alpha[}\DecValTok{2}\OperatorTok{:}\DecValTok{5}\NormalTok{,i]=}\DecValTok{2}\OperatorTok{*}\KeywordTok{solve}\NormalTok{(W)}\OperatorTok{%*%}\NormalTok{barXi}
+\NormalTok{\}}
+\NormalTok{alpha}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               setosa versicolor   virginica
+## intercept -173.89767 -146.43672 -210.754506
+## X1          48.04932   32.03716   25.399692
+## X2          48.13851   14.43369    7.520979
+## X3         -33.53192   10.63561   26.054173
+## X4         -35.50696   13.13108   43.018598
+\end{verbatim}
+
+Aide : Dans l'AFD, la notion de score est liée au calcul de la règle de
+décision. Une observation \(x = (x_1, x_2, x_3, x_p)\) sera affectée au
+groupe avec le score \(s_i(x)\) maximal.
+
+Rappel : \[
+\hat{y} = \arg\min_i (x - \bar{X}_i)^T W^{-1} (x - \bar{X}_i) 
+\] Ce calcul revient à maximiser
+\(2 x^T W^{-1} \bar{X}_i - \bar{X}_i^T W^{-1}\bar{X}_i\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{22}
+\tightlist
+\item
+  Calculer les scores des individus à partir de cette règle (simple
+  calcul matriciel, on pourra rajouter une colonne de 1 à la matrice des
+  données à l'aide de la fonction \texttt{cbind})
+\end{enumerate}
+
+Exemple à la main pour le calcul des scores
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(iris[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{alpha[}\DecValTok{2}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{]) }\CommentTok{# Score pour l'individu 1 dans la classe 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 185.5926
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\KeywordTok{as.matrix}\NormalTok{(iris[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])) }\OperatorTok{%*%}\StringTok{ }\NormalTok{alpha[,}\DecValTok{1}\NormalTok{, drop =}\StringTok{ }\OtherTok{FALSE}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        setosa
+## [1,] 185.5926
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\KeywordTok{as.matrix}\NormalTok{(iris[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])) }\OperatorTok{%*%}\StringTok{ }\NormalTok{alpha}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        setosa versicolor virginica
+## [1,] 185.5926    84.9868 -9.813089
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{,iris[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])) }\OperatorTok{%*%}\StringTok{ }\NormalTok{alpha)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        setosa versicolor  virginica
+## [1,] 185.5926   84.98680  -9.813089
+## [2,] 151.9135   71.36252 -18.653517
+## [3,] 155.2845   66.77827 -24.834677
+## [4,] 138.9593   64.25830 -22.915909
+## [5,] 185.6015   83.22645 -11.600960
+## [6,] 202.1018  106.18833  17.235182
+\end{verbatim}
+
+Score individu : simple produit matriciel
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s=}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{,iris[,}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{]))}\OperatorTok{%*%}\NormalTok{alpha}
+\NormalTok{s[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         setosa versicolor  virginica
+##  [1,] 185.5926   84.98680  -9.813089
+##  [2,] 151.9135   71.36252 -18.653517
+##  [3,] 155.2845   66.77827 -24.834677
+##  [4,] 138.9593   64.25830 -22.915909
+##  [5,] 185.6015   83.22645 -11.600960
+##  [6,] 202.1018  106.18833  17.235182
+##  [7,] 153.2034   68.83796 -18.963173
+##  [8,] 172.6206   81.40328 -10.499739
+##  [9,] 123.0749   53.90057 -32.105461
+## [10,] 156.9248   72.55635 -19.597861
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(}\KeywordTok{which.max}\NormalTok{(s[}\DecValTok{150}\NormalTok{,]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "virginica"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Ypredit =}\StringTok{ }\KeywordTok{apply}\NormalTok{(s, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{names}\NormalTok{(}\KeywordTok{which.max}\NormalTok{(x)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{23}
+\tightlist
+\item
+  En déduire le classement de chacun des individus à partir de ces
+  scores (en utilisant de façon appropriée les fonctions \texttt{apply}
+  et \texttt{which.max}) :
+\end{enumerate}
+
+On affecte l'individu dans la colonne où le score est le plus élevé :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Ypredit=}\KeywordTok{levels}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Y)[}\KeywordTok{apply}\NormalTok{(s,}\DecValTok{1}\NormalTok{,which.max)]}
+\NormalTok{Ypredit[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "setosa" "setosa" "setosa" "setosa" "setosa" "setosa" "setosa" "setosa"
+##  [9] "setosa" "setosa"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(Ypredit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Ypredit
+##     setosa versicolor  virginica 
+##         50         49         51
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\DataTypeTok{Y =}\NormalTok{ iris}\OperatorTok{$}\NormalTok{Y,Ypredit) }\CommentTok{# Matrice de confusion}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             Ypredit
+## Y            setosa versicolor virginica
+##   setosa         50          0         0
+##   versicolor      0         48         2
+##   virginica       0          1        49
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TBC =}\StringTok{ }\KeywordTok{mean}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\NormalTok{Ypredit)}
+\NormalTok{TBC}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.98
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TMC =}\StringTok{ }\KeywordTok{mean}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Y }\OperatorTok{!=}\StringTok{ }\NormalTok{Ypredit)}
+\NormalTok{TMC}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02
+\end{verbatim}
+
+\end{document}

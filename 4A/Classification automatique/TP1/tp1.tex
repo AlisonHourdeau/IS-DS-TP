@@ -1,0 +1,408 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={TP1 - CA},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{TP1 - CA}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\hypertarget{tp1-distance-similarituxe9-et-inerties}{%
+\section{TP1 : Distance, similarité et
+inerties}\label{tp1-distance-similarituxe9-et-inerties}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\FloatTok{7.5}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{4}\NormalTok{,}\FloatTok{1.5}\NormalTok{,}\DecValTok{7}\NormalTok{),}\DataTypeTok{byrow=}\OtherTok{TRUE}\NormalTok{,}\DataTypeTok{ncol=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"X1"}\NormalTok{,}\StringTok{"X2"}\NormalTok{)}
+\KeywordTok{rownames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"w1"}\NormalTok{,}\StringTok{"w2"}\NormalTok{,}\StringTok{"w3"}\NormalTok{,}\StringTok{"w4"}\NormalTok{,}\StringTok{"w5"}\NormalTok{,}\StringTok{"w6"}\NormalTok{)}
+\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     X1 X2
+## w1 2.0  2
+## w2 7.5  4
+## w3 3.0  3
+## w4 0.5  5
+## w5 6.0  4
+## w6 1.5  7
+\end{verbatim}
+
+\hypertarget{question-1-contruire-les-matrices-des-distances-entre-les-individus}{%
+\subsection{Question 1 : Contruire les matrices des distances entre les
+individus}\label{question-1-contruire-les-matrices-des-distances-entre-les-individus}}
+
+\hypertarget{en-utilisant-la-distance-de-manhattan}{%
+\subsubsection{En utilisant la distance de
+manhattan}\label{en-utilisant-la-distance-de-manhattan}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dist_manhattan=}\KeywordTok{dist}\NormalTok{(data,}\DataTypeTok{method=}\StringTok{"manhattan"}\NormalTok{)}
+\KeywordTok{as.matrix}\NormalTok{(dist_manhattan)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     w1  w2  w3  w4  w5  w6
+## w1 0.0 7.5 2.0 4.5 6.0 5.5
+## w2 7.5 0.0 5.5 8.0 1.5 9.0
+## w3 2.0 5.5 0.0 4.5 4.0 5.5
+## w4 4.5 8.0 4.5 0.0 6.5 3.0
+## w5 6.0 1.5 4.0 6.5 0.0 7.5
+## w6 5.5 9.0 5.5 3.0 7.5 0.0
+\end{verbatim}
+
+\hypertarget{en-utilisant-la-distance-euclidienne}{%
+\subsubsection{En utilisant la distance
+euclidienne}\label{en-utilisant-la-distance-euclidienne}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dist_euclidienne=}\KeywordTok{dist}\NormalTok{(data,}\DataTypeTok{method=}\StringTok{"euclidean"}\NormalTok{)}
+\KeywordTok{as.matrix}\NormalTok{(dist_euclidienne)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          w1       w2       w3       w4       w5       w6
+## w1 0.000000 5.852350 1.414214 3.354102 4.472136 5.024938
+## w2 5.852350 0.000000 4.609772 7.071068 1.500000 6.708204
+## w3 1.414214 4.609772 0.000000 3.201562 3.162278 4.272002
+## w4 3.354102 7.071068 3.201562 0.000000 5.590170 2.236068
+## w5 4.472136 1.500000 3.162278 5.590170 0.000000 5.408327
+## w6 5.024938 6.708204 4.272002 2.236068 5.408327 0.000000
+\end{verbatim}
+
+\hypertarget{comparer-les-ruxe9sultats}{%
+\subsubsection{Comparer les résultats}\label{comparer-les-ruxe9sultats}}
+
+Bien que les valeurs soient différentes, l'ordre de grandeur des
+distances entre les individus ici reste inchangé quelque soit la
+distance appliquée soit la distance appliquée à notre jeu de données.
+
+\hypertarget{question-2-calcul-des-barycentres-de-la-partition-w1w3w4w2w5w6}{%
+\subsection{Question 2 : Calcul des barycentres de la partition
+\{\{w1,w3\};w4;\{w2,w5\};w6\}}\label{question-2-calcul-des-barycentres-de-la-partition-w1w3w4w2w5w6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{barycentre<-}\ControlFlowTok{function}\NormalTok{(vect)\{}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{apply}\NormalTok{(vect,}\DecValTok{2}\NormalTok{,mean))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+On applique cette fonction à la partition
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{G1_}\DecValTok{3}\NormalTok{<-}\KeywordTok{barycentre}\NormalTok{(data[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),])}
+\NormalTok{G4<-data[}\DecValTok{4}\NormalTok{,]}
+\NormalTok{G2_}\DecValTok{5}\NormalTok{<-}\KeywordTok{barycentre}\NormalTok{(data[}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{),])}
+\NormalTok{G6<-data[}\DecValTok{6}\NormalTok{,]}
+\NormalTok{barycentres <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(G1_}\DecValTok{3}\NormalTok{,G4,G2_}\DecValTok{5}\NormalTok{,G6)}
+\KeywordTok{as.matrix}\NormalTok{(barycentres)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        X1  X2
+## G1_3 2.50 2.5
+## G4   0.50 5.0
+## G2_5 6.75 4.0
+## G6   1.50 7.0
+\end{verbatim}
+
+\hypertarget{question-3-calcul-des-distances-des-points-avec-le-barycentre}{%
+\subsection{Question 3 : Calcul des distances des points avec le
+barycentre}\label{question-3-calcul-des-distances-des-points-avec-le-barycentre}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{distance<-}\ControlFlowTok{function}\NormalTok{(vect)\{}
+\NormalTok{  bar<-}\KeywordTok{barycentre}\NormalTok{(vect)}
+\NormalTok{  vect_}\DecValTok{2}\NormalTok{<-}\KeywordTok{rbind}\NormalTok{(vect,bar)}
+\NormalTok{  z<-}\KeywordTok{dist}\NormalTok{(vect_}\DecValTok{2}\NormalTok{,}\DataTypeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(z))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d1<-}\KeywordTok{distance}\NormalTok{(data[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),])}
+\NormalTok{d1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            w1        w3       bar
+## w1  0.0000000 1.4142136 0.7071068
+## w3  1.4142136 0.0000000 0.7071068
+## bar 0.7071068 0.7071068 0.0000000
+\end{verbatim}
+
+Interprétation : 1,41 : distance entre w1 et w3 et la distance entre w3
+et w1. Car c'est symétrique 0,71 : distance entre le barycentre et w1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d2<-}\KeywordTok{distance}\NormalTok{(data[}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{),])}
+\NormalTok{d2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       w2   w5  bar
+## w2  0.00 1.50 0.75
+## w5  1.50 0.00 0.75
+## bar 0.75 0.75 0.00
+\end{verbatim}
+
+\hypertarget{question-4-calculer-linertie-totale-de-lensemble-de-donnuxe9es}{%
+\subsection{Question 4 : Calculer l'inertie totale de l'ensemble de
+données}\label{question-4-calculer-linertie-totale-de-lensemble-de-donnuxe9es}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dist_totale=}\KeywordTok{distance}\NormalTok{(data)}
+
+\NormalTok{I_totale=}\DecValTok{1}\OperatorTok{/}\DecValTok{6}\OperatorTok{*}\NormalTok{(}\KeywordTok{sum}\NormalTok{(dist_totale[,}\StringTok{'bar'}\NormalTok{]}\OperatorTok{^}\DecValTok{2}\NormalTok{)) }\CommentTok{# sélectionner la colonne bar}
+\NormalTok{I_totale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8.756944
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Méthode prof}
+\NormalTok{n<-}\KeywordTok{nrow}\NormalTok{(data)}
+\NormalTok{Inertie_total<-}\KeywordTok{sum}\NormalTok{((}\KeywordTok{distance}\NormalTok{(data)}\OperatorTok{^}\DecValTok{2}\NormalTok{)[n}\OperatorTok{+}\DecValTok{1}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\NormalTok{n])}\OperatorTok{/}\NormalTok{n}
+\NormalTok{Inertie_total}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8.756944
+\end{verbatim}
+
+\hypertarget{question-5-calculer-linertie-interclasse-intraclasse-et-le-pourcentage-dinertie-expliquuxe9}{%
+\subsection{Question 5 : Calculer l'inertie interclasse, intraclasse et
+le pourcentage d'inertie
+expliqué}\label{question-5-calculer-linertie-interclasse-intraclasse-et-le-pourcentage-dinertie-expliquuxe9}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bary_global<-}\KeywordTok{barycentre}\NormalTok{(data)}
+\NormalTok{bary_global}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       X1       X2 
+## 3.416667 4.166667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{I_inter<-}\ControlFlowTok{function}\NormalTok{(vect,bary)\{}
+\NormalTok{  n<-}\KeywordTok{nrow}\NormalTok{(vect)}
+\NormalTok{  vect_}\DecValTok{2}\NormalTok{<-}\KeywordTok{rbind}\NormalTok{(vect,bary)}
+\NormalTok{  Inertie<-}\KeywordTok{sum}\NormalTok{((}\KeywordTok{distance}\NormalTok{(vect_}\DecValTok{2}\NormalTok{)}\OperatorTok{^}\DecValTok{2}\NormalTok{)[}\DecValTok{6}\OperatorTok{+}\DecValTok{1}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\NormalTok{n])}\OperatorTok{/}\DecValTok{6}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# barycentre global}
+\NormalTok{G <-}\KeywordTok{barycentre}\NormalTok{(data)}
+
+\CommentTok{# Matrice des barycentres}
+\NormalTok{bar <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(G1_}\DecValTok{3}\NormalTok{,G4,G2_}\DecValTok{5}\NormalTok{,G6,G)}
+\NormalTok{nbar<-}\KeywordTok{nrow}\NormalTok{(bar)}
+
+\CommentTok{#distance au carré entre les différents barycentres et le barycentre global}
+\NormalTok{ecarts <-(}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{dist}\NormalTok{(bar))}\OperatorTok{^}\DecValTok{2}\NormalTok{)[nbar,}\DecValTok{1}\OperatorTok{:}\NormalTok{nbar}\DecValTok{-1}\NormalTok{]}
+
+\CommentTok{# effectifs de chaque classe}
+\NormalTok{effectifs<-( }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{Inertie_inter <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(ecarts}\OperatorTok{*}\NormalTok{effectifs)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(effectifs)}
+
+\NormalTok{temp}\FloatTok{.1}\NormalTok{ <-}\StringTok{ }\NormalTok{(d1}\OperatorTok{^}\DecValTok{2}\NormalTok{)[}\KeywordTok{nrow}\NormalTok{(d1),}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(d1)}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{temp}\FloatTok{.2}\NormalTok{ <-}\StringTok{ }\NormalTok{(d2}\OperatorTok{^}\DecValTok{2}\NormalTok{)[}\KeywordTok{nrow}\NormalTok{(d2),}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(d2)}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{vect.sum.dist<-}\KeywordTok{rbind}\NormalTok{(}\KeywordTok{mean}\NormalTok{(temp}\FloatTok{.1}\NormalTok{),}\DecValTok{0}\NormalTok{,}\KeywordTok{mean}\NormalTok{(temp}\FloatTok{.2}\NormalTok{),}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{Inertie_intra <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(vect.sum.dist}\OperatorTok{*}\NormalTok{effectifs)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(effectifs)}
+\NormalTok{Inertie_intra}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3541667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Inertie_exp<-(}\DecValTok{1}\OperatorTok{-}\NormalTok{(Inertie_intra}\OperatorTok{/}\NormalTok{Inertie_total))}\OperatorTok{*}\DecValTok{100}
+\NormalTok{Inertie_exp}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 95.95559
+\end{verbatim}
+
+\hypertarget{question-6-repruxe9senter-graphiquement-le-nuage-de-point.}{%
+\subsection{Question 6 : Représenter graphiquement le nuage de
+point.}\label{question-6-repruxe9senter-graphiquement-le-nuage-de-point.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{tp1_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\hypertarget{quelle-segmentation-proposez-vous}{%
+\subsubsection{Quelle segmentation proposez-vous
+?}\label{quelle-segmentation-proposez-vous}}
+
+On pourrait proposer la répartion suivante :
+\{\{w1,w3\},\{w4,w6\},\{w2,w5\}\}
+
+\hypertarget{calculer-le-pourcentage-dinertie-expliquuxe9e-par-cette-nouvelle-partition-et-comparer-uxe0-celle-de-la-question-2}{%
+\subsubsection{Calculer le pourcentage d'inertie expliquée par cette
+nouvelle partition et comparer à celle de la question
+2}\label{calculer-le-pourcentage-dinertie-expliquuxe9e-par-cette-nouvelle-partition-et-comparer-uxe0-celle-de-la-question-2}}
+
+
+\end{document}

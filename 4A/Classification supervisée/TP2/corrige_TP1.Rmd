@@ -1,0 +1,493 @@
+---
+title: 'Classification supervisée : fiche TP1, corrigé'
+author: "Vincent Vandewalle, Cristian Preda"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
+    number_sections: yes
+    toc: yes
+  html_notebook:
+    number_sections: yes
+    toc: yes
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+```
+
+
+# Reprise des exemples du cours
+
+Lancer les commandes suivantes pour retrouver les résultats des exercices de la première séance de cours.
+
+
+## Test du Chi-deux
+
+```{r Test du Chi-deux}
+V3V1<-matrix(c(30,20,30,20,10,15,10,15),4,2,byrow=TRUE)
+V3V1
+chi2 = chisq.test(V3V1)
+str(chi2)
+chi2
+1-pchisq(5.3571,3)
+sum(chi2$residuals^2)
+```
+
+1. Commenter code et résultats : ici on réalise un test du Chi-deux d'indépendance, on ne rejetterai pas l'hypothèse d'indépendance au risque $\alpha = 0,05$.
+
+## Test de Fisher
+```{r Test de Fisher}
+x <- c(4,5,7,8,9,2,3,4,6,7,8)
+y <- c(rep(0,5),rep(1,6))
+cbind(x,y)
+lm(x~factor(y))
+factor(y)
+anova(lm(x~y))
+SCF <- (mean(x[1:5])-mean(x))^2*5+(mean(x[6:11])-mean(x))^2*6
+SCR <- sum(c((x[1:5]-mean(x[1:5]))^2,(x[6:11]-mean(x[6:11]))^2))
+Fstat <- (SCF/1)/(SCR/9)
+pval <- pf(Fstat,1,9,lower.tail=FALSE)
+pval
+Rsq <- SCF/(SCF+SCR)
+Rsq
+c(SCF,SCR,Fstat,pval,Rsq)
+summary(lm(x~y))$r.squared
+pchisq(6.585^2,df = 1, lower.tail = FALSE)
+```
+2. Commenter code et résultats : Ici on a réalisé un test de l'ANOVA, sous $H_0$ la statistique de test suit une loi de Fisher a $K-1$, $n-K$ degré de liberté, avec $K$ le nombre de classes et $n$ le nombre de données. Ici la probabilité critique est de $0,2686$ donc la variable $y$ n'a pas d'effet significatif sur la variable $x$ au risque $\alpha = 0,05$. 
+
+**Attention** : en classification supervisée on veut prédire $y$ à partir de $x$ ! Mais le fait que la variance de $x$  soit bien expliquée par $y$ nous donne un bon indicateur du pouvoir prédictif $x$ sur $y$.
+
+# Analyse préliminaire du jeu de données `iris`, ANOVA et MANOVA
+
+## Analyse préliminaire du jeu de données `iris`
+
+Dans cette partie on utilisera les données `iris`. 
+
+3. Faire `data("iris")` dans R.
+
+```{r chargement}
+data("iris")
+head(iris)
+```
+
+4. Renommer les variables "Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width","Species" en "X1", "X2", "X3", "X4", "Y".
+
+```{r renommage}
+names(iris) <- c("X1","X2","X3","X4","Y") 
+```
+
+5. Représenter graphiquement le lien entre X1 et Y :
+
+```{r boxplot X1 sachant Y}
+library(dplyr)
+library(ggplot2)
+iris %>% 
+  ggplot(aes(x = Y, y = X1)) + 
+  geom_boxplot()
+```
+
+Puis faire de même pour les autres variables : 
+```{r boxplot des X en fonction de Y}
+library("tidyr")
+iris %>% 
+  gather("variable","mesure",-Y) %>% 
+  ggplot(aes(x = Y, y = mesure)) + 
+  geom_boxplot() +
+  facet_wrap(~ variable, scales = "free_y")
+```
+
+Commenter : On voit que les variable pour lesquelles les classes sont les mieux séparées sont les variable $X_3$ et $X_4$.
+
+## ANOVA
+
+Réaliser l'ANOVA de X1 en fonction de Y et obtenir le $R^2$ associé, faire de même pour les autres variables. A partir des p-values, indiquer si la variable Y a une influence sur l'ensemble des variables. Quelle est la variable la mieux expliquée par Y ? 
+
+Ajustement du modèle linéaire pour X1
+```{r Ajustement du modèle linéaire pour X1 en fonction de Y}
+lm(X1 ~ Y, data = iris)
+shapiro.test(iris$X1[iris$Y == "setosa"])
+
+# Test de normalité groupe par groupe : 
+by(data = iris$X1, INDICES = iris$Y, shapiro.test)
+# Ici accepte l'hypothèse de normalité dans chacune des classes
+
+# Test d'homogénité des variances : 
+bartlett.test(iris$X1, iris$Y)
+# p-value = 0.0003345
+# On rejette l'homogénéité des variances
+# Attention : conclusion du test de l'ANOVA possiblement erronnées
+
+summary(lm(X1 ~ Y, data = iris)) # Résumé
+summary(lm(X1 ~ Y, data = iris))$r.squared
+```
+
+Extension à chacune des variables
+```{r Ajustement du modèle linéaire de chaque X en fonction de Y}
+sapply(names(iris)[-5], 
+       function(x) summary(lm(as.formula(paste(x,"~ Y")), 
+                              data = iris))$r.squared)
+```
+
+6. Commenter ces résultats : Ici la variable que dont la variance est la mieux expliquée par $Y$ est la variable $X_4$
+
+$$
+R^2_{X_4 / Y} = \frac{\mbox{Variance de }X_4 \mbox{ expliquée par } Y }{\mbox{Variance de }X_4} = 92,8\%
+$$
+
+Calcul de l'ANOVA (calcul de la p-value du test)
+```{r}
+anova(lm(X1~Y,data=iris)) 
+anova(lm(X1~Y,data=iris))$`Pr(>F)`
+anova(lm(X1~Y,data=iris))$`Pr(>F)`[1]
+```
+
+Extension à chacune des variables
+```{r}
+sapply(names(iris)[-5], 
+       function(x) anova(lm(as.formula(paste(x,"~ Y")), 
+                            data = iris))$`Pr(>F)`[1])
+```
+
+7. Commentez ces résultats : la sous-espèce a-t'elle un effet significatif sur l'espérance de X1 ? de X2 ? de X3 ? de X4 ? Sur l'espérance de $X = \begin{pmatrix} X_1 \\ X_2 \\ X_3 \\ X_4 \end{pmatrix}$  ? 
+
+Oui la sous-espéce à un effet significatif sur chacune des variables explicatives.
+
+
+Ici vous avez testé :
+$$
+H_{0j} = \{ \mu_{1j} = \mu_{2j} = \mu_{3j} \} \mbox{ contre } H_{1j} = \{\exists i \neq i'|  \mu_{ij} \neq \mu_{i'j} \},
+$$
+pour $j \in \{1,2,3,4\}$, c'est-à-dire pour chacune des variables séparément.
+
+Mais, ce que nous souhaitons tester ici est : y-a-t'il une différence entre groupes pour au moins une des variables ? : 
+$$
+H_{0} = \{ \mu_{1} = \mu_{2} = \mu_{3} \} \mbox{ contre } H_{1} = \{\exists j \in \{1,2,3,4\}, \exists i \neq i'|  \mu_{ij} \neq \mu_{i'j} \}
+$$
+avec $\mu_i = \begin{pmatrix} \mu_{i1} \\ \mu_{i2} \\ \mu_{i3} \\ \mu_{i4}\end{pmatrix}$.
+
+Comment recoller les morceaux ??? 
+
+Remarquons d'abord que : 
+$$
+H_0 = \cap_{j=1}^{4} H_{0j} = H_{01} \cap H_{02} \cap H_{03} \cap H_{04}
+$$ 
+
+Ainsi $H_0$ est fausse du moment qu'au moins une des $H_{0j}$ est fausse. La question est alors quel est le risque de première espèce $\alpha_{global}$ de rejeter $H_0$ à tord quand on se donne un risque de première espèce $\alpha$ de rejeter $H_{0j}$ à tord pour $j \in \{1,2,3,4\}$ ? Et comment choisir $\alpha$ de manière à maintenir un risque global $\alpha_{global}$ ?
+
+On note $p_j$ les probabilités critiques associées à chacune de $H_{0j}$. Sous $H_{0j}$ on sait que $p_j$ suit une loi uniforme sur $[0;1]$ ($p_j \sim U([0;1])$). En notant $A_j$ l'événement $H_{0j}$ est rejeté, $A_j = \{p_j \leq \alpha \}$.
+
+$$
+P_{H_0}(\mbox{rejet de } H_0 \mbox{ à tord}) =  P_{H_0}(\cup_{j=1}^{d} A_j) = P_{H_0}(\cup_{j=1}^{d}\{p_j \leq \alpha\}) 
+\leq \sum_{j = 1}^{d}P_{H_{0j}}\left(p_j \leq \alpha\right) = d \times \alpha
+$$
+
+Ainsi, si on veut s'assurer que $P_{H_0}(\mbox{rejet de } H_0 \mbox{ à tord}) \leq \alpha_{global}$, on peut choisir $\alpha = \frac{\alpha_{global}}{d}$. Il s'agit de la correction de **Bonferroni** (cette correction est plutôt frustre et on peu parfois lui préférer d'autres corrections comme l'utilisation du False Discovery Rate (FDR) qui vise à controler le pourcentage de faux positifs).
+
+8. On se donne un risque de première espèce $\alpha_{global} = 0,05$, réaliser l'ajustement de Bonferroni. Rejettez-vous $H_0$ ?  
+```{r}
+alpha_glo = 0.05
+d = 4
+alpha = alpha_glo/d
+alpha
+
+pvalue = sapply(names(iris)[-5], 
+       function(x) anova(lm(as.formula(paste(x,"~ Y")), 
+                            data = iris))$`Pr(>F)`[1])
+pvalue
+any(pvalue < alpha) # TRUE : moins une des 
+# p-valeurs est inférieure à 0,0125 donc on rejette H_0 au risque global alpha = 0,05 ! La distribution de X varie en fonction du groupe Y.
+```
+
+
+
+## MANOVA
+
+Contrairement à la situation précédente on souhaite tester directement $H_0$ contre $H_1$, ce qui impose un modèle sur la distribution du vecteur $X$ sachant la classe $Y$ : 
+
+- $X | Y = k \sim \mathcal{N}_d(\mu_i;\Sigma_i)$ : Hypothèse de normalité sachant la classe
+- $\Sigma_1 = \Sigma_2 = \cdots = \Sigma_K = \Sigma$ : Hypothèse d'homogénéité des variances
+
+En utilisant la fonction `ggpairs` du package `GGally` on représente les corrélations deux à deux entre les différentes variables en fonction de la variable `Y` comme suit : 
+
+```{r Nuages de point deux a deux, message=FALSE}
+library(GGally)
+ggpairs(iris, columns = 1:4, aes(color = Y, alpha = 0.8))
+```
+
+9. Commenter le graphique obtenus, que dire des hypothèses de normalité et d'homogénéité des variances ? 
+
+Ici à l'allure du nuage de point on peut éventuellement admettre un normalité classe par classe, cependant l'hypothèse d'homogénéité des variance ne semble pas vérifiée (allure du nuage de point différente d'une classe à l'autre).
+
+
+
+A l'aide de la fonction `mshapiro.test` de la librairie `mvnormtest` réaliser un test de normalité pour chacune des classes :
+```{r Test de normalité}
+# install.packages("mvnormtest")
+library(mvnormtest)
+mshapiro.test(as.matrix(t(iris[iris$Y=="versicolor",1:4])))
+mshapiro.test(as.matrix(t(iris[iris$Y=="setosa",1:4])))
+mshapiro.test(as.matrix(t(iris[iris$Y=="virginica",1:4])))
+```
+
+10. Commenter : Ici on rejetterai l'hypothèse de normalité, sauf pour la classe setosa
+
+
+A l'aide de la fonction contenue dans le fichier \texttt{BoxMTest.R} on réalise le test d'égalité des matrices de variances-covariances.
+```{r Test M de Box}
+source("BoxMTest.R") # Fichier à récupérer sur moodle
+BoxMTest(iris[,1:4],iris$Y)
+```
+
+11. Commenter : Ici on rejette l'hypothèse d'homogénéité des variances. Par conséquent nous ne somme pas sous les conditions d'application du test de la MANOVA, on peut alors lui des versions non paramètriques ne reposant pas sur l'hypothèse de normalité, comme par exemple de le test de Kruskal-Wallis multivarié.
+
+
+A l'aide de la fonction `manova` de R tester l'égalité des espérances des groupes : `manova(cbind(X1,X2,X3,X4) ~ Y, data = iris)`
+
+```{r Test de la manova}
+iris_manova = manova(cbind(X1,X2,X3,X4)~Y,data=iris)
+```
+
+Obtenir les résumés à partir de la fonction `summary` appliquée à l'objet précédent : 
+```{r Résumé du test de la MANOVA}
+summary(iris_manova) # compléter
+```
+
+12. Commenter : Ici la statistique de test utilisée est la statistique de Pillai, une transformation appliquée à la statistique de test suit approximativement une loi de Fisher à $8$ et $290$ dgegrés de liberté. Ici on rejette $H_0$.
+
+
+13. Aller voir dans l'aide de la fonction `summary.manova`  pour modifier la statistique de test utilisée
+```{r Statistiques de test de la MANOVA}
+help("summary.manova")
+summary(iris_manova,"Pillai")
+summary(iris_manova,"Wilks")  
+summary(iris_manova,"Hotelling-Lawley") 
+summary(iris_manova,"Roy") 
+```
+
+14. Commenter les résultats obtenus : Dans chacun des cas on rejette $H_0$.
+
+
+Par la suite on va calculer les matrices $W$ et $B$ qui pourraient être utilisées pour récalculer les statistiques de test ci-dessus. 
+
+
+# Analyse factorielle discriminante (iris de Fisher)
+
+## Calcul des matrices
+
+15. Calculer $V$ la matrice de variance-covariance globale, à partir de la fonction \texttt{cov.wt} en utilisant l'option \texttt{method = "ML"}. Expliquer à quoi sert cette option.
+
+```{r}
+V = cov.wt(iris[,1:4],method = "ML")$cov
+```
+
+Attention on prendra garde de récupérer le bon élément de sortie de la fonction `cov.wt`, fonction qui ressort une liste contenant entre autres `cov`, `center`, ... 
+
+On calcule les vecteurs des moyennes pour chaque groupe $\bar{X}_{i}$ en s'aidant de la fonction `by`, et en restructurant le résultat sous forme d'un tableau. 
+
+Constituez la matrice $G$ de centres des classes composée d'une colonne par variable et d'une ligne par sous-espèce (on rappelle que la fonction `t` permet de transposer un tableau)
+```{r}
+by(iris[,1:4],iris$Y, colMeans)
+simplify2array(by(iris[,1:4],iris$Y, colMeans))
+G = t(simplify2array(by(iris[,1:4],iris$Y, colMeans)))
+```
+
+
+16. En déduire : 
+$$
+B = \sum_{i=1}^{K}\frac{n_i}{n}(\bar{X}_{i}-\bar{X})(\bar{X}_{i}-\bar{X})^T
+$$
+où $\bar{X}_{i}$, $\bar{X}$ sont respectivement les vecteurs colonnes des moyennes intra-classes et de la moyenne globale. Pour cela on pourra remarquer que $B$ est la matrice de covariance des centres des classes pondérés par leurs effectifs (penser à `cov.wt` et à son argument `wt`). 
+```{r}
+B = cov.wt(G, wt = as.vector(table(iris$Y)) , method = "ML")$cov
+```
+
+Calcul de W : 
+```{r}
+Wi = lapply(levels(iris$Y), function(k)
+  cov.wt(iris[iris$Y== k,1:4],method="ML")$cov) # Liste de Wi
+ni = table(iris$Y)  # Vecteur de ni
+
+W = Reduce('+',Map('*',Wi,ni))/sum(ni)
+```
+
+
+
+17. Vérifier qu'on retrouve bien : $V = W + B$
+```{r}
+# Proposer un indicateur synthétique du fait que V = W + B
+norm(V - (W + B)) 
+```
+
+
+
+## Réalisation de l'AFD
+
+On rappelle que dans R l'ACP peut se réaliser à la main comme suit :
+```{r}
+eigen(V) # Decomposition en valeurs propres
+eigen(V)$values
+ACP=eigen(V)$vectors
+c=as.matrix(iris[,1:4])%*%ACP[,1:2]
+plot(c,col=iris$Y)
+
+c = as.data.frame(c)
+names(c) <- c("C1","C2")
+c %>% mutate(Y = iris$Y) %>% 
+  ggplot(aes(x = C1, y = C2, color = Y, shape = Y)) + 
+  geom_point()
+```
+
+18. Commenter, quel est le pourcentage d'inertie expliqué par chacun des axes ? Pour les deux premiers axes
+
+```{r}
+l = eigen(V)$values
+l
+prop_var = l/sum(l) # 0.924618723 0.053066483 0.017102610 0.005212184
+cumsum(prop_var)
+```
+
+
+19. Calculer les coordonnées $d_1$ et $d_2$ des points projetés sur les deux premières composantes discriminantes, sachant qu'en AFD on diagonalise la matrice $V^{-1}B$. Adapter le code pour réaliser l'AFD, et commenter les résultats (on rappelle que l'inverse s'obtient avec la fonction `solve` et le produit matriciel avec l'opérateur `%*%`) : 
+```{r}
+M = solve(V) %*% B
+eigen(M) # Decomposition en valeurs propres
+eigen(M)$values
+AFD=eigen(M)$vectors
+d=as.matrix(iris[,1:4])%*%AFD[,1:2]
+plot(d,col=iris$Y)
+
+d = as.data.frame(d)
+names(d) <- c("D1","D2")
+d %>% mutate(Y = iris$Y) %>% 
+  ggplot(aes(x = D1, y = D2, color = Y, shape = Y)) + 
+  geom_point()
+
+```
+
+Quels est la part de variance de $d_1$ expliquée par la classe ? De $d_2$
+
+20. Reprendre le code précédent en remplaçant $V^{-1}B$ par $W^{-1}B$. 
+```{r}
+eigen(solve(V) %*% B)$vectors 
+eigen(solve(W) %*% B)$vectors
+
+l = eigen(solve(V) %*% B)$values # lambda
+eigen(solve(W) %*% B)$values # lambda/(1-lambda)
+l/(1-l)
+```
+Que dire ? Quel est le lien entre les différents vecteurs propres et valeurs propres ?
+
+
+21. Comparer les résultats obtenus à ceux obtenus en ACP.
+
+
+## Calcul des scores discriminants
+
+On souhaite calculer les fonctions de score pour chacun des groupes, ces fonctions nous serviront ensuite à affecter chaque individu au groupe de plus grand score (équivalent à la minimisation de la distance de Mahalanobis).
+
+On rappelle que le calcul des fonctions de score pour chaque groupe s'effectue comme suit : 
+$$
+s_i(x) = \alpha_{i0} + \alpha_{i1}x_1 + \alpha_{i2}x_2 + \alpha_{i3}x_3 + \alpha_{i4}x_4 
+$$
+avec $\alpha_{i0} = - \bar{X}_i^T W^{-1} \bar{X}_i$ et 
+$$
+\begin{pmatrix} \alpha_{i1} \\ \vdots \\ \alpha_{ip} \end{pmatrix} = 2 W^{-1} \bar{X}_i
+$$
+
+22. Construire le tableau des coefficients :
+
+|          |Setosa         | Versicolor    | Virginica    |
+|----------|---------------|---------------|--------------| 
+|Constante | $\alpha_{10}$ | $\alpha_{20}$ | $\alpha_{30}$|
+|$X_1$     | $\alpha_{11}$ | $\alpha_{21}$ | $\alpha_{31}$|
+|$X_2$     | $\alpha_{12}$ | $\alpha_{22}$ | $\alpha_{32}$|
+|$X_3$     | $\alpha_{13}$ | $\alpha_{23}$ | $\alpha_{33}$|
+|$X_4$     | $\alpha_{14}$ | $\alpha_{24}$ | $\alpha_{34}$|
+
+
+Exemple à la main : 
+```{r}
+i = 1 # Classe 1 (setosa)
+dim(G[i,])
+dim(G[i,,drop = FALSE])
+Xi <- matrix(G[i,],4,1)
+# Xi <- t(G[i,,drop = FALSE])
+- t(Xi) %*% solve(W) %*% Xi  # Premier alpha_{i0}
+2 * solve(W) %*% Xi # Les 4 autres ! 
+```
+
+Mise en production !
+```{r}
+alpha=matrix(0,5,3)
+rownames(alpha) = c("intercept","X1","X2","X3","X4")
+colnames(alpha) = levels(iris$Y)
+for (i in 1:3) {
+  barXi=matrix(G[i,],4,1) # centres de Xj pour Y=i
+  alpha[1,i]=-t(barXi)%*%solve(W)%*%barXi
+  alpha[2:5,i]=2*solve(W)%*%barXi
+}
+alpha
+```
+
+
+Aide : Dans l'AFD, la notion de score est liée au calcul de la règle de décision. Une observation $x = (x_1, x_2, x_3, x_p)$ sera affectée au groupe avec le score $s_i(x)$ maximal.
+
+Rappel :
+$$
+\hat{y} = \arg\min_i (x - \bar{X}_i)^T W^{-1} (x - \bar{X}_i) 
+$$
+Ce calcul revient à maximiser $2 x^T W^{-1} \bar{X}_i - \bar{X}_i^T W^{-1}\bar{X}_i$. 
+
+23. Calculer les scores des individus à partir de cette règle (simple calcul matriciel, on pourra rajouter une colonne de 1 à la matrice des données à l'aide de la fonction `cbind`)
+
+Exemple à la main pour le calcul des scores
+```{r}
+alpha[1,1] + sum(iris[1,1:4] * alpha[2:5,1]) # Score pour l'individu 1 dans la classe 1
+c(1,as.matrix(iris[1,1:4])) %*% alpha[,1, drop = FALSE]
+c(1,as.matrix(iris[1,1:4])) %*% alpha
+head(as.matrix(cbind(1,iris[1:4])) %*% alpha)
+```
+
+
+Score individu : simple produit matriciel
+```{r}
+s=as.matrix(cbind(1,iris[,1:4]))%*%alpha
+s[1:10,]
+names(which.max(s[150,]))
+Ypredit = apply(s, 1, function(x) names(which.max(x)))
+```
+
+
+24. En déduire le classement de chacun des individus à partir de ces scores (en utilisant de façon appropriée les fonctions `apply` et `which.max`) : 
+
+On affecte l'individu dans la colonne où le score est le plus élevé :
+```{r}
+Ypredit=levels(iris$Y)[apply(s,1,which.max)]
+Ypredit[1:10]
+table(Ypredit)
+table(Y = iris$Y,Ypredit) # Matrice de confusion
+TBC = mean(iris$Y == Ypredit)
+TBC
+TMC = mean(iris$Y != Ypredit)
+TMC
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

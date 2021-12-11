@@ -1,0 +1,401 @@
+---
+title: "Projet_CA"
+output:
+  word_document: default
+  html_document: 
+    toc:TRUE
+    toc_depth:2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Librairies utilisées
+
+#1. Introduction
+Au cours de ce projet, nous étudirons un jeu de données portant sur des modèles d'appareils photos.
+
+Nous allons comparer différentes méthodes de partitionnement telles que la méthode des k-means, la méthode des k-médoides et la classification mixte. Pour chaque méthode, nous allons dans un premier temps sélectionner le nombre de classes optimal puis comparer la division en clusters (ou classes), ainsi que l'inertie totale, l'inertie intra-classe, l'inertie inter-classes et la part d'inertie expliquée. 
+
+
+#1.1. Importation des packages et des données
+
+Au cours de l'étude, nous aurons besoin des librairies suivantes :
+
+```{r}
+library(dplyr)
+library(plyr)
+library(xtable)
+library(corrplot)
+library(cluster)
+library(factoextra)
+```
+
+
+Nous commençons par importer les données.
+```{r}
+data = read.csv("Camera.csv", header=TRUE, sep = ";")
+``` 
+
+#2. Analyse et traitement préalable
+
+```{r}
+dim(data)
+nb_indiv <- dim(data)[1]
+nb_car <- dim(data)[2]
+```
+
+Le jeu de données "camera.csv" comporte `r nb_indiv` lignes et `r nb_car` colonnes. Nous pouvons donc constater la présence de `r nb_indiv` individus qui sont les modèles d'appareil photo. Pour chacun de ces modèles, 13 caractéristiques sont relevées comme par exemple la date de sortie (release.date), les résolutions minimale et maximale (respectivement Low.resolution et Max.resolution), les dimensions (Dimensions) ou le prix (Price).
+
+```{r}
+
+data_sans_NA = na.omit(data)
+summary(data_sans_NA)
+data=data_sans_NA
+dim(data)
+
+
+
+data.quanti = data[,cbind(3:13)]
+data.quanti
+
+
+
+stats_descr = round(sapply(data.quanti, each(min, max, mean, sd, var, median, IQR)),3)
+
+xtable(stats_descr,digits = 2)
+
+```
+
+Grâce au tableau ci-dessus, nous pouvons obtenir plusieurs statistiques descriptives telles que les minimum et maximum, la moyenne, la variance ou encore la médiane. Par exemple, nous constatons que le prix minimum d'un modèle d'appareil photo est égal à 14 euros, le prix maximum est de 7999 euros. En moyenne, un appareil photo coûte 458 euros.
+
+
+```{r}
+boxplot(data.quanti,main = "Boxplot des variables quantitatives")
+```
+
+
+Nous pouvons calculer les coefficients de corrélation entre les différentes variables quantitatives, qui vont nous permettre d'étudier le lien entre celles-ci.
+
+```{r}
+
+correlations = cor(data.quanti)
+
+
+corrplot(correlations,method="circle", type="upper", order="hclust", tl.col="black", tl.srt=30)
+
+```
+Grâce à la matrice et au graphique ci-dessus, nous obtenons les coefficients de corrélation entre les variables quantitatives. Les variables Low.resolution et Max.resolution sont fortement corrélées (r=0.84), ainsi que les variables Low.resolution et Effective.pixels (r=0.82) et Max.resolution et Effective.pixels (r=0.95). Cela signifie que lorsqu'une variable augmente, l'autre augmente également.
+
+2. Implémentation de l'algorithme des k-means : algorithme de Lloyd
+
+Afin d'implémenter l'algorithme de Lloyd, nous avons créé plusieurs fonctions annexes. 
+
+D'abord, nous avons implémenté une fonction qui retourne le cluster d'un individu. 
+Pour cela, nous lui donnons en paramètre l'individu dont nous voulons connaître la classe, qui est donc un vecteur, ainsi que la matrice des barycentres que nous aurons calculé dans l'algorithme de Lloyd.
+Nous initialisons un minimum et le cluster à NULL. 
+Nous parcourons ensuite la matrice des barycentres par ligne puisqu'une ligne correspond au barycentre d'une classe, nous ajoutons cette ligne au vecteur des individus. Nous appelons la matrice nouvellement obtenue "indiv_bary".
+Pour terminer, nous calculons la matrice des distances à partir de la matrice indiv_bary, nous ne retenons que la valeur de la deuxième ligne, première colonne car cette valeur correspond à la seule distance qui nous intéresse, à savoir la distance entre notre individu et le barycentre actuellement testé (barycentre de la classe i).
+Enfin, si la distance obtenu est inférieur au minimum ou si le minimum est NULL, nous affectons la distance obtenu à la variable min et nous affectons sa classe à cluster, correspondant au numéro de l'itération i. 
+
+Une fois la matrice des barycentres entièrement parcourue, nous aurons testé la distance entre l'individu et chacun des barycentres, nous aurons retenu la distance minimale et nous obtiendrons ainsi la classe de l'individu, que nous retournons.
+```{r}
+cluster_by_indiv <- function(indiv, barycentres) {
+  min <- NULL
+  cluster <- NULL
+  for(i in 1:nrow(barycentres)){
+    indiv_bary <- rbind(indiv,barycentres[i,])
+    distance <- as.matrix(dist(indiv_bary, method = "euclidean"))[2,1]
+    if(!is.na(distance) && (min > distance || is.null(min))) {
+      min <- distance
+      cluster <- i
+    }
+  }
+  return(cluster)
+}
+```
+
+
+Nous avons ensuite décidé d'implémenter une fonction qui permet de savoir si deux matrices sont égales. Celle-ci nous servira pour savoir si les points ont changé de cluster entre deux itérations dans l'algorithme de Lloyd. 
+
+Nous passons en paramètre de la fonction deux matrices A et B. D'abord nous testons l'égalité du nombre de colonnes entre A et B, si elle n'est pas vérifiée nous retournons false, de même pour le nombre de lignes. 
+Enfin, nous parcourons les élements des deux matrices un à un et nous testons leur égalité. Si elle n'est pas vérifiée, nous retournons false. 
+Après le parcours, si rien n'a été retourné, cela signifie que les matrices sont égales, nous retournons true.
+```{r}
+matrices_egales <- function(A, B) {
+  if( isTRUE(ncol(A) != ncol(B)) ) return(FALSE)
+  if( isTRUE(nrow(A) != nrow(B)) ) return(FALSE)
+  
+  for( i in 1:nrow(A) ){
+    for( j in 1:ncol(A) ) {
+      if( A[i,j] != B[i,j] ) return(FALSE)
+    }
+  }
+  return(TRUE)
+}
+```
+
+La dernière fonction annexe que nous avons implémenté est une fonction qui indique s'il on doit arrêter l'algorithme de Floyd. 
+Nous devons arrêter si le numéro de l'itération auquel nous sommes arrivés dépasse le nombre d'itérations maximum fixé ou si aucun individu ne change de classe. 
+La condition "aucun individu ne change de classe" équivaut à la condition "l'inertie intra-classe ne diminue plus" ainsi qu'à la condition "le vecteur des barycentres est stable".
+
+Nous passons en paramètres de la fonction :
+    - un entier i, qui correspond au nombre d'itérations que nous avons déjà effectué
+    - un entier max_iter, qui correspond au nombre maximal d'itérations que nous avons fixé
+    - une matrice data, correspondant à la matrice des données actuelles, composée des individus et d'une colonne indiquant la classe de chacun pour cette itération
+    - une matrice old_data, correspondant à la matrice des données de la précédante itération, composée elle aussi des individus et d'une colonne indiquant leurs classes calculées à la précédante itération.
+    
+Comme précédemment indiqué, nous testons d'abord si le nombre d'itération maximum est atteint, si c'est le cas nous renvoyons true. Sinon, nous renvoyons le résultat de la fonction matrices_egales à laquelle nous passons en paramètre les colonnes cluster de data et old_data. Ce resultat nous indiquera si les individus ont changé de classes entre les deux itérations, si c'est le cas, nous renvoyons false et continons l'algorithme de Lloyd, sinon nous stoppons son déroulement.  
+```{r}
+haveToStop <- function(i, max_iter, data, old_data){
+  if(i>=max_iter) return(TRUE)
+  else return(matrices_egales(as.matrix(data$cluster),as.matrix(old_data$cluster)))
+}
+```
+
+
+A l'aide de ces trois fonctions, nous avons implémenté l'algorithme de Floyd, cette algorithme prend en paramètre un entier k correspondant au nombre de classes souhaité et une matrice de données data :
+```{r}
+algo_Lloyd <- function(k, data) {
+  
+  #En premier lieu, on vérifie la valeur de k :
+  nb_indiv <- nrow(data)
+  
+  if(k<1) {
+    stop("Le nombre de classes doit être supérieur à 1.")
+  }
+  
+  if(k>nb_indiv) {
+    stop("Le nombre de classes doit être inférieur au nombre d'individus.")
+  }
+  
+  
+  # On choisit aléatoirement et sans remise k points parmi les données data, ces points seront les barycentres des k classes
+  barycentres <- data[sample(1:nrow(data),k, replace = FALSE),]
+  
+  # i : nombre d'itérations, initialisé à 0
+  i <- 0
+  
+  # max_iter : nombre d'itérations maximum, initialisé à 100
+  max_iter <- 5
+  
+
+  # stop : booleen indiquant si l'on doit arrêter l'algorithme
+  # On arrete si une des conditions suivantes est vraie :
+  # min intra max inter
+    # 1 - i >= max_iter
+    # 2 - aucun indiv ne change de classe
+    # 3 - inertie intra ne diminue plus
+    # 4 - le vecteur des barycentres est stable
+  stop <- FALSE
+  
+  #faire une fonction qui verifie data cluster != null 
+  
+  cluster <- c()
+  for(d in 1:nrow(data)){
+    cluster <- rbind(cluster,-1)
+  }
+  
+  data <- cbind(data, cluster)
+  
+  while(!stop){
+    old_data <- data
+    
+    data$cluster <- cluster
+    
+    if(i>0) {
+      barycentres <- NULL
+      for(j in 1:k){
+        vect_barycentre <- colMeans(subset(old_data[,-ncol(old_data)], old_data$cluster == j))
+        barycentres <- rbind(barycentres, vect_barycentre)
+      }
+    }
+    
+    for(j in 1:nrow(data)){
+      data[j,-1] <- cluster_by_indiv(data[j,-ncol(data)], barycentres)
+    }
+    
+    stop <- haveToStop(i, max_iter, data, old_data)
+    i <- i+1
+  }
+  return(data)
+}
+```
+
+En premier lieu, nous testons la valeur de k. En effet, le nombre de classe doit être supérieur à 1 et inférieur au nombre d'individus. Si ce n'est pas le cas, nous stopons directement l'algorithme en précisant la raison.
+
+Ensuite, nous tirons aléatoirement les k barycentres de la première itérations parmi les individus (lignes) de la matrice de données data.
+
+Nous initialisons le nombre d'iterations i à 0 et le nombre d'itérations maximum à 20 afin que l'algorithme ne tourne pas indéfiniment s'il n'y a pas de convergence entre les clusters. 
+
+Nous initialisons le booléen stop à false, celui-ci permettra de savoir si une des conditions d'arrêt définies dans la fonction haveToStop est vérifiée. 
+
+Avant de commencer les itérations, nous initialisons également un vecteur init_cluster, composé d'une colonne et du même nombre de lignes que la matrice de données, ne contenant que des -1. 
+Nous modifions la matrice des données en lui ajoutant ce vecteur.
+
+Tant que stop n'est pas égale à true, nous itérons : 
+Nous stockons la matrice des données dans une variable old_data afin de modifier librement la matrice data et de garder les anciens clusters des individus pour le test d'arrêt. 
+Nous réinitialisons la colonne cluster à l'aide du vecteur cluster initialisé au début de notre fonction. 
+Si nous ne sommes pas à la première itération, nous recalculons la matrices des barycentres à partir des données de l'itération précédentes, matrice old_data, afin de connaître les individus de chacune des classes. Pour ce faire, pour chaque classe, nous utilisons la fonction R colMeans appliquée à la matrice old_data privée de la colonne cluster, en filtrant les données sur la classe correspondante. 
+Une fois les barycentres calculés, nous parcourons les individus (lignes) de la matrice data et nous leur affectons leur classe à l'aide de notre fonction cluster_by_indiv. 
+
+Enfin, nous regardons si nous devons arrêter la fonction, à savoir si nous avons atteint le nombre d'itérations maximum ou si les individus n'ont pas changé de classes entre l'itération actuelle et la précédente. Nous incrémentons également i. 
+
+Lorsque la fonction est terminée, nous retournons la matrice data, contenant les individus et leurs classes.
+
+4. Segmentation à partir de la méthode des k-means de R
+
+
+
+```{r}
+
+result_kMeans <- c()
+
+for (i in 1:10) {
+  restmp=kmeans(data.quanti,centers=i,algorithm="MacQueen")
+  result_kMeans[i]=restmp$betweenss/restmp$totss
+} 
+
+plot(1:10,result_kMeans,type='b', main = "Représentation de la courbe du R2 en fonction du nombre de classes", xlab="Nombre de classes", ylab = "Coefficient R2")
+```
+Nous voulons trouver le nombre de classes optimal à l'aide de la méthode du coude. Grâce à ce graphique, nous remarquons qu'à partir de trois classes, l'adjonction d'un groupe supplémentaire n'augmente pas significativement la part d'inertie expliquée. Nous pouvons donc décider de garder 3 classes.
+
+```{r}
+nb_class <- 3
+kmeans.2 <- kmeans(data.quanti, centers=nb_class, algorithm=c("Lloyd")) 
+kmeans.2
+```
+
+Le pourcentage d'inertie expliquée avec 3 classes est de 61.6%. Nous obtenons ce résultat grâce à la ligne (between_SS / total_SS =  61.6 %) issue de kmeans.2.
+
+Ensuite, grâce à la ligne de commande ci-dessous, nous pouvons observer la composition des différentes classes : 
+```{r}
+table(kmeans.2$cluster)
+```
+
+Nous pouvons constater que 467 appareils photo sont inclus dans la classe 1, 496 dans la classe 2 et 73 dans la classe 3. Si nous voulons le détail, c'est à dire à quelle classe appartient chaque appareil photo, il suffit d'exécuter la ligne de commande kmeans$cluster.
+
+```{r}
+kmeans.2$centers
+```
+
+- La première classe sera donc composée des modèles d'appareil photo possédant des résolutions maximale et minimale faibles (moyennes respectivement environ égales à 1824.5 et 1021.5), des poids et dimensions moyens (328.7 et 107.4) ainsi qu'un prix moyen (392.61 euros).
+- La deuxième classe sera composée des modèles d'appareil photo possédant des résolutions maximale et minimale moyennes (moyennes respectivement environ égales à 2960.5 et 2372.7), des poids et dimensions faibles (257.1 et 99.9) ainsi qu'un prix faible (241.2 euros).
+
+- La troisième classe sera composée des modèles d'appareil photo possédant des résolutions maximale et minimale  élevées (moyennes respectivement environ égales à 3310.2 et 2532.2), des poids et dimensions élevés (681.7 et 129.6) ainsi qu'un prix élevé (2348.3 euros).
+
+Visualisation des résultats : 
+
+```{r}
+fviz_cluster (kmeans.2, data.quanti, geom="point")
+```
+
+On remarque que les résultats sont différents de ceux de  la méthode implémentée par notre groupe lors de la précédente question. Ceci est probablement du à la définition de la fonction objectif ainsi qu'à la meilleure optimisation de la fonction kmeans de R. D'autre part, lorsque nous lancons la fonction kmeans de R, celle-ci nous indique que la convergence n'est pas atteinte malgré un grand nombre d'itérations. Ce manque de convergence implique des définitions de classes différentes.
+
+RAPPEL : FONCTION TABLE AVEC KMEANS R ET KMENS IMPLÉMENTÉ.
+
+5. Recherche documentaire et comparative des méthodes PAM et CLARA (méthodes de segmentation k-medoids)
+
+(a) - Présentation des méthodes 
+
+* PAM
+
+La méthode PAM (Partitioning Around Medoid), développée par Kaufman et Rousseeuw, consiste à considérer un représentant pour chaque classe, celui-ci étant censé être le plus central de la classe.L'idée de cet algorithme consiste à commencer avec un ensemble de k médoides puis échanger le rôle entre un objet médoide et un non médoide si ça permet de réduire la distance globale, ce qui revient à minimiser la fonction objectif. À chaque itération, un médoïd est mis en concurrence avec un autre individu aléatoire. Si l’échange améliore le critère, cet individu devient le nouveau médoïd.
+
+L'algorithme PAM est basé sur la recherche de k objets ou médoïdes représentatifs parmi les observations du jeu de données.
+
+Après avoir trouvé un ensemble de k médoïdes, des clusters sont construits en attribuant chaque observation au médoïde le plus proche.
+Ensuite, chaque médoïde m sélectionné et chaque point de données non médoïde sont échangés et la fonction objectif est calculée. La fonction objectif correspond à la somme des dissemblances de tous les objets à leur médoïde le plus proche.
+
+Le noyau d’une classe est alors un médoïd (i.e., l’observation d’une classe qui minimise la moyenne des distances aux autres observations de la classes).
+
+Avantages : moins sensible aux valeurs atypiques, efficace pour des données de petite taille
+
+Inconvénient: limité par le nombre d'observations (matrices de dissimilarités à stocker) et en temps de calcul (algorithme en O(n2)). Non adaptable pour une population importante d'objets.
+
+Phase de construction :
+
+Sélectionnez k objets pour devenir les médoïdes, ou si ces objets ont été fournis, utilisez-les comme médoïdes ;
+Calculer la matrice de dissimilarité si elle n'a pas été fournie ;
+Attribuez chaque objet à son médoïde le plus proche ;
+Phase d'échange :
+4. Pour chaque cluster rechercher si l'un des objets du cluster diminue le coefficient de dissimilarité moyen ; si c'est le cas, sélectionnez l'entité qui diminue le plus ce coefficient comme le médioïde pour ce cluster ; 5. Si au moins un medoid a changé, passez à (3), sinon terminez l'algorithme.
+
+```{r}
+k=3
+pam = pam(data.quanti, k, metric = "euclidean")
+table(pam$clustering) # clustering : vecteur contenant le numéro de cluster de chaque objet.
+pam$medoids # objets qui représentent des clusters.
+fviz_cluster (pam, data.quanti, geom="point") 
+fviz_silhouette(silhouette(pam))
+```
+Pour estimer le nombre optimal de clusters, la méthode de la silhouette moyenne sera utilisée . L'idée est de calculer l'algorithme PAM en utilisant différentes valeurs de clusters k. Ensuite, la silhouette moyenne des clusters est dessinée en fonction du nombre de clusters. Celle-ci mesure la qualité d'un clustering. Une largeur de silhouette moyenne élevée indique un bon regroupement. Le nombre optimal de clusters k est celui qui maximise la silhouette moyenne sur une plage de valeurs possibles pour k.
+
+Pour mesurer la qualité d'une partition d'un ensemble de données, nous allons calculer le coefficient de silhouette. Celui-ci désigne la différence entre la distance moyenne avec les points du même groupe que lui et la distance moyenne avec les points des autres groupes voisins. Si la différence est négative, le point est en moyenne plus proche du groupe voisin que du sien, ce qui signifie qu'il sera mal classé. Au contraire, si la différence est positive, le point est en moyenne plus proche de son groupe que du groupe voisin. Il sera donc bien classé.
+
+
+* CLARA
+
+La méthode CLARA (Clustering Large Applications)a développée également par Kaufman et Rousseeuw dans le but de réduire le coût de calcul de PAM. Cet algortihme travaille sur des échantillons au lieu de la population totale et leur applique à chaque fois la méthode PAM et retient le meilleur résultat. On prend une petite partie d‘objets (échantillon). Ensuite, les k médoides sont déterminés en appliquant PAM sur cet échantillon. Si cet échantillon est choisi d‘une manière aléatoire, alors il représente bien tous les objets, donc les médoides sont similaires à ceux qui sont créés à partir de tous les objets.
+L‘algorithme est, généralement, exécuté sur plusieurs échantillons pour obtenir le meilleur résultat.
+
+Créer aléatoirement, à partir de l'ensemble de données d'origine, plusieurs sous-ensembles de taille fixe (sampsize)
+Calculez l'algorithme PAM sur chaque sous-ensemble et choisissez les k objets représentatifs correspondants (medoids). Attribuez chaque observation de l'ensemble des données au médoïde le plus proche.
+Calculer la moyenne (ou la somme) des dissemblances des observations à leur médoïde le plus proche. Ceci est utilisé comme une mesure de la qualité du clustering.
+Conserver le sous-ensemble de données pour lequel la moyenne (ou somme) est minimale. Une analyse plus approfondie est effectuée sur la partition finale.
+
+Avantages : 
+
+Inconvénients : possibilité de ne pas atteindre la meilleure solution si l'objet qui serait le meilleur médoide n'apparait dans aucun échantillon.
+
+```{r}
+clara = clara(data.quanti, k, metric = "euclidean") # samples par défaut : 5
+table(clara$clustering)
+clara$medoids
+```
+
+```{r}
+fviz_cluster (clara, data.quanti, geom="point") 
+fviz_silhouette(silhouette(clara))
+```
+
+
+Comparaison avec les méthodes précédentes :
+
+- Avec kmeans de R
+
+```{r}
+table(kmeans.2$cluster,pam$clustering)
+```
+
+```{r}
+table(kmeans.2$cluster, clara$clustering)
+```
+
+
+Classification mixte des données 
+
+
+```{r}
+
+CAH <- hclust(dist(data.quanti,method = 'euclidian'), method='ward.D2')
+CAH
+```
+```{r}
+h <- CAH$height
+plot((nrow(data.quanti)-1):1,h,xlab="nb groupes", ylab="augmentation inertie_intra", type="h")
+
+```
+
+```{r}
+fviz_dend(CAH , # cluster 
+          k = 3, # nombre de classes
+          cex = 0.5, # taille du label
+          palette = "jco", # choix couleurs 
+          color_labels_by_k = TRUE, # couleur par label 
+          rect = TRUE # rectangle autour des classes
+)
+
+```
+

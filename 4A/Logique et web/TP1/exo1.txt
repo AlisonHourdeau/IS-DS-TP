@@ -1,0 +1,23 @@
+Hourdeau Alison IS2A4
+
+TP1 - Exercice 1:
+
+- quels sont les enfants de Bruno ?
+code : ?- pere(bruno,X).
+réponse : anne, marie
+
+- quels sont les parents de Bruno ?
+code : ?- parent(X,bruno).
+réponse : patricia, thomas
+
+- quels sont les frères d'Elisabeth ?
+code : ?- frere(X,elisabeth).
+réponse : bruno
+
+- quels sont les frères de Thomas?
+code : ?- frere(X,thomas).
+réponse : aucun
+
+- Patricia et Thomas ont-ils des enfants communs?
+code : parent(patricia,X), parent(thomas,X).
+réponse : bruno

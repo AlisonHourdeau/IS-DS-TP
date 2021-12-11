@@ -1,0 +1,152 @@
+---
+title: "TP2"
+output: html_document
+---
+
+```{r}
+#Load.package(c("tidyverse","xtable"))
+library(tidyselect)
+library(xtable)
+library(ggplot2)
+library(dplyr)
+library(plyr)
+```
+
+
+### Question 1
+```{r}
+data<-mtcars
+str(data)
+```
+```{r}
+summary(data)
+```
+
+```{r}
+# statistiques élémentaires
+dtf<-round(sapply(mtcars, each(min,max,mean,sd,var,median,IQR)),3)
+as.matrix(dtf, digits=2)
+```
+
+## Question 2 : Visualiser les données
+### Pour les variables wt et qsec
+
+```{r}
+g<-ggplot(mtcars, aes(x=wt, y=qsec))+geom_point(size=3)
+g
+```
+
+### Pour les variables wt et qsec
+
+```{r}
+g<-ggplot(mtcars, aes(x=wt, y=mpg))+geom_point(size=3)
+g
+```
+
+On pourrait avoir 2 ou 3 classes
+
+## Question 3 : Faire une segmentation des mtcars à partir de wt et qsec
+
+### Réalisation des classes et calcul des variances inter et intra classe
+```{r}
+classe<-kmeans(mtcars[,c("wt","qsec")], centers=3, algorithm = "MacQueen")
+classe
+```
+Au début on a la taille des classes
+
+Cluster means : coordonnées des barycentre des classes
+
+Clustering vector : donne pour chaque individus à quelle classe il est affecté. 
+Par exemple ici, l'individus 1 est affecté à la classe 3
+
+Within cluster correspond à la variance de chaque classe.
+68,1% est le pourcentage de l'inertie expliquée
+
+```{r}
+mtcars$cluster <- factor(classe$cluster)
+mtcars$cyl <- factor(mtcars$cyl, labels=c("Four cylinder", "Six cylinder", "Eight cylinder"))
+```
+
+```{r}
+# Centres
+classe$centers
+```
+
+```{r}
+# variance intra classe 
+classe$tot.withinss
+```
+
+```{r}
+# variance inter classe
+classe$betweenss
+```
+
+### Calcul du R²
+```{r}
+R2=100*(classe$betweenss/classe$totss)
+R2
+```
+
+
+### Visualiser le nuage de point en distinguant chaque classe par une couleur et distinguer les centre de classes
+```{r}
+plot( x=mtcars[,"wt"], y=mtcars[,"qsec"], col = classe$cluster)
+points(classe$centers, col = 1:3, pch = 3)
+```
+
+### Donner la matrice de confusion
+```{r}
+table(mtcars$cluster, mtcars$cyl)
+```
+La segmentation obtenue distingue les véhicules à faible motorisation des véhicules à forte motorisation. 
+Ici, la classe 2 se caractérise par les voitures avec une forte motorisation et la classe 1 se caractérise par les voitures avec une faible motorisation.
+
+
+## Question 4 : Même question que la 3 avec les attributs wt et mpg.
+
+## Question 5 : On suppose le nombre de classe inconnu et en utilisant wt et mpg
+### Calculer et représenter la courbe de R², déterminer le nombre de classe optimal
+```{r}
+res<-c()
+for(i in 1:10){
+  restmp=kmeans(cbind(mtcars$wt,mtcars$qsec), centers = i,algorithm = "MacQueen")
+  res[i]=sum(restmp$betweenss/restmp$totss)
+}
+plot(1:10, res, type='b')
+```
+On garde donc ici 3 classes.
+
+### Faire une représentation graphique de la segmentation
+```{r}
+
+classe2<-kmeans(cbind(mtcars$wt,mtcars$qsec), centers = n_class,algorithm = "MacQueen")
+plot( x=mtcars[,"wt"], y=mtcars[,"qsec"], col = classe2$cluster)
+points(classe2$centers, col = 1:3, pch = 3)
+```
+
+# Question 6, reprendre la question 3 avec l'option nstart
+
+nstart permet de de définir un ensemble aléatoire.
+
+```{r}
+classe3<-kmeans(cbind(mtcars$wt,mtcars$qsec), centers = 3,nstart=30,algorithm = "MacQueen")
+classe3
+```
+
+## Question 7 Reprendre la question 3 en utilisant les méthodes forgy et des nuées dynamiques
+
+### forgy
+```{r}
+k_forgy<-kmeans(cbind(mtcars$wt,mtcars$qsec), centers = 3,algorithm = "Forgy")
+```
+
+
+### nuées dynamique
+Par défaut si on ne précise pas la méthode R fait la méthode des nuées dynamiques
+```{r}
+k_nues<-kmeans(cbind(mtcars$wt,mtcars$qsec), centers = 3)
+```
+
+
+Conclusion : tjs utilisé des nstarts et pas besoin de spécifier la méthode

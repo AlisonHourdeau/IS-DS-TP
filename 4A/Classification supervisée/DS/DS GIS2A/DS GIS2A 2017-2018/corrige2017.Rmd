@@ -1,0 +1,337 @@
+---
+title: 'apGIS 4 : Corrigé du devoir surveillé de classification supervisée'
+author: "Vincent Vandewalle"
+date: "30/03/2018"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+# Décription générale des données
+
+L'objectif de ce devoir est d'étudier les facteurs qui influencent la mortalité d'un accident. 
+
+Les données sont issues de l'observatoire national interministériel de sécurité routière
+(extraction du 3 juillet 2012). Il s'agit de la base de données des accidents sur 6 années avec informations de géolocalisation. Le descriptif détaillé de ces données est présent dans le fichier *descriptif.pdf*.
+
+Les données sont issues d'une version simplifiée du fichier ETALAB ACCIDENTS. Ce fichier simplifié est constitué initialement de 454.372 lignes correspondant à 454.372 accidents. Parmis ces accidents les effectifs des différentes valeurs possibles de la variable *ttue* (qui représente le nombre de morts) sont les suivants : 
+
+Valeur   |     0  |    1 |    2 |    3 |    4  |   5 |    7  |   26 
+---------|--------|------|------|------|-------|-----|-------|------
+Effectif |429511  |23142 | 1465 |  188 |   48  |  12 |    5  |    1 
+
+Ici il y a beaucoup plus d'accidents non-mortels que d'accidents mortels (heureusement ...). 
+
+# 1. Réflexion préliminaire
+
+**Question 1** : Les méthodes étudiées en classification supervisées vous permettent-elles de prédire le nombre de morts (justifier) ? Pourquoi une régression linéaire classique ne serait-elle pas non plus très adaptée (justifier) ? (1,5 points)
+
+**Réponse 1** : Ici la variable nombre de tués est une variable qui prend les valeurs 0, 1, ..., 26. Il s'agit donc d'une variable à valeurs entières, ce qui n'est pas adapté au cadre de la classification supervisée, sauf si on considère chaque nombre possible comme une modalité, mais alors pour certaines modalités on n'aurait pas d'effectif assez grand pour bien conduire l'esimation. Dans ce cas une solution pourrait être de considérer plutôt un modèle parcimonieux de régression logistique sur variables ordinales. La régression linéaire classique n'est pas non plus adaptée ; la variable à expliquer est bien numérique, mais l'hypothèse de normalité des résidus ne peut pas être envisagée du fait du faible nombre de valeurs différentes de la variable numérique. En pratique elle semble cependant l'approche la plus adaptée pour prédire le nombre d'accidents. En fait l'approche la plus adaptée ici serait de réaliser une régression de Poisson :
+$$
+Y \sim \mathcal{P}(\lambda(x))
+$$
+où le paramètre d'intensité de la loi de Poisson, $\lambda(x)$, dépendrait des variables explicatives. L'hypothèse faite dans le cadre du modèle linéaire généralisé est
+$$
+\log(\lambda(x)) = \beta_0 + \sum_{j=1}^d \beta_j x_j
+$$
+Il peut être ajusté à l'aide de la fonction *glm* en précisant l'option *family = "poisson"*.
+
+Pour simplifier le problème on décide de créer une nouvelle variable nommée *mort* qui prend la valeur 1 si l'accident est mortel et 0 sinon. 
+
+**Question 2** : En l'état actuel la proportion d'accidents non mortels est très élevée. Quel serait le taux de bon classement obtenu si on classait tous les individus dans la classe majoritaire ? Quelle serait alors la sensibilité et la spécifité de la règle de classement ? (1,5 points)
+
+**Réponse 2** :
+
+```{r}
+n0 = 429511  # Effectif accidents non mortels
+n1 = 23142 + 1465 +  188 + 48 +  12 + 5 +1  # Effectif accident mortels
+p0 = n0/(n1+n0)
+p0 # proportion classe majoritaire
+TBC = p0
+TBC # simplement la proportion de la classe majoritaire 
+Se = 0
+Se # On ne prédit que des 0, donc aucun 1 bien prédit
+Sp = 1
+Sp # On ne prédit que des 0, donc tous les 0 bien prédits
+```
+
+Enfin pour limiter la quantité de données à traiter, on tire au hasard 24.861 lignes correspondant à des accidents non mortels, et on conserve toutes les lignes correspondant à des accidents mortels. Il s'agit en fait d'une méthode d'échantillonnage appelée échantillonnage retrospectif. Son impact sur l'estimation des paramètres du modèle de régression logistique fera l'objet d'une question ultérieure. 
+
+Vous pouvez maintenant charger le fichier *accidents.Rda* resultant de ces prétraitements.
+
+```{r}
+load("accidents.Rda")
+```
+
+**Question 3** : Maintenant que vous disposez des données vous pouvez avancer davantage sur l'analyse. A l'aide d'un simple résumé des données et d'une lecture du descriptif des variables, lister les variables qui vous semblent pertinentes pour l'analyse. Donner aussi la liste des variables qu'il faut aboslument exclure de l'analyse. (2 pts)
+
+**Réponse 3** : On commence par faire le résumé des données
+```{r}
+summary(accidents)
+```
+
+Les variables à ne surtout pas utiliser sont les variables dont le calcul fait intervenir la variable *ttue* qui sert à définir la variable *mort* qui est justement celle que l'on cherche à prédire ici ... Ainsi il faut absolument exclure les variables *ttue* et *grav*. 
+
+Les variables reliées au nombres de blessés (*tbg*, *tbl* et *tindm*) ne sont pas formellement à exlucre, mais cependant les inclure dans le modèle serait un peu hors sujet si le but principal est de trouver les diverses conditions de la voirie, de la météo, qui ont une influence sur la mortalité de l'accident.
+
+Toutes les autres variables peuvent être intéressantes, cependant on veillera par exemple à exclure les variables avec trop de valeurs manquantes, où alors avec trop de modalités différentes (par exemple adresses). Après, inclure toutes les autres variables ne serait potentiellement pas pertinent dans un but explicatif, et il vaut mieux réfléchir à un focus particulier dans l'analyse. On peut par exemple inclure dans le modèle les variable *lum*, *agg*, *int*, *atm*, *col*, *catr* (mais attention au grand nombre de valeurs manquantes).
+
+**Question 4** : Enfin pour conclure sur les questions d'ordre général. Les données disponibles vous suffisent-elles à prédire les zones les plus dangereuses ? Pourquoi ? (1 point) 
+
+**Réponse 4** : Non elles ne sont pas suffisantes puisque les données ne contiennent ici que des informations sur les accidents corporels. Il faudrait aussi des données globales de circulation pour prédire la dangerosité des différentes routes. 
+
+# 2. Etudes bivariées préliminaires
+
+**Question 5** : Y-a-t'il une liaison significative entre la variable *lum* et la variable *mort* ? Quelle est la condition de luminosité où les accidents corporels sont les plus mortels ? (2 points)
+
+**Réponse 5** : Ici on va faire un tableau de contingence croisant les variables *lum* et *mort* puis effectuer un test du chi-2 d'indépendance
+```{r}
+tab <- xtabs(~mort + lum,data = accidents)
+tab # tableau de contingence
+chisq.test(tab) # p-value < 2.2e-16
+```
+On rejette donc l'hypothèse d'indépendence entre les variables *lum* et *mort*. La lumière a un impact sur la mortalité de l'accident.
+
+Pour trouver les conditions météorologiques où les accidents sont les plus mortels on calcule simplement un tableau des profils colonne à partir de *tab* :
+```{r}
+prop.table(tab,2)
+```
+On voit que les conditions météorologiques où les accidents sont le plus mortels sont la nuit sans éclairage public, avec une proportion de mort de $78\%$ dans cette condition. 
+
+**Question 6** : Parmis les variables explicatives *lum*, *agg*, *int*, *atm*, *col*, quelle est la plus corrélée à la variable *mort* ? (2 points)
+
+**Réponse 6** : Ici on peut par exemple ici calculer le V de Cramer entre *mort* et toutes les autres variables puis les ordonner de celle qui a le V de Cramer le plus grand à celle qui a le V de Cramer le plus petit.
+
+```{r}
+var = c("lum","agg","int","atm","col")
+Vcramer = rep(NA,length(var))
+names(Vcramer) = var
+for (j in var){
+  tab <- table(accidents$mort,accidents[,j])
+  Vcramer[j] <- chisq.test(tab)$statistic/(sum(tab)*prod(dim(tab)-1))
+}
+Vcramer
+```
+
+Ainsi la variable la plus corrélée à la variable *mort* est la variable *agg* (localisation par rapport à l'agglomération), avec un V de Cramer de $2,7\%$.
+
+On peut analyser davantage le croisement entre les variables *mort* et *agg*
+```{r}
+profils = prop.table(with(accidents,table(mort,agg)),2)
+profils[,order(profils[2,],decreasing = T)]
+```
+Ainsi les accidents les plus mortels sont les accidents hors agglomération.
+
+# 3. Ajustement du modèle de régression logistique
+
+**Question 7** : Ajuster un modèle de régression logistique permettant de prédire la variable *mort* en fonction de *lum*. Quelle est la modalité de la variable *lum* qui sert de modalité de référence ? Par combien est multiplié le risque d'accident mortel quand la lumière passe de "plein jour" à "crépuscule ou aube". (2 points)
+
+**Réponse 7** : 
+On ajuste le modèle et on fait le résumé
+```{r}
+model1 <- glm(mort ~ lum, family = "binomial", data = accidents)
+summary(model1)
+```
+La modalité que sert de référence est la première modalité de la variable *lum*
+```{r}
+levels(accidents$lum)
+```
+Il s'agit donc de la modalité "Plein jour", donc tous les coefficients du modèle doivent être calculés relativement à cette modalité.
+
+Donc pour obtenir l'odds-ratio de "Crépuscule ou aube" vs "Plien jour", il suffit de prendre l'exponentielle du coefficient associé à cette modalité
+```{r}
+exp(coef(model1)["lumCrépuscule ou aube"])
+```
+
+**Question 8** : Ajuster un modèle de régression logistique permettant de prédire la *mort* en fonction de *lum*, *agg*, *int*, *atm* et *col*. Commenter le résultat. (1 point)
+
+**Réponse 8** : 
+```{r}
+model2 <- glm(mort ~ lum + agg + int + atm + col, family = "binomial",
+              data = accidents)
+# summary(model2)
+```
+Ici on remarque que presque toutes les modalités ont un effet significatif par rapport à la modalité de référence. Si on veut tester l'effet d'une variable dans son intégralité, alors il faut alors faire une test de modèles emboîtés. Par exemple si on veut tester l'effet de la variable *int* (type d'intersection), alors on fait : 
+```{r error = TRUE}
+model2bis <- glm(mort ~ lum + agg + atm + col, family = "binomial",
+              data = accidents)
+anova(model2bis,model2, test = "LRT")
+```
+Ici, celà ne fonctionne pas car la variable *int* comporte des valeurs manquantes, du coup quand on ajuste le modèle 2 bis les cas avec les valeurs qui ne sont manquantes que pour la variable *int* sont réintégrés au modèle, et par conséquent les tests deviennent inapropriés ... Une solution serait de se limiter ici au ligne complètes pour les variables *mort*, *lum*, *agg*, *int*, *atm* et *col* (lignes qui ont étés utilisées pour le modèle 2). On procède donc comme suit :
+```{r}
+idx = apply(!is.na(accidents[,c("mort","lum","agg","int","atm","col")]),1,all) 
+# idx est vecteur de booléens qui prend la valeur vraie si toutes variables sont
+# observées et 0 sinon
+model2bis <- glm(mort ~ lum + agg + atm + col, family = "binomial",
+              data = accidents[idx,])
+anova(model2bis,model2, test = "LRT")
+```
+On en déduit donc ici que l'effet de la variable *int* est significatif.
+
+
+**Question 9** : Faire une sélection de variables pas à pas sur le modèle précédent. Qu'en concluez-vous ? (1 point)
+
+**Réponse 9** : 
+```{r}
+step(model2,trace = FALSE)
+```
+Ici la sélection pas à pas ne conduit pas à supprimer des variables. On en déduit donc qu'on a intérêt à conserver toutes les variables dans le modèle. 
+
+
+**Question 10** : Evaluer les performances prédictives du modèle précédent. (2 points)
+
+**Réponse 10** : On va réaliser la courbe ROC, caculer l'AUC, trouver le meilleur seuil et retourner les $S_e$, $S_p$, et $TBC$ correspondants : 
+```{r}
+library(ROCR)
+library(caTools)
+# On se limite directement aux ligne complètes pour évacuer le pb des manquants
+model2 <- glm(mort ~ lum + agg + int + atm + col, family = "binomial",
+              data = accidents[idx,])
+S <- predict(model2, type="response")
+pred <- prediction(S, accidents[idx,"mort"])
+#Coordonnées de courbe ROC
+perf <- performance(pred, "tpr", "fpr")
+# Plot courbe ROC
+plot(perf)
+# Calcul de l'AUC
+colAUC(S, accidents[idx,"mort"])
+
+id_best <- which.min((perf@x.values[[1]])^2 + (1 - perf@y.values[[1]])^2)
+alpha_best = perf@alpha.values[[1]][id_best]
+# Le seuil optimal est proche de 0,5 ce qui colle avec le seuil optimal au niveau de l'erreur de Bayes. Les Se et Sp 
+Se = perf@y.values[[1]][id_best]
+Se 
+Sp = 1 - perf@x.values[[1]][id_best]
+Sp
+# Enfin, le TBC peut facilement est déduite de Se et Sp en faisant : 
+# TBC = Se * P(Y = 1) + Sp * P(Y = 0)
+# Or dans l'échantillon à disposition P(Y = 1) = P(Y = 0) = 0,5
+TBC = 0.5*Se + 0.5*Sp
+TBC
+```
+Ici en toute rigueur, on aurait dû partitionner les données en un échantillon d'apprentissage et un échantillon test pour évaluer correctement les performances du modèle.
+
+**Question 11** : Maintenant à vous de jouer, et de proposer le modèle de régression logistique le plus pertinent possible, commenter les variables retenues au final, et évaluer les performances de ce modèle. (4 points) 
+
+**Réponse 11** : Ici on va essayer d'inclure d'autres variables dans le modèle. Cependant cette question n'est pas aisée si on veut réaliser des selections de variables pas à pas futures, puisqu'il faudra veuiller à toujours travailler sur le même ensemble d'indivdus, et que l'on ne veut pas se priver de trop de données dans l'analyse. On se propose donc de rajouter les variable *col* et *dep* au modèle précédent. La variable *dep* nécessaitant un recodage préalbale sous forme de facteur.
+```{r}
+table(accidents$dep,useNA = "always")
+accidents$dep = factor(accidents$dep)
+idx = apply(!is.na(accidents[,c("mort","lum","agg","int","atm","col","org","dep")]),1,all) 
+
+
+library(ROCR)
+# On se limite directement aux ligne complètes pour évacuer le pb des manquants
+model3 <- glm(mort ~ lum + agg + int + atm + col + org + dep, family = "binomial",
+              data = accidents[idx,])
+S <- predict(model3, type="response")
+pred <- prediction(S, accidents[idx,"mort"])
+#Coordonnées de courbe ROC
+perf <- performance(pred, "tpr", "fpr")
+# Plot courbe ROC
+plot(perf)
+
+# Calcul de l'AUC
+colAUC(S, accidents[idx,"mort"])
+
+# Optimisation du seuil
+id_best <- which.min((perf@x.values[[1]])^2 + (1 - perf@y.values[[1]])^2)
+alpha_best = perf@alpha.values[[1]][id_best]
+
+Se = perf@y.values[[1]][id_best]
+Se 
+Sp = 1 - perf@x.values[[1]][id_best]
+Sp
+# Enfin, le TBC peut facilement est déduite de Se et Sp en faisant : 
+# TBC = Se * P(Y = 1) + Sp * P(Y = 0)
+# Or dans l'échantillon à disposition P(Y = 1) = P(Y = 0) = 0,5
+TBC = 0.5*Se + 0.5*Sp
+TBC
+```
+Les résultats sont donc sensiblement meilleurs que ceux du modèle précédent, mais attention, nous n'avons pas considéré d'échantillon test ici, donc risque de biais d'optimisme ...
+
+# 4. Redressement des paramètres de la régression logistique en échantillonnage rétrospectif
+
+Faisons maintenant un peu de mathématiques !!! Comme dit au début les proportions dans les données qui vous ont étées fournies ne sont pas représentatives des vraies proportions de mort et de non-mort. Vous allez maintenant montrer que cette modification perturbe assez peu les résultats de la régression logistique. 
+
+**Question 12** En notant $f_0(x)$ et $f_1(x)$ les densités de probabilité de $X$ dans les classes $0$ et $1$, puis $\pi_0$ et $\pi_1$ les proportions des classes $0$ et $1$, montrer que (2 points)
+$$
+\ln \frac{P(Y=1|X=x)}{P(Y=0|X=x)} = \ln \frac{\pi_1 f_1(x)}{\pi_0 f_0(x)}
+$$
+
+**Réponse 12** : 
+On a 
+$$
+\ln \frac{P(Y=1|X=x)}{P(Y=0|X=x)} = \ln \frac{\frac{P(Y=1,X=x)}{P(X=x)}}{\frac{P(Y=0,X=x)}{P(X=x)}}  = \ln \frac{P(Y=1,X=x)}{P(Y=0,X=x)}  = \ln \frac{P(Y=1)P(X=x|Y=1)}{P(Y=0)P(X=x|Y=0)} =\ln \frac{\pi_1 f_1(x)}{\pi_0 f_0(x)}
+$$
+Il s'agit ici d'un abus de langage dans les notations car $P(X=x)$ n'a pas de sens ici pour les variables aléatoires continues.
+
+**Question 13** : Supposons maintenant qu'on ait ajusté le un modèle de régression logistique mais sur des données issues d'un échantillonnage rétrospectif en imposant $\tilde\pi_0$ et $\tilde\pi_1$ les proportions des différentes classes. On notera $\tilde P(Y=1|X=x)$ les probabilités estimées par ce modèle. En passant par l'équation utilisée dans la question 12, quel est alors le lien entre $\ln \frac{P(Y=1|X=x)}{P(Y=0|X=x)}$ et $\ln \frac{\tilde P(Y=1|X=x)}{\tilde P(Y=0|X=x)}$. (1 point)
+
+**Réponse 13** : En reprenant les résultats de la question 12, on simplement
+$$
+\ln \frac{\tilde P(Y=1|X=x)}{\tilde P(Y=0|X=x)} = \ln \frac{\tilde\pi_1 f_1(x)}{\tilde\pi_0 f_0(x)}
+$$
+Ici $f_1(x)$ et $f_0(x)$ restent inchangés, on en déduit donc que
+$$
+\ln \frac{P(Y=1|X=x)}{P(Y=0|X=x)} = \ln \frac{\tilde P(Y=1|X=x)}{\tilde P(Y=0|X=x)} + \ln\frac{\pi_1\tilde\pi_0}{\pi_0\tilde\pi_1}
+$$
+
+**Question 14** : Enfin supposons qu'on ait ajusté un modèle de régression logistique à l'aide de l'échantillonage rétrospectif sur $\ln \frac{\tilde P(Y=1|X=x)}{\tilde P(Y=0|X=x)}$ sous la forme :  
+$$
+\ln \frac{\tilde P(Y=1|X=x)}{\tilde P(Y=0|X=x)} = \tilde\beta_0 + \tilde\beta_1 x_1 + \cdots +  \tilde\beta_d x_d 
+$$
+alors comment peut-on en déduire le modèle de régression logistique sur $\ln \frac{P(Y=1|X=x)}{P(Y=0|X=x)}$ si les proportions $\pi_0$ et $\pi_1$ sont connues. Quels sont alors les liens entre les $\beta_0$, $\beta_1$, \ldots, $\beta_d$ (inconnus) et les $\tilde\beta_0$, $\tilde\beta_1$, \ldots, $\tilde\beta_d$ (connus). (1 point)
+
+**Réponse 14** : Ici on voit que seule l'ordonnée à l'origine est modifiée : $\beta_0 = \tilde\beta_0 + \ln\frac{\pi_1\tilde\pi_0}{\pi_0\tilde\pi_1}$. Pour les autres paramètres on conserve $\beta_1 = \tilde\beta_1$, \ldots, $\beta_d = \tilde\beta_d$.
+
+**Question 15** : En déduire dans le cas des données accident la correction qu'il faut appliquer aux résultats du modèle précédemment appris pour obtenir les "vrais" $P(\mbox{mort} = 1 |X = x)$. (1 point)
+
+**Réponse 15** : Ici, on a $\pi_0 = 0.9452849$, $\pi_1 = 0.05471508$, et $\tilde \pi_1 = \tilde \pi_0 = 0,5$.
+Ainsi $\beta_0 = \tilde\beta_0 - 2,84$, ce qui conduit ici à une dimuntion de la probabilité $P(mort = 1 |X=x)$ (conforme à l'intuition), cependant cela ne change rien à l'ordre des probabilités calculées, ainsi la courbe ROC et l'AUC resteraient inchangés.
+
+# 5. Réflexion autour de l'utilisation de l'analyse discrimante probabiliste
+
+**Question 16** : Ici pourquoi sur les données dont vous disposez ne pouvez-vous pas appliquer la LDA ou la QDA ? (1 point)
+
+**Réponse 16** : Ici on ne peut pas appliquer la LDA et la QDA car les données considérées sont qualitatives, on ne peut donc pas modéliser leur distribution sachant le groupe par une loi normale.
+
+**Question 17** : Utiliser la fonction *naiveBayes* du package *e1071* pour apprendre le modèle prédictif. A l'aide de la documentation de la fonction dire à quelle méthode vue en cours la méthode utilisée est à relier, et expliquer l'hypothèse qui est faite ici. (1 point)
+
+**Réponse 7** : L'approche utilisée consiste à supposer l'idépendance de chacune des variables explicative sachant la variable de classe. Ainsi, il est aisé de modéliser la distribution de chacune des variables qualitatives sachant la variable de classe par une simple distribution multinomiale, puis d'en déduire ensuite la probabilité de la classe sachant les covariables à l'aide de l'application du théorème de Bayes. Cette méthode est donc à relier à l'analyse discriminante probabiliste. Le modèle peut donc être estimé comme suit :
+```{r}
+library(e1071)
+nb_accidents <- naiveBayes(mort ~ lum + agg + int + atm + col + org + dep,data = accidents)
+```
+Remarquons par ailleurs que la modélisation permet de prendre en compte sans aucun mal des données avec des valeurs manquantes, puis que seule les lois du type $X_j | Y = k$ doivent être estimées, ainsi même si un individu comporte quelques valeurs manquantes alors il peut quand même intervenir dans l'estimation de certaines lois $X_j | Y = k$. 
+
+Enfin on peut évaluer les performances de ce modèle on peut procéder comme suit :
+```{r}
+S <- predict(nb_accidents,newdata = accidents,type = "raw")[,2]
+pred <- prediction(S, accidents$mort)
+#Coordonnées de courbe ROC
+perf <- performance(pred, "tpr", "fpr")
+# Plot courbe ROC
+plot(perf)
+
+# Calcul de l'AUC
+colAUC(S, accidents$mort)
+
+# Optimisation du seuil
+id_best <- which.min((perf@x.values[[1]])^2 + (1 - perf@y.values[[1]])^2)
+alpha_best = perf@alpha.values[[1]][id_best]
+alpha_best
+
+Se = perf@y.values[[1]][id_best]
+Se 
+Sp = 1 - perf@x.values[[1]][id_best]
+Sp
+# Enfin, le TBC peut facilement est déduite de Se et Sp en faisant : 
+# TBC = Se * P(Y = 1) + Sp * P(Y = 0)
+# Or dans l'échantillon à disposition P(Y = 1) = P(Y = 0) = 0,5
+TBC = 0.5*Se + 0.5*Sp
+TBC
+```
+
+Les résultats obtenus ici sont assez comparables à ceux obtenus par la régression logistique.

@@ -1,0 +1,204 @@
+---
+title: "TP1"
+author: "Alison"
+date: "21/05/2021"
+output: pdf_document
+---
+
+
+#0. Importation  des données et packages
+
+
+```{r}
+data <- matrix(c(2.0,7.5,3,0.5,6,1.5,2,4,3,5,4,7),nrow = 6, ncol=2 )
+data
+```
+
+#1. Matrice de distance entre les indivdus
+##1.1. Manhattan
+
+```{r}
+manhattan <- dist(data,method = "manhattan") 
+as.matrix(manhattan)
+```
+
+##1.2. Euclidienne
+```{r}
+euclidienne <- dist(data,method = "euclidean") 
+as.matrix(euclidienne)
+```
+
+##1.3. Conclusion
+En fonction de la méthode utilisée, on n'obtient pas les mêmes matrices. Cependant, les résultats sont semblables : en effet, on n'observe pas une grande différence entre les deux matrices, les résultats ont le même ordre de grandeur. 
+
+#2. Fonction qui calcule pour un ensemble de données les coordonnées de son barycentre
+
+```{r}
+barycentre <- function(matrice) {
+  # On doit retourner un vecteur dont les valeurs sont la moyenne de chaque colonne de la matrice en paramètre 
+  # On applique la fonction mean sur les colonnes (2e paramètre de la fonction apply=2) de matrice
+  return(apply(matrice, 2, mean))
+}
+```
+
+On applique cette fonction à la partition {{w1,w3};w4; {w2,w5};w6} : 
+
+Soit g1, le barycentre de {w1,w3} :
+```{r}
+#On prend toutes les colonnées des lignes 1 et 3 de nos données, auquelles on applique notre fonction
+g1 <- barycentre (data[c(1,3),])
+g1
+```
+
+Soit g2, le barycentre de {w4} :
+```{r}
+#Le point w4 étant le seul de ce "groupe", les coordonnées du barycentre du groupe sont les coordonnées du point w4
+g2 <- data[c(4),]
+g2
+```
+
+Soit g3, le barycentre de {w2,w5} :
+```{r}
+g3 <- barycentre (data[c(2,5),])
+g3
+```
+
+Soit g4, le barycentre de {w6}, de la même manière que pour le barycentre de {w4}, ses coordonnées sont égales à celles du point w6 :
+```{r}
+g4 <- data[c(6),]
+g4
+```
+
+#3. Fonction qui calcule les distances entre un ensemble de points et son barycentre
+
+```{r}
+distances <- function(matrice) {
+  g <- barycentre(matrice)
+  #Afin de calculer les distances entre chacun des points entre eux et avec le barycentre, on regroupe les coordonnées des points et celle du barycentre dans une même matrice
+  matrice <- rbind(matrice,g)
+  return(as.matrix(dist(matrice ,method = "euclidean")))
+}
+```
+
+On teste la fonction sur l'ensemble des données, on devrait retrouver les mêmes distances qu'à la question 1.2., avec une colonne en plus pour le barycentre :
+
+```{r}
+distances_totales <- distances(data)
+as.matrix(distances_totales)
+```
+
+#4. Inertie totale de l'ensemble des données
+L'inertie totale est égale à la moyenne pondérée des distances carrée des points avec leur barycentre
+```{r}
+nrow <- nrow(data)
+
+#Récupération des distances au carrée entre les points et le barycentre :
+#Il s'agit de la dernière ligne (ou dernière colonne).
+#On ne prend pas en compte la dernière valeur car il s'agit de la distance entre le barycentre et lui même (0).
+distances_carres_points_barycentre <- distances(data)[nrow+1,1:nrow]^2
+
+#Enfin, on somme les distances au carré préalablement obtenues, que l'on divise par le nombre de points (nombre de lignes)
+inertie_totale <- sum(distances_carres_points_barycentre)/nrow
+inertie_totale
+```
+
+L'inertie totale est d'environ 8.76.
+
+#5. Inertie interclasse, Inertie intra classe et pourcentage d’inertie expliqué
+##5.1. Inertie interclasse
+Il s'agit de la moyenne pondérée des distances au carré entre les barycentres des classes et le barycentre global.
+
+Soit g le barycentre global :
+```{r}
+g <- barycentre(data)
+g
+```
+
+On va regrouper les barycentres des classes, précédemment calculés, dans une matrice, puis on appliquera la fonction distances que nous avons définie :
+```{r}
+barycentres <- rbind(g1,g2,g3,g4,g)
+as.matrix(barycentres)
+
+nrow <- nrow(barycentres)
+
+distances_carre_barycentres <- distances(barycentres)[nrow+1,1:nrow]^2
+
+#On divise par nrow-1 car barycentres contient les barycentres des classes ET le barycentre global
+inertie_inter <- sum(distances_carre_barycentres)/(nrow-1)
+inertie_inter
+```
+
+L'inertie inter-classe est d'environ 8.45.
+
+##5.2. Inertie intraclasse
+Il s'agit de la moyenne pondérée des inerties de chacune des classes.
+
+On va calculer l'inertie de chaque classe.
+Soit I1, l'inertie de {w1;w3}, et g1 son barycentre précédemment défini et calculé. 
+Soit I2, l'inertie de w4, nulle.
+Soit I3, l'inertie de {w2;w5}, et g3 son barycentre précédemment defini et calculé.
+Soit I4, l'inertie de w6, nulle.
+```{r}
+
+# On calcule les distances pour w1, w3 et g1 :
+distances_w1_w3_g1 <- distances(rbind(data[c(1,3),]))
+
+# On prend la dernière ligne (distance de w1 et w3 avec g1 et on supprime la dernière colonne (distance de g1 avec lui même)) puis on elève au carre
+nrow_1 <- nrow(distances_w1_w3_g1)
+distances_carre_w1_w3_g1 <- distances_w1_w3_g1[nrow_1,1:nrow_1-1]^2
+
+# On divise par nrow-1 car nrow comprend la ligne du barycentre de la classe
+I1 <- sum(distances_carre_w1_w3_g1)/(nrow_1-1)
+ 
+#Même chose pour w2, w5 :
+
+distances_w2_w5_g3 <- distances(rbind(data[c(2,5),]))
+
+nrow_3 <- nrow(distances_w2_w5_g3)
+distances_carre_w2_w5_g3 <- distances_w2_w5_g3[nrow_3,1:nrow_3-1]^2
+
+I3 <- sum(distances_carre_w2_w5_g3)/(nrow_3-1)
+
+inertie_intra <- ((nrow_1-1)*I1+(nrow_3-1)*I3)/nrow(data)
+inertie_intra
+```
+
+La variance intra-classe est d'environ 0.35.
+
+##5.3 Inertie expliquée
+```{r}
+inertie_expliquee <- 100*(1- inertie_intra/inertie_inter)
+inertie_expliquee
+```
+
+Le pourcentage d’inertie expliqué est 95.96%.
+
+P est une bonne partition car elle a une inertie inter élevée et une inertie intra faible. 
+
+```{r}
+inertie_inter+inertie_intra
+```
+
+On retrouve bien en sommant ces deux interties l’inertie totale (théoreme de huyguens).
+
+#6. Représentation graphique
+
+```{r}
+nuage_points <-as.data.frame(data)
+nuage_points
+```
+```{r}
+p <- ggplot(data= nuage_points, aes(x= nuage_points$V1,
+y=nuage_points$V2,label=rownames(nuage_points)))
+p <- p + geom_point(size=2,colour="red")
+p <- p + ggtitle("Nuage de point")
+p <- p + xlab(label=" Variable 1")
+p <- p + ylab(label="Variable 2")
+p <- p + geom_point(shape=15,color="white",size=6)+geom_text()
+
+p
+```
+
+La représenation graphique suggère de considérer la partition: {{w1,w3}; {w2,w5}; {w4,w6}}.
+
+                      

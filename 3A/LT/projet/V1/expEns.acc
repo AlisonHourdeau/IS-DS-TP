@@ -1,0 +1,52 @@
+/* Fichier expEns.acc */
+
+%prelude{ /* Code C */
+   /* Inclusion de bibliotheques C */
+   #include <stdio.h>
+   #include <malloc.h>
+   
+   /* Action de fin d analyse */
+   void fin_analyse(){
+        printf("Syntaxe correcte\n");
+   }
+}
+
+/* Declaration des tokens */
+%token RC, LETTRE, ENTIER, UNI, INT, COM, DIF, AFF, ACCOUV, ACCFER, PAROUV, PARFER, VIR;
+
+// Grammaire
+D : listeAffExp RC { fin_analyse(); }
+;
+
+listeAffExp : listeAffExp RC affExp
+            | affExp
+;
+
+affExp : LETTRE AFF ensemble
+;
+
+ensemble : ACCOUV listeEntiers ACCFER
+         | ACCOUV ACCFER
+         | LETTRE
+         | expr
+;
+
+listeEntiers : listeEntiers VIR ENTIER
+             | ENTIER
+;
+
+expr : PAROUV opNaire ensemble ensemble listeEnsemble PARFER
+     | PAROUV opBinaire ensemble ensemble PARFER
+;
+
+listeEnsemble : listeEnsemble ensemble
+              | 
+;
+
+opNaire : UNI
+        | INT
+;
+
+opBinaire : COM
+          | DIF
+;

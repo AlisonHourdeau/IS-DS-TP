@@ -1,0 +1,141 @@
+---
+title: "TP1 - CA"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# TP1 : Distance, similarité et inerties
+
+```{r}
+data <- matrix(c(2,2,7.5,4,3,3,0.5,5,6,4,1.5,7),byrow=TRUE,ncol=2)
+colnames(data) <- c("X1","X2")
+rownames(data) <- c("w1","w2","w3","w4","w5","w6")
+data
+```
+
+## Question 1 : Contruire les matrices des distances entre les individus
+### En utilisant la distance de manhattan
+```{r}
+dist_manhattan=dist(data,method="manhattan")
+as.matrix(dist_manhattan)
+```
+
+### En utilisant la distance euclidienne
+```{r}
+dist_euclidienne=dist(data,method="euclidean")
+as.matrix(dist_euclidienne)
+```
+
+### Comparer les résultats
+Bien que les valeurs soient différentes, l'ordre de grandeur des distances entre les individus ici reste inchangé quelque soit la distance appliquée soit la distance appliquée à notre jeu de données.
+
+
+## Question 2 : Calcul des barycentres de la partition {{w1,w3};w4;{w2,w5};w6}
+```{r}
+barycentre<-function(vect){
+  return(apply(vect,2,mean))
+}
+```
+
+On applique cette fonction à la partition 
+```{r}
+G1_3<-barycentre(data[c(1,3),])
+G4<-data[4,]
+G2_5<-barycentre(data[c(2,5),])
+G6<-data[6,]
+barycentres <- rbind(G1_3,G4,G2_5,G6)
+as.matrix(barycentres)
+```
+
+## Question 3 : Calcul des distances des points avec le barycentre
+```{r}
+distance<-function(vect){
+  bar<-barycentre(vect)
+  vect_2<-rbind(vect,bar)
+  z<-dist(vect_2,method = "euclidean")
+  return(as.matrix(z))
+}
+```
+
+```{r}
+d1<-distance(data[c(1,3),])
+d1
+```
+Interprétation : 1,41 : distance entre w1 et w3 et la distance entre w3 et w1. Car c'est symétrique
+0,71 : distance entre le barycentre et w1.
+
+```{r}
+d2<-distance(data[c(2,5),])
+d2
+```
+
+
+## Question 4 : Calculer l'inertie totale de l'ensemble de données
+```{r}
+dist_totale=distance(data)
+
+I_totale=1/6*(sum(dist_totale[,'bar']^2)) # sélectionner la colonne bar
+I_totale
+```
+
+```{r}
+# Méthode prof
+n<-nrow(data)
+Inertie_total<-sum((distance(data)^2)[n+1,1:n])/n
+Inertie_total
+```
+
+## Question 5 : Calculer l'inertie interclasse, intraclasse et le pourcentage d'inertie expliqué
+```{r}
+bary_global<-barycentre(data)
+bary_global
+
+
+I_inter<-function(vect,bary){
+  n<-nrow(vect)
+  vect_2<-rbind(vect,bary)
+  Inertie<-sum((distance(vect_2)^2)[6+1,1:n])/6
+}
+```
+```{r}
+# barycentre global
+G <-barycentre(data)
+
+# Matrice des barycentres
+bar <- rbind(G1_3,G4,G2_5,G6,G)
+nbar<-nrow(bar)
+
+#distance au carré entre les différents barycentres et le barycentre global
+ecarts <-(as.matrix(dist(bar))^2)[nbar,1:nbar-1]
+
+# effectifs de chaque classe
+effectifs<-( c(2,1,2,1))
+
+Inertie_inter <- sum(ecarts*effectifs)/sum(effectifs)
+
+temp.1 <- (d1^2)[nrow(d1),1:nrow(d1)-1]
+
+temp.2 <- (d2^2)[nrow(d2),1:nrow(d2)-1]
+
+vect.sum.dist<-rbind(mean(temp.1),0,mean(temp.2),0)
+
+Inertie_intra <- sum(vect.sum.dist*effectifs)/sum(effectifs)
+Inertie_intra
+
+Inertie_exp<-(1-(Inertie_intra/Inertie_total))*100
+Inertie_exp
+```
+
+
+
+## Question 6 : Représenter graphiquement le nuage de point. 
+```{r}
+plot(data)
+```
+
+### Quelle segmentation proposez-vous ?
+On pourrait proposer la répartion suivante : {{w1,w3},{w4,w6},{w2,w5}}
+
+### Calculer le pourcentage d'inertie expliquée par cette nouvelle partition et comparer à celle de la question 2
+

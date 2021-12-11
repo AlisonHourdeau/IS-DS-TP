@@ -1,0 +1,327 @@
+# TP R - PROBABILITES 2
+# mercredi 7 avril 2021
+# thibault.moulin [at] univ-lille.fr
+
+###################################
+###########   TP 2   ##############
+###################################
+
+# SIMULATIONS PAR LA METHODE D'INVERSION
+
+# EXERCICE 1
+# ------------------------
+# 1. Par un calcul à la main en utilisant que l'intégrale sur R de la densité de f(x) = 1
+# On établi
+C <- 3/2
+
+f0 <- function(x){
+    res = 1 / ((1+x)^2)
+    return(res)
+  }
+
+
+f1 <- function(x){
+  if(0 > x){
+    return(0)
+  }
+  else if(x > 2){
+    return(0)
+  }
+  else{
+    res = C / ((1+x)^2)
+    return(res)
+    }
+}
+Cinv <- integrate(f0, 0, 2)
+C <- 1/Cinv[[1]]
+
+Fx1 <- function(x){
+  if(x<0){return(0)}
+  else if(x>2){return(1)}
+  else{
+    return(-C/((1+x)) + C )
+  }
+}
+
+x <- seq(-1, 3, 0.01)
+y <- c(rep(NA, length(x)))
+for (i in 1:length(x)){
+  y[i] <- Fx1(x[i])  
+}
+plot(x, y)
+
+
+# 2. Simuler échantillon de taille 1000 de la loi de densité f1
+# (i) Tout d'abord, on tire 1000 variables aléatoires de loi uniforme sur [0, 1]
+U <- runif(1000, min = 0, max = 1)
+
+# (ii) On calcule ensuite G(U)
+GU <- c(rep(0, length(U)))
+for (i in 1:length(U)){
+  while(Fx1(GU[i]) < U[i] ){
+    GU[i] <- GU[i] + 0.0001
+  }
+}
+GU
+
+# 3. Histogramme
+hist(GU, breaks=seq(min(GU), max(GU), length=50), 
+     include.lowest=TRUE, 
+     freq = F, 
+     plot = TRUE,
+     xlab = "valeurs de x", 
+     ylab = "densité de X",
+     main = "histogramme des 1000 tirages")
+
+x <- seq(-1, 3, 0.001)
+y[1] <- 0
+for (i in 1:length(x)){
+  y[i] <- f1(x[i])  
+}
+
+# 4. Ajouter le tracé de la densité
+lines(x, y, lwd = 2, col = 'chartreuse1')
+
+
+# EXERCICE 2
+# ------------------------
+# 1. Par un calcul à la main, on montre que E[Z] = + infini, donc Z n'admet pas d'espérance.
+
+# 2. On procède de la même façon que pour la question précédente, 
+# en remarquant que f est intégrable et on peut calculer la primitive, donc on trouve une expression de F
+
+f2 <- function(x){
+    res =  1 / ( pi*(1+x^2) )
+    return(res)
+}
+
+Fx2 <- function(x){
+  res <- atan(x)/pi + 1/2
+    return(res)
+}
+
+x2 <- seq(-5, 5, 0.01)
+y2 <- c(rep(NA, length(x2)))
+for (i in 1:length(x2)){
+  y2[i] <- Fx2(x2[i])  
+}
+plot(x2, y2, type = "l")
+
+# Echantillon de taille 1000 de la loi de Cauchy
+xcauchy <- rcauchy(1000, location = 0, scale = 1)
+
+# Histogramme (pas du tout pertinent ici)
+x3 <- seq(-500, 500, 0.01)
+y3 <- c(rep(NA, length(x3)))
+for (i in 1:length(x3)){
+  y3[i] <- f2(x3[i])  
+}
+hist(xcauchy, breaks=seq(min(xcauchy), max(xcauchy), length=50), include.lowest=TRUE,
+     freq = F, 
+     plot = TRUE) 
+lines(x3, y3, lwd = 2, col = 'chartreuse1')
+
+# 3. Extrapolation linéaire
+# Echantillon de taille 1000 de la loi de Cauchy
+xcauchy <- rcauchy(1000, location = 0, scale = 1)
+
+
+n <- 1:length(xcauchy)
+x_cauchy_bar <- c(rep(NA, length(n)))
+for (i in 1:length(n)){
+  x_cauchy_bar[i] <- (1/i)*sum(xcauchy[1:i])
+}
+
+# A nouveau, il convient d'utiliser la structure frame pour calculer la régression
+dframe <-data.frame(n, x_cauchy_bar)
+# On calcule ici la regression linéaire
+reglin <- lm(x_cauchy_bar ~ n, dframe)
+reglin
+
+# On trace l'extrapolation linéaire qui vient approcher l'espérance (mais qui n'existe pas)
+plot(n[2:length(n)], x_cauchy_bar[2:length(n)], type = "b", xlab = "n", ylab = "Moyenne de n lloi de Cauchy", main = "Extrapolation linéaire loi de Cauchy" )
+abline(lm(x_cauchy_bar ~ n, dframe), col = 'blue', lwd = 3)
+
+# Qu'observe-t-on lorsque l'on affiche plusieurs fois de suite le graphe pour différents tirages ?
+
+
+
+
+
+# EXERCICE 3 - avec la méthode d'inversion
+# ----------------------------------------
+# 1. On trouve en calculant à la main :
+C <- 1/(exp(1) - 1)
+
+# Ou remarquer que c'est l'inverse de l'intégrale suivante :
+f3_0 <- function(x){
+  res =  exp(x)
+  return(res)
+}
+cste <- 1/integrate(f3_0, 0, 1)[[1]]
+
+# On vérifie qu'avec cette cste, l'intégrale de la densité sur R vaut 1 :
+f3_1 <- function(x){
+  res = cste * exp(x)
+  return(res)
+}
+integrate(f3_1, 0, 1)[[1]]
+
+# L'espérance vaut (on la calcule aussi à la main)
+Esp_ex3 <- 1/(exp(1) - 1)
+
+
+# On définit les fonctions f et F ainsi trouvée
+f3 <- function(x){
+  if(0 > x){
+    return(0)
+  }
+  else if(x > 1){
+    return(0)
+  }
+  else{
+    res = cste * exp(x)
+    return(res)
+  }
+}
+
+# Pour fixer les choses, représentons l'allure de f3 :
+x4 <- seq(-2, 2, 0.001)
+y4 <- c(rep(NA, length(x4)))
+for (i in 1:length(x4)){
+  y4[i] <- f3(x4[i])  
+}
+plot(x4, y4)
+
+
+Fx3 <- function(x){
+  if(x<0){return(0)}
+  else if(x>1){return(1)}
+  else{
+    return(cste * (exp(x) - 1) )
+  }
+}
+
+x <- seq(-0.5, 1.5, 0.01)
+y <- c(rep(NA, length(x)))
+for (i in 1:length(x)){
+  y[i] <- Fx3(x[i])  
+}
+plot(x, y)
+
+# ---------------------------------
+# Essai avec la méthode d'inversion
+# (i) Tout d'abord, on tire 1000 variables aléatoires de loi uniforme sur [0, 1]
+U <- runif(1000, min = 0, max = 1)
+
+# (ii) On calcule ensuite G(U)
+GU <- c(rep(0, length(U)))
+for (i in 1:length(U)){
+  while(Fx3(GU[i]) < U[i] ){
+    GU[i] <- GU[i] + 0.001
+  }
+}
+GU
+
+
+hist(GU, breaks=50,
+     freq = F, 
+     plot = TRUE,
+     xlab = "valeurs de x", 
+     ylab = "densité de X",
+     main = "histogramme des 1000 tirages")
+
+x4 <- seq(0, 1, 0.001)
+y4 <- c(rep(NA, length(x4)))
+for (i in 1:length(x4)){
+  y4[i] <- f3(x4[i])  
+}
+# 4. Ajouter le tracé de la densité -> On voit que cela fonctionne très bien !
+lines(x4, y4, lwd = 2, col = 'chartreuse1')
+
+
+# ---------------------------------
+# Essai avec la méthode du rejet
+
+# (i) Tout d'abord, on tire 1000 variables aléatoires de loi uniforme sur [0, 1]
+U <- runif(1000, min = 0, max = 1)
+
+# (ii) Il faut trouver une suite de v.a. (Yn) iid d'une densité g facile à simuler
+# -> On choisit la loi exponentielle de paramètre 1 ! Sa densité vaut g(x) = exp(-x)
+# -> Pour tout x, on a bien f(x) <= g(x) car la cste C = 0.58 < 1
+
+
+# Description de l'idée générale !
+# -> (i) les v.a. Ui suivent une loi uniforme dont on simule facilement les valeurs prises par les va Ui (runif)
+# -> (ii) les v.a. Yn suivent une loi exponentielle (on l'a choisi ainsi) dont il est facile de calculer la densité (dexp)
+
+
+
+# EXERCICE 4 - avec la méthode du rejet
+# -------------------------------------
+# 1. Tracer 100 réalisations de loi uniforme dans le carré [-1, 1]x[-1, 1]
+# Il suffit de tirer 2 va uniformes sur [-1, 1] qui seront les abcisses et ordonnées à tracer
+X1 <- runif(100, min = -1, max = 1)
+X2 <- runif(100, min = -1, max = 1)
+plot(X1, X2)
+abline(h = 0, col = "lightgrey", lwd = 2, lty = 2)
+abline(v = 0, col = "lightgrey", lwd = 2, lty = 2)
+
+# 2. Ajoutons le traçage d'un disque dans le plot précédent
+disq <- function(x){
+  return(sqrt(1 - x^2))
+}
+x5 <- seq(-1, 1, 0.01)
+y5 <- c(rep(NA, length(x5)))
+for (i in 1:length(x5)){
+  y5[i] <- disq(x5[i])  
+}
+y <- seq(-1, 1, 0.01)
+lines(x5, y5)
+lines(x5, -y5)
+
+# 3. Considérons cette assertion vraie
+
+# 4. Simuler 100 réalisations indépendantes de loi uniforme dans le disque unité D
+# La méthode du rejet consiste simplement à ne pas considérer les vecteurs hors du disque
+Y1 <- c(rep(NA, 1000)) # vecteur aléatoire de sortie de points dans le disque
+Y2 <- c(rep(NA, 1000)) # vecteur aléatoire de sortie de points dans le disque
+nbtirage <- 0 # nombre total de tirages effecutés, incluant les points hors du disque donc exclu
+
+for (i in 1 : length(Y1)){ # chaque itération de la boucle correspond à un coef des vecteurs Y1 et Y2
+  temp1 <- runif(1, min = -1, max = 1) # on tire tout d'abord 2 valeurs uniformément dans le carré C
+  temp2 <- runif(1, min = -1, max = 1)
+  nbtirage <- nbtirage + 1 # on ajoute 1 au nombre de tirages
+
+    while (sqrt(temp1^2 + temp2^2) > 1){ # on test si le point tiré est dans le disque
+    temp1 <- runif(1, min = -1, max = 1) # sinon, on ressimule 2 nouvelles va uniformément
+    temp2 <- runif(1, min = -1, max = 1)    
+    nbtirage <- nbtirage + 1 # on ajoute 1 à ce nouveau tirage
+  }
+ Y1[i] <- temp1 # puisqu'on est sorti du while, temp1 et temp2 sont forcément dans le disque. 
+ Y2[i] <- temp2 # on les stocke dans les vecteurs de sortie Y1 et Y2
+}
+print(nbtirage) # nombre de réalisaton nécessaire pour obtenir les 100 points dans le disque
+
+# Afficher les points simulés
+plot(Y1, Y2, xlim = c(-1,1), ylim = c(-1, 1))
+lines(x5, y5, col = "darkorange", lty = 2)
+lines(x5, -y5, col = "darkorange", lty = 2)
+
+
+# 5.On calcule la moyenne arithmétique de la distance séparant ces 100 points à l'origine
+# Vecteur contenant les distances de chaque points à l'origine
+dist <- sqrt(Y1^2 + Y2^2)
+# on calcule la valeur moyenne de ces 100 distances
+dist_bar <- sum(dist)/length(dist)
+print(dist_bar)
+
+# On trouve environ une distance moyenne de 0.66. C'est un peu étrange !
+# On s'attend plutôt à une longueur moyenne :
+# E[L] = R^2 / 2 = 1 / 2
+# cf. exercice 6 du TD. 
+
+# Pourquoi ?
+# Parce que nos lois uniformes sont un peu biaisés ici : en effet, pour obtenir les points dans le disque
+# on a exclu certains points simulés dans le carré mais hors du disque. Les points restant, ne sont
+# donc plus exactement distribués selon la loi uniforme avec cette méthode.

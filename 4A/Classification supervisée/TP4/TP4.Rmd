@@ -1,0 +1,149 @@
+---
+title: "TP4"
+author: "Alison"
+date: "17/03/2021"
+output: pdf_document
+---
+
+# Chargement du jeu de données
+
+```{r}
+load("prema.RData")
+str(prema)
+prema$DIAB = as.factor(prema$DIAB)
+attach(prema)
+```
+
+#Etude d'une variable binaire
+
+Calculons le tableau de contingence PREMATURE/GEMEL :
+```{r}
+table(prema$PREMATURE, prema$GEMEL)
+```
+
+On calcule la probabilité d'accoucher prématurément lors d'une grossesse multiple :
+```{r}
+#P(A sachant B) = P(A et B)/P(B)
+proba_prema_sachant_gemel = 35/39
+proba_prema_sachant_gemel
+```
+La probabilité d'accoucher prématurément lors d'une grossesse multiple est d'environ 90%. Il y a de fortes chances d'accoucher prématurément lors d'une grossesse multiple.
+
+On ajuste le modèle expliquant l'accouchement prématuré par le type de grossesse :
+```{r}
+model1 <- glm(PREMATURE ~ GEMEL, family = "binomial", data = prema)
+summary(model1)
+```
+Le coefficient de la variable GEMEL est 1.5101. Sa p-value est d'environ 0.00514, elle est inférieure à 5% donc on rejette l'hypothèse nulle donc le coefficient est significatif.
+
+On calcule l'odd-ratio à partir du tableau de contingence :
+```{r}
+#OR = diagonale 1 / diagonale 2
+OR = (119*35)/(230*4)
+OR
+```
+L'OR est supérieur à 1 donc avoir une grossesse gémelaire est un facteur de risque de la prématurité.
+
+Comme la variable X est quantitative, on peut aussi calculer l'odd-ratio à partir de l'exponentielle du coefficient de GEMELMultiple :
+```{r}
+OR = exp(1.5101)
+OR
+```
+De même, l'OR est supérieur à 1 donc avoir une grossesse gémelaire est un facteur de risque de la prématurité.
+
+# Etude d'une variable quantitative
+On calcule l'effacement moyen du col chez les patientes ayant accouché prématurément et chez les patientes n'ayant pas accouché prématurément.
+```{r}
+by(prema$EFFACE, prema$PREMATURE, mean)
+```
+En moyenne, l'effacement du col chez les patientes ayant accouché prématurément est d'environ 51,80 mm. Pour les patientes n'ayant pas accouché prématurement, la moyenne est d'environ 27,02 mm.
+
+
+On ajuste le modèle expliquant l'accouchement prématuré par l'effacement du col :
+```{r}
+model2 <- glm(PREMATURE ~ EFFACE, family = "binomial", data = prema)
+summary(model2)
+```
+
+On cherche à exprimer pi(x) = P(PREMATURE = 1/EFFACE = x) en fonction de x et à retourner ce resultat :
+```{r}
+# pi(x) = exp(beta0 + beta1 * X) / (1 + exp(beta0 + beta1 * X))
+pi <- function(x) {
+  return(exp(coefficients(model2)[1] + coefficients(model2)[2] * x) /(1 + exp(coefficients(model2)[1] + coefficients(model2)[2] * x)))
+}
+```
+
+Calculons la probabilité d'accoucher prématurément quand le col est effacé à 60% :
+```{r}
+proba_prema_sachant_efface60 = pi(60)
+proba_prema_sachant_efface60
+```
+La probabilité d'accoucher prématurément quand le col est effacé à 60% est d'environ 78%.
+
+Calculons le score pi associé aux femmes de l'étude :
+```{r}
+#???
+```
+
+
+On compare le résultat avec le résultat des commandes suivantes :
+```{r}
+pi_hat = predict(model2, prema, type = "response")
+model2$fitted.values
+```
+
+Voici le graphique permettant d'illustrer la dépendance entre l'effacement du col et
+l'accouchement prématuré.
+```{r}
+library(lattice)
+gS = densityplot(~pi_hat, data = data.frame(prema, pi_hat), groups = PREMATURE,
+plot.points = FALSE, ref = TRUE, auto.key = list(columns = 1))
+print(gS)
+```
+
+# Etude de plusieurs graphiques
+On ajuste le modèle expliquant l'accouchement prématuré par le type de grossesse et l'effacement du col :
+```{r}
+model3 <- glm(PREMATURE ~ GEMEL + EFFACE, family = "binomial",
+data = prema)
+summary(model3)
+```
+
+On compare le modèle 2 et le modèle 3 :
+```{r}
+anova(model2, model3, test = "LRT")
+```
+Le modèle 3 a un Df égale à 1 et une p-value inférieure à 0.05 donc le modèle 3 est l'ajout de "GEMEL" a conduit à un ajustement significativement amélioré par rapport au modèle 2.
+On conserve donc le modèle 3.
+
+Estimons le modèle complet :
+```{r}
+fullmodel <- glm(PREMATURE ~ ., family = "binomial", data = prema)
+summary(fullmodel)
+```
+Les variables DILATE, EFFACE, MEMBRANNon, MEMBRANEIncertain et PARIT ont une p-value inférieure à 0.05 donc ces variables sont significatives.
+Les autres coefficients ne sont pas significatifs puisque leurs p-values sont supérieures à 5%.
+On réduit le modèle :
+```{r}
+reduced = step(fullmodel)
+summary(reduced)
+```
+Le modèle reduced est composé des variables GEST, EFFACE, DIALATE, MEMBREANNon, MEMBRANIncertain, GRAVID, PARIT, DIABNon, TRANFNon et GEMELMultiple.
+Les variables GEST, EFFACE, DIALATE, MEMBREANNon et PARIT ont des p-values inférieures à 5% donc leurs coefficients sont significatifs.
+
+On compare les deux modèles :
+```{r}
+anova(fullmodel, reduced, test = "LRT")
+```
+Le modèle reduced a une p-value de 0.9063, clairement supérieure à 5%, le résultat n'est pas significatif donc on rejette ce modèle et on conserve le modèle fullmodel.
+
+On a interpreté les coefficients de reduced précedemment. On va déterminer quels sont les facteurs de risque et quels sont les facteurs protecteurs pour l'accouchement prématuré :
+```{r}
+exp(cbind(OR=coef(reduced), confint(reduced)))
+```
+Les OR de DIALTE, EFFACE, GRAVID et GEMELMultiple sont supérieurs à 1 donc ce sont des facteurs de risque de la prématurité.
+En revanche, les OR de GEST, MEMBRANNon, MEMBRANIncertain, DIABNon et TRANSFNon sont inférieurs à 1 donc ce sont des facteurs protecteurs de la prématurité.
+
+
+# Evaluation de la régle de décision
+

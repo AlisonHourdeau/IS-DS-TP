@@ -1,0 +1,226 @@
+@startuml
+package "Configurations" #ffeebb {
+    class Configuration
+    class Progressiste
+    class Socialiste
+    class NeoLiberale
+    class Capitaliste
+    class EuropeApresCovid19
+}
+package "Cases" #ffeebb {
+    class Case
+    class Impot
+    class BureauFinancesPubliques
+    class LoiAntitrust
+    class Investissement
+    class Subvention
+    class Repos
+}
+package "Joueur" #ffeebb {
+    class Joueur
+    class Agressif
+    class Prudent
+    class Etat
+}
+
+
+together {
+    class Progressiste
+    class Socialiste
+    class NeoLiberale
+    class Capitaliste
+    class EuropeApresCovid19
+}
+together {
+    class Impot
+    class BureauFinancesPubliques
+    class LoiAntitrust
+    class Investissement
+    class Subvention
+    class Repos
+}
+together {
+    class Agressif
+    class Prudent
+    class Etat
+}
+
+
+abstract class Configuration [[java:Monopoly.Configurations.Configuration]] {
+	#nbJoueursA: int
+	#nbJoueursP: int
+	#pourcentageCasesLoiAntitrust: int
+	#pourcentageCasesBureauFinancesPubliques: int
+	#pourcentageCasesInvestissement: int
+	#pourcentageCasesSubvention: int
+	#pourcentageCasesRepos: int
+	#defaultJoueurLiquideMax: int
+	#defaultJoueurLiquideMin: int
+	#defaultLoiAntitrustSeuil: int
+	#defaultBureauFinancesPubliquesValeur: int
+	#defaultBureauFinancesPubliquesPourcentageMax: int
+	#defaultBureauFinancesPubliquesPourcentageMin: int
+	#defaultInvestissementValeurMax: int
+	#defaultInvestissementValeurMin: int
+	#defaultInvestissementPourcentageMax: int
+	#defaultInvestissementPourcentageMin: int
+	#defaultSubventionMontantMax: int
+	#defaultSubventionMontantMin: int
+	+Configuration()
+	+initJeu(plateau: Plateau, joueurs: List<Joueur>): void
+	+initPlateau(plateau: Plateau, c: Case, etat: Joueur): void
+	+initJoueurs(joueurs: List<Joueur>, c: Case): void
+}
+class Progressiste [[java:Monopoly.Configurations.Progressiste]] {
+	+Progressiste(nbJoueursA: int, nbJoueursP: int)
+}
+class Socialiste [[java:Monopoly.Configurations.Socialiste]] {
+	+Socialiste(nbJoueursA: int, nbJoueursP: int)
+}
+class NeoLiberale [[java:Monopoly.Configurations.NeoLiberale]] {
+	+NeoLiberale(nbJoueursA: int, nbJoueursP: int)
+}
+class Capitaliste [[java:Monopoly.Configurations.Capitaliste]] {
+	+Capitaliste(nbJoueursA: int, nbJoueursP: int)
+}
+class EuropeApresCovid19 [[java:Monopoly.Configurations.EuropeApresCovid19]] {
+	+EuropeApresCovid19(nbJoueursA: int, nbJoueursP: int)
+}
+
+
+abstract class Case [[java:Monopoly.Cases.Case]] {
+	-id: int
+	+Case(id: int)
+	+{abstract} action(j: Joueur): boolean
+}
+enum Impot [[java:Monopoly.Cases.Impot]] {
+	SUR_LE_REVENU
+	FONCIER
+}
+class BureauFinancesPubliques [[java:Monopoly.Cases.BureauFinancesPubliques]] {
+	#valeur: int
+	#pourcentage: int
+	+BureauFinancesPubliques(id: int)
+	+BureauFinancesPubliques(id: int, nom: Impot, valeur: int, pourcentage: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class LoiAntitrust [[java:Monopoly.Cases.LoiAntitrust]] {
+	#seuil: int
+	+LoiAntitrust(id: int)
+	+LoiAntitrust(id: int, seuil: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Investissement [[java:Monopoly.Cases.Investissement]] {
+	#valeurNominale: int
+	#pourcentage: int
+	+Investissement(id: int)
+	+Investissement(id: int, valeurNominale: int, pourcentage: int, j: Joueur)
+	+changeProprietaire(j: Joueur): void
+	+action(j: Joueur): boolean
+}
+class Subvention [[java:Monopoly.Cases.Subvention]] {
+	#montant: int
+	+Subvention(id: int)
+	+Subvention(id: int, montant: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Repos [[java:Monopoly.Cases.Repos]] {
+	+Repos(id: int)
+	+action(j: Joueur): boolean
+}
+
+
+abstract class Joueur [[java:Monopoly.Joueurs.Joueur]] {
+	#id: int
+	#liquide: int
+	#totalInvestissements: int
+	#aPerdu: int
+	+Joueur(id: int, sortie: Case, liquide: int)
+	+addLiquide(liquide: int): void
+	+removeLiquide(liquide: int): void
+	+addInvestissement(investissement: Investissement): void
+	+removeInvestissement(investissement: Investissement): void
+	+payeAntitrust(somme: int, etat: Etat): void
+	+paye(joueur: Joueur, somme: int): void
+	+joue(c: Case): boolean
+	+acheteOuPas(i: Investissement): boolean
+	+compareTo(joueur: Joueur): int
+	+equals(o: Object): boolean
+}
+class Agressif [[java:Monopoly.Joueurs.Agressif]] {
+	+Agressif(id: int, sortie: Case, liquide: int)
+	+acheteOuPas(i: Investissement): boolean
+	+joue(c: Case): boolean
+}
+class Prudent [[java:Monopoly.Joueurs.Prudent]] {
+	+Prudent(id: int, sortie: Case, liquide: int)
+	+acheteOuPas(i: Investissement): boolean
+	+joue(c: Case): boolean
+}
+class Etat [[java:Monopoly.Joueurs.Etat]] {
+	+Etat(id: int, sortie: Case, liquide: int)
+}
+
+
+class Plateau [[java:Monopoly.Plateaux.Plateau]] {
+	#nbCases: int
+	+Plateau(nbCases: int)
+	+addCase(c: Case): void
+}
+
+
+class Simulation [[java:Monopoly.Simulation]] {
+	+{static} assezJoueursEnLice(joueurs: List<Joueur>): boolean
+	+{static} displayTransitivState(joueurs: List<Joueur>, afficherOrdre: boolean): String
+	+{static} main(args: String[]): void
+}
+
+
+interface "Comparable<Joueur>" as Comparable_Joueur_ {
+}
+
+
+Configuration <|-- Progressiste
+Configuration <|-- Socialiste
+Configuration <|-- NeoLiberale
+Configuration <|-- Capitaliste
+Configuration <|-- EuropeApresCovid19
+
+Case <|-- BureauFinancesPubliques
+Case <|-- LoiAntitrust
+Case <|-- Investissement
+Case <|-- Subvention
+Case <|-- Repos
+
+BureauFinancesPubliques --> "1" Impot : nom
+BureauFinancesPubliques --> "1" Etat : etat
+BureauFinancesPubliques --> "1" Etat : gCapitalisteetEtat()
+
+LoiAntitrust --> "1" Etat : etat
+
+Investissement --> "1" Joueur : proprietaire
+Investissement --> "1" Joueur : getProprietaire()
+
+Subvention --> "1" Etat : etat
+Subvention --> "1" Etat : getEtat()
+
+Joueur <|-- Agressif
+Joueur <|-- Prudent
+Joueur <|-- Etat
+
+Joueur --> "1" Case : position
+Joueur --> "1" Case : getPosition()
+Joueur --> "*" Investissement : investissements
+Joueur --> "*" Investissement : getInvestissements()
+Joueur --> "1" Investissement : antitrustInvestissementARevendre()
+
+Agressif --> "1" Investissement : antitrustInvestissementARevendre()
+
+Prudent --> "1" Investissement : antitrustInvestissementARevendre()
+
+Plateau --> "*" Case : plateau
+Plateau --> "*" Case : getPlateau()
+
+Comparable_Joueur_ <|.. Joueur
+
+@enduml

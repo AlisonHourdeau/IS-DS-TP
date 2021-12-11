@@ -1,0 +1,355 @@
+
+
+
+
+/* Reseau */
+
+type liste_graph_reseau = structure
+  id : Entier
+  head : maillon_graph_reseau
+fin
+
+type maillon_graph_reseau = structure
+  id : Entier
+  flot : Entier
+  capacite : Entier
+  next : maillon_graph_reseau
+fin
+
+
+
+/* Graphe Ecart */
+
+type maillon_graph_ecart = structure
+  id : Entier
+  flot_entrant : Entier
+  next : maillon_graph_ecart
+fin
+
+type liste_graph_ecart = structure
+  id : Entier
+  head : maillon_graph_ecart
+fin
+
+
+
+/* Chemin */
+
+type maillon_chemin = structure
+  id : Entier
+  capacite_residual : Entier
+  next : maillon_chemin
+fin
+
+type liste_chemin = structure
+  head : maillon_chemin
+fin
+
+
+
+/* File */
+
+type file = structure
+  tab : vecteur d'Entier
+  taille : Entier
+  read_end : Entier
+  write_end : Entier
+  n : Entier
+fin
+
+
+
+/* Fonctions-Actions */
+
+
+
+Action buildGraph(nom_fichier, source, sink, nb_sommets, nb_arcs, tab) :
+  D : nom_fichier : Chaine (nom du fichier contenant la description du réseau à maximiser).
+  R : source : Entier (source du réseau).
+      sink : Entier (puits du réseau).
+      nb_sommets : Entier (nombre de sommets dans le réseau).
+      nb_arcs : Entier (nombre d'arcs dans le réseau).
+      tab : vecteur de liste_graph_reseau (tableau contenant le réseau, tableau construit au long de cette action).
+  L : value : Entier (valeur du sommet source puis puits).
+      from : Entier (sommet initial d'un arc).
+      to : Entier (sommet destination d'un arc).
+      cap : Entier (capacite de l'arc de sommet initial 'from' et sommet destination 'to').
+      table_created : Boolean (permet de s'assurer que le tableau a bien été créé avant d'essayer de le remplir).
+      currentline : Chaine (ligne dans le fichier, parcourt l'ensemble du fichier).
+      i : Entier (index pour parcourir le tableau tab en cours de création).
+
+  ouverture du fichier nom_fichier pour y lire les informations et construire le réseau
+
+  table_created = Faux // le tableau contenant le réseau n'a pas encore été créé.
+
+  TantQue il reste des lignes pas encore lues dans le fichier Faire :
+    currentline = ligne suivante
+
+    Si 'p' est le premier caractère de la currentline Faire : // 'p' en début de ligne signifie que les valeurs qui suivent sur la même ligne sont, dans l'ordre, le nombre de sommets et le nombre d'arcs constituant le réseau.
+      nb_sommets = nombre de sommets, valeur indiquée dans currentline
+
+      nb_arcs = nombre d'arcs, valeur indiquée dans currentline
+
+      création du tableau tab // connaissant à présent le nombre de sommets du réseau, on peut créer un tableau de la taille du nombre de sommets.
+      table_created = Vrai // le tableau contenant le réseau a bien été créé.
+
+      Pour i allant de 0 à nombre de sommets Faire : // initialisation de toute les têtes de listes contenues dans le tableau de réseau
+        tab[i].id = i + 1 // la case du tableau est la tête de liste. Elle contient l'information du sommet source des arcs qui seront décrits dans la chaîne de maillons constituant le reste de la liste.
+        tab[i].head = NULL // on ne sait pas encore quels sont les successeurs de chaque sommet, on le matérialise par la valeur 'NULL'.
+      FinPour
+
+    FinSi
+
+    Si 'n' est le premier caractère de la currentline Faire : // 'n' en début de ligne signifie que les valeurs qui suivent sur la même ligne sont, un sommet, 's' pour indiquer que le sommet de la ligne est la source du réseau et 't' pour indiquer que le sommet de la ligne est le puits du réseau.
+      value = sommet source ou puits, valeur indiquée dans currentline
+
+      Si 's' est le caractère suivant dans currentline Faire : // 's' pour la source.
+        source = value
+      Sinon Si 't' est le caractère suivant dans currentline Faire : // 't' pour le puits.
+        sink = value
+      FinSi
+
+    FinSi
+
+    Si 'a' est le premier caractère de la currentline et que table_created est à Vrai Faire : // 'a' en début de ligne signifie que les valeurs qui suivent sur la même ligne sont, le sommet source de l'arc décrit, le sommet puits de l'arc décrit, la capacité de l'arc décrit sur cette ligne.
+      from = sommet source de l'arc, valeur indiquée dans currentline
+      to = sommet puits de l'arc, valeur indiquée dans currentline
+      cap = capacité de l'acr allant de 'from' à 'to', valeur indiquée dans currentline
+
+      ajouter en tête de la liste tab[from - 1] un maillon dont les valeurs seront id = to, flot = 0, capacite = cap, next = tete actuelle de la liste, le maillon head de la liste devient ce maillon.
+    FinSi
+
+  FinTantQue
+
+  // le tableau construit contient maintenant le réseau lu dans le fichier nom_fichier
+
+  refermer le fichier nom_fichier
+
+FinAction
+
+
+
+Fonction buildRG(tabReseau, nb_sommets) : vecteur de liste_graph_ecart
+  D : tabReseau : vecteur liste_graph_reseau (tableau de listes de successeurs, représentant le réseau sur lequel se base le graphe d'écart renvoyé en sortie).
+      nb_sommets : Entier (nombre de sommets dans les différents graphes. D'un type de graphe à l'autre et d'une itération à l'autre, cette valeur ne change pas, contrairement ).
+  L : tabEcart : vecteur de liste_graph_ecart (tableau de listes de successeurs, représentant le graphe d'écart que nous allons construire à partir du réseau).
+      M_r : maillon_graph_reseau (maillon parcourant les listes du réseau).
+      i : Entier (index pour parcourir le tableau du réseau).
+
+  création du tableau tabEcart
+
+  Pour i allant de 0 à nb_sommets Faire : // permet de parcourir les successeurs de tous les sommets du réseau.
+    initialisation de la liste avec les valeurs i+1 pour l'id et NULL pour la tête de la liste étant donné qu'on n'a pas encore de successeurs pour le sommet i+1.
+
+    M_r = tabReseau[i].head // on va parcourir la liste tabReseau[i] grace au maillon M_r.
+
+    TantQue M_r != NULL Faire : // tant qu'on n'est pas arrivés au bout de la listes des successeurs.
+
+      Si M_r.capacite - M_r.flot != 0 Faire : // les arcs d'un graphe d'écart ont pour valeur la capacité - le flot de l'arc équivalent dans le réseau. Ici, tous lees arcs du réseau ont un flot de 0 donc c'est pure précaution.
+        ajouter en tête de la liste tabEcart[i] un nouveau maillon de graphe d'écart de valeurs id = M_r.id, de flot_entrant = M_r.capacite et de next = tabEcart[i].head.
+      FinSi
+
+      M_r = M_r.next // on a fini de traiter ce maillon du réseau, on passe au suivant.
+    FinTantQue
+
+  FinPour
+
+  retourner tabEcart
+
+FinFonction
+
+
+
+Action shortestPath(tabEcart, source, sink, nb_sommets, fini, tabChemin) :
+  D : tabEcart : vecteur liste_graph_ecart (tableau contenant le graphe d'écart à parcourir pour trouver une chaîne améliorante).
+      source : Entier (source du graphe).
+      sink : (puits du graphe).
+      nb_sommets : Entier (nombre de sommets dans le graphe).
+  R : fini : Boolean (Vrai si une chaîne améliorante a été trouvée, Faux sinon : on a trouvé le flot maximum pour le réseau correspondant).
+      chemin : liste_chemin (Chemin décrivant la chaîne améliorante trouvée).
+  L : predecesseurs : vecteur de nb_sommets Entiers (tableau permettant de retracer le chemin entre le sommet source et le sommet puits améliorant le flot du réseau).
+      i : Entier (index pour parcourir le tableau predecesseurs).
+      file_f : file (file permettant le parcours en largeur du graphe).
+      sommet : Entier (sommet qui va être défilé).
+      prec : Entier (sommet parcourant les prédécesseurs du sommet courant pour retracer le chemin de la chaîne améliorante entre le sommet puits et le sommet source).
+
+  predecesseurs = création du tableau de nb_sommets Entiers
+  Pour i allant de 0 à nb_sommets Faire :
+    predecesseurs[i] = 0 // on initialise tous les champs du tableau à 0.
+  FinPour
+  predecesseurs[source - 1] = source // par convention, le sommet prédécesseur du sommet source est le sommet source lui-même.
+  file = initialisation de la file avec le nombre de sommets pour créer le tableau de taille nb_sommets contenant les sommets enfilés.
+  enfiler le sommet source dans la file file_f
+  fini = Faux // on n'a pas encore trouvé de chemin améliorant.
+  sommet = défiler la tête de la file file_f
+  TantQue fini est à Faux et sommet est différent de -1 Faire :
+    enfiler tous les successeurs de 'sommet' qui n'ont pas encore de prédécesseur dans le tableau predecesseurs, donc qui n'est pas encore dans la file.
+    fini = Vrai si predecesseurs[sink - 1] n'est pas 0 // on regarde si le sommet puits a été enfilé, si oui on peut arrêter la recherche d'une chaîne améliorante car on l'a trouvée.
+    sommet = défiler la tête de la file file_f
+  FinTantQue
+  Si predecesseurs[sink - 1] n'est pas 0 Faire : // si le sommet puits a un prédécesseur, soit si le graphe contient une chaîne améliorante.
+    on ajoute en tête du chemin le sommet puits avec le flot de l'arc entre ce sommet et predecesseurs[sink - 1], son sommet prédécesseur, retrouvé en parcourant le graphe d'écart.
+    prec = predecesseurs[sink - 1]
+    TantQue while (prec != predecesseurs[prec - 1])
+      on ajoute en tête du chemin le sommet prec avec le flot de l'arc entre ce sommet et predecesseurs[prec - 1], son sommet prédécesseur, retrouvé en parcourant le graphe d'écart.
+      prec = predecesseurs[prec - 1]
+    FinTantQue
+  FinSi
+  on ajoute en tête du chemin le sommet source avec le flot -1 car le sommet ajouté n'a pas de prédécesseur et donc il n'y a pas d'arc pour récupérer un flot.
+FinAction
+
+
+
+Fonction minCapa(liste_chemin) : int
+  D: liste_chemin : structure liste chemin : une liste chainée de sommets avec les valeurs de capcité résidual
+  L: parcours : maillon_chemin
+     min : entier (La valeur qui sera retourner à la fin du traitement de liste_chemin)
+
+  parcours = liste_chemin->head->next (On initalise la liste chemin au deuxieme élément car le premier élément est le sommet de départ de capacité residual -1)
+
+  Si parcours n'est pas égal à 0 Faire :
+    retourner(-1)
+  Sinon
+    min = parcours.capacite_residual
+    parcours = parcours.next
+
+    Tantque (parcours!=NIL (Quand on n'a pas arrivé jusqu'au bout de la liste)) Faire :
+      Si(parcours.capacite_residual < min et parcours.capacite_residual!=-1) Faire:
+        min = parcours.capacite_residual
+      FinSi
+
+      parcours = parcours.next
+    FinTantQue
+  FinSi
+  retourner(min)
+FinFonction
+
+
+
+
+
+Action updateFlowInRG(chemin,tabEcart,min) : on cherche à mettre à jour le graph d'écart apres avoir trouver un chemin entre la source et le sink , plus precisement, on a mettre à jour les flots du chemin dans le graph d'écart
+  D/R : tabEcart : un tableau de taille nb_sommets de liste_chainée de type maillon_graph_réseau
+  D : chemin : une liste chainée de type maillon_chemin qui correspond au plus court chemin
+      min : Entier : la capacité minimale du chemin
+  L: id_commet : Entier : numéro du sommet
+     parcours_chemin : structure type maillon chemin qui permet de parcourir la liste chainée (chemin)
+     parcours_graph_écart : structure type maillon graph écart qui permet de parcourir la liste chaine de grpah d'écart
+
+  id_sommet = chemin.head.id
+  mparcours_chemin = chemin->head->next (la premiere valeurs est le sommet de départ donc sa capacité résidual est à -1 donc on l'ignore)
+  Tantque parcours_chemin != 0 Faire:
+    parcours_graph_ecart = tabEcart[id_sommet-1].head
+
+    Tantque parcours_graph_ecart != NIL et parcours.id!=parcours.chemin.id:
+      parcours_graph_ecart = parcours_graph_ecart.next
+    FinTanque
+    // On cherche le sommet dans le tabEcart qui correspond au sommet du chemin pour diminuer le flot
+    // Si c'est égal à 0, dans ce cas, on retire l'arc
+
+    Si parcours_graph_écart.flot_entrant - min =0 Alors :
+      retirer_de_la_liste(tabEcart[id_sommet -1], parcours_chemin.id); // intial et terminal de l'arcs à enlever
+    Sinon
+      parcours_graph_ecart.flot_entrant -= min;
+    FinSi
+
+    // On s'interesse à ajouter des arcs maintenant mais on va faire un parcours de sink à sommet
+    sommet_flot_a_repousser = parcours_chemin.id
+    parcours_graph_ecart = tabEcart[sommet_flot_a_repousser -1].head;
+    Tantque parcours_graph_ecart != NIL et parcours.id!=parcours.chemin.id:
+      parcours_graph_ecart = parcours_graph_ecart.next
+    FinTanque
+
+    Si parcours_graph_ecart == NIL Alors :
+      ajout_en_tete_graph_ecart(tabEcart[sommet_flot_a_repousser-1],id_sommet,min)
+    Sinon
+      parcours_graph_ecart.flot_entrant += min
+    FinSi
+
+    id_sommet = parcours_chemin.id
+    parcours_chemin = parcours_chemin.next
+  FinTanque
+FinAction
+
+
+
+
+Action updateFlowInNet(tabReseau,tabEcart,nb_sommets)
+  D/R : tabReseau : un tableau de taille nb_sommets de liste_chainée de type maillon_graph_réseau
+  D: tabEcart : un tableau de taille nb_sommets de liste_chainée de type maillon_graph_écart
+     nb_sommets : Entier : le nombre de sommets dans le graph qui sera utliser pour le parcours de tabReseau
+  L: i : Entier : indice de parcours du tableau
+  Debut du traitement
+    Pour i allant de 0 à nb_sommets :
+
+      parcours = tabReseau[i].head // le parcours est initialisé à la tete de graph de réseau
+
+      Tantque parcours != NIL_mr (parcours de la liste chainée n'est pas terminé) Faire :
+        parcours.flot = getFlot(parcours.id,i+1,tabEcart) on cherche la valeur de flot dans les arcs repousé
+        parcours = parcours.next
+      FinTantQue
+
+    FinPour
+  Fin du traitement
+FinAction
+
+
+
+
+
+Action dinic(tabReseau,flot,source,sink,nb_sommets)
+  D: Source : Entier : Sommet de source (le numéro de sommet)
+     Sink : Entier : Sommet de sink (le numéro de sommet)
+     nb_sommet : Entier : le nombre de noeuds (sommets) dans le graph de réseau : Cette valeur sera utiliser pour pzrcourir le graph de réseau
+  D/R : flot : Entier : C'est le flot du graph qui sera mis à jour régulièrement
+        tabReseau : un tableau de taille nb_sommets de liste chainée du type graph_reseau
+                    Premièrement ce graph sera utiliser pour creer le graph d'écart puis ce graph sera mis à jour à la fin du traitement
+  L: tabEcart : un tableau de taille nb_sommets de liste chainée du type graph_d'écart
+     plus_court_chemin : une liste chainée de sommets type amillon_chelin qui forme un chemin entre la source et le sink
+     fini : boolean qui correspond à bool vérifie s'il y a des chemins possibles ou pas
+            true : s'il y a des chemins possibles  et false : si il y a plus de chemin possible
+     min : Entier : La capacité minimale résidual dans le chemin
+  Debut du traitement
+    tabEcart = buildRG(tabReseau,nb_sommets) (on utilise la fonction buildRG pour contruire le graph d'écart)
+    plus_court_chemin = shortestPath(tabEcart,source,sink,nb_sommets,fini) (on initalise le plus_court_chemin en creant un plus court chemin du graph entre la source et le sink)
+
+    Tantque(fini==true(il existe des chemins)) Faire :
+      min = minCapa(plus_court_chemin)
+      updateFlowInRG(plus_court_chemin,tabEcart,min) (on met à jour le grpah d'écart)
+
+      flot = flot + min ; (On fait l'amélioration du flot)
+
+      plus_court_chemin = shortestPath(tabEcart,source,sink,nb_sommets,fini) (on initalise le plus_court_chemin en creant un plus court chemin du graph entre la source et le sink, on met à jour à la fin du boucle comme ca si c'est false, la boucle s'arrete)
+    FinTantQue
+    updateFlowInNet(tabReseau,tabEcart,nb_sommets) (à la fin on a un grpah d'écart, on essaye de modifier le grpqh de réseau en fonction de grpah d'écart)
+  Fin du traitement
+FinAction
+
+
+
+
+
+
+Fonction main() : retourne 0 (Entier)
+  L : fichier_dinic : chaine de caractere quicorrespond au nom du fichier DIMACS à triater. Cette valeur est demandé à l'utilisateur de tapper à la main dans la machine
+      source : Entier : sommet source du graph
+      sink : Entier : sommet sink du graph
+      nb_sommets : Entier : nombre de sommets dans le graph
+      nb_arcs : Entier : nombre d'arcs dans le graph
+      f : Entier : flot maximum
+      result : Entier : choix d'impression (il y a deux types d'impression dans le fichier, impression normal et impression sous forme de DIMACS)
+
+  Debut du traitement
+    Lecture (fichier_dinic);
+
+    tabReseau = buildGraph(fichier_dinic,source,sink,nb_sommets,nb_arcs) (on initalise le graph de réseau)
+
+    f =0;
+    dinic(tabReseau,f,source,sink,nb_sommets)
+
+    Lecture(result) (On demande l'utilisateur de faire un choix d'impression)
+
+  retourner(0) (comme tous les mains)
+
+  Fin du traitement
+FinFonction

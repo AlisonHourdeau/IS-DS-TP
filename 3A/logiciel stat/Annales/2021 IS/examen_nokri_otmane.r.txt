@@ -1,0 +1,215 @@
+#==========================================================================
+# EXAMEN GIS 2020-2021 
+# ENSEIGNANTS : Sofiane MAAZI - Thibault 
+#==========================================================================
+
+getwd()
+setwd("C:/Users/Otmane/Documents/Examen")
+
+#### IMPORTATION DES TABLES
+cards <- read_csv("cards.csv")
+deckPegasus <- read_csv("deckPegasus.csv")
+deckYugi <- read_csv("deckYugi.csv")
+
+#------------------------------------------------------------------------------------------------------
+#  - PARTIE I : Le deck des joueurs
+#------------------------------------------------------------------------------------------------------
+
+#### 1
+#a)
+i<-which(cards$Name=="Sand Gambler")
+TypeCarte<- cards$Type[i];TypeCarte 
+# Il s'agit d'une carte monstre
+
+###b)
+i<-which(cards$ID=="5958")
+NomCarte<- cards$Name[i];NomCarte 
+# Graceful Dice  
+
+#### 2
+###a)
+dim(deckPegasus)
+dim(deckYugi)
+
+# Le deck de chaque joueurs possèdent 60 cartes
+
+###b)
+
+DeckDescriptifPegasus=merge(cards,deckPegasus,by="ID")
+DeckDescriptifYugi=merge(cards,deckYugi,by="ID")
+
+###c)
+
+# On remarque que la variable ID n'est pas ordonnée de la même façon dans les différentes tables, en effet la 
+#variable ID dans la table cards est ordonnée de façon aléatoire alors que la variable id dans les tables 
+#DeckDescriptifPegasus et DeckDescriptifYugi sont ordonnées de façon croissantes
+
+###d)
+
+### Non cela ne respecte pas l'ordre du coup
+
+
+#### 3
+### a)
+sum(DeckDescriptifPegasus$Type=="Spell Card",na.rm = T)
+sum(DeckDescriptifYugi$Type=="Spell Card",na.rm = T)
+### C'est le deck de Yugi qui contient le plus de carte Magie
+
+###b
+library(stringr)
+TypeDP=DeckDescriptifPegasus$Type
+SumMonsterP=str_detect(TypeDP,"Monster")
+table(SumMonsterP)
+
+### On remarque qu'il y a 35 cartes monstres dans le deck de Pegasus
+
+TypeDY=DeckDescriptifYugi$Type
+SumMonsterY=str_detect(TypeDY,"Monster")
+table(SumMonsterY)
+
+### On remarque qu'il y a 33 cartes monstres dans le deck de Pegasus
+### C'est donc le deck de Pegasus qui a le plus de cartes monstres.
+
+####c
+t=table(SumMonsterY)
+t1=c(t);t1
+freq=(t1/sum(t1));freq
+
+### Conclusion on ne peut pas affirmer que le deck de Yugi contient 42% de cartes monstres puisqu'il y en a 55%.
+
+#####4
+DoubleNom=duplicated(DeckDescriptifPegasus$Name);DoubleNom
+i<-which(DoubleNom=="TRUE");i
+NomCarte<- DeckDescriptifPegasus$Name[i];NomCarte
+
+### On remarque qu'il y a aussi des cartes en triple soit Toon Mermaid puisqu'elle apparait deux fois dans une liste
+### qui est déjà composé de doublons.
+
+####5
+DeckPiegeP<- DeckDescriptifPegasus %>% filter(DeckDescriptifPegasus$Type=="Trap Card")
+DeckPiegeY<- DeckDescriptifYugi %>% filter(DeckDescriptifYugi$Type=="Trap Card")
+doublonsP <- which(duplicated(DeckPiegeP$Name));doublonsP
+doublonsY <- which(duplicated(DeckPiegeY$Name))
+DeckPiegeP <- DeckPiegeP[-c(2,4,10),] 
+x=c(1:9)
+x=as.data.frame(x)
+DeckPiegeY=cbind(DeckPiegeY,x)
+x=c(1:15)
+x=as.data.frame(x)
+DeckPiegeP=cbind(DeckPiegeP,x)
+DeckPiegeDoublons=merge(DeckPiegeP,DeckPiegeY,by="Name")
+
+#### Je viens de me rendre compte que je pouvais faire en moins d'étapes j'ai testé une stratégie différente
+#### J'avais pour idée de merge a l'aide de x puis ensuite de faire un which et voir si il y avait des doublons
+#### au final seulement un merge est suffisant.
+
+####6
+
+ToonMermaid<- DeckDescriptifPegasus %>% select(Name,ATK) %>% filter(Name=="Toon Mermaid")
+Detruite<- DeckDescriptifYugi %>% select(Name,DEF) %>% filter(DEF<1400)
+dim(Detruite)
+
+##Il peut donc détruire 16 cartes
+
+####7
+tapply(DeckDescriptifYugi$ATK,DeckDescriptifYugi$Attribute,mean)
+
+## Il s'agit de l'attribut dark
+
+####8
+DefenseYugi<- DeckDescriptifYugi %>% select(Name,DEF) 
+mean(DefenseYugi$DEF,na.rm=T) 
+
+### oui la moitié des monstres de yugi ont au moins 1000 points de def
+
+#####9
+DefenseYugi=na.omit(DefenseYugi)
+ggplot(DefenseYugi, aes(x=DefenseYugi$DEF)) + 
+  geom_histogram(aes(y=..density..,), alpha=1, 
+                 position="identity",bins = 10) +
+  geom_density(alpha=.2,fill="#96ff66")  + ggtitle(label = "Histogramme de la variable défense du deck de Yugi et sa densité") + theme_gray() 
+
+####10
+x=10
+hist(DeckDescriptifYugi$ATK,prob=T)
+curve(dnorm(x,mean(5),sd(17)), add=T,col="red")
+
+hist(DeckDescriptifYugi$ATK,prob=T)
+curve(dweibull(x,shape = 2,scale = 5), add=T,col="red")
+
+#####11
+AttaqueeYugi<- DeckDescriptifYugi %>% select(Name,ATK) 
+AttaqueeYugi=na.omit(AttaqueeYugi)
+summary(DeckDescriptifYugi$ATK)
+table(DeckDescriptifYugi$ATK)
+boxplot(DeckDescriptifYugi[c("DEF","ATK")],main="Boxplot du de l'ATK et de la DEF du deck de Yugi")
+ggplot(AttaqueeYugi, aes(sort(AttaqueeYugi$ATK))) + stat_ecdf(geom = "point") + theme_gray() + labs(title = "Fonction de répartition de l'ATK du deck de Yugi")
+
+##Voici plusieurs graphiques et méthodes d'analyse pour analyser une variable quantitative
+##Je n'ai pas pu analyser chaque graphique par soucis de temps
+
+
+#------------------------------------------------------------------------------------------------------
+#  - PARTIE II : Le duel de monstres
+#------------------------------------------------------------------------------------------------------
+
+####1
+LP <- c(8000)
+deck <- c(60)
+main <- c(0)
+joueur <- list(LP,main,deck)
+
+
+####2
+###a
+Pioche <- function(n,joueur){
+  mainj <- c(joueur[[2]])+n
+  deckj <- c(joueur[[3]])-n
+  mainj <- deckj[1:n]
+  deckj <- deckj[-c(1:n)]
+  joueur <- list(LP,main=mainj,deck=deckj)
+  return (joueur)
+}
+
+###b
+ChoixCarte <- function(ID,joueur){
+  mainj <- c(joueur[[2]])
+  deckj <- c(joueur[[3]])
+  mainj <- c(mainj,deckj[deckj==ID])
+  deckj[-(deckj==ID)]
+  joueur <- list(LP,mainj,deckj)
+  return (joueur)
+}
+
+### c
+JouerCarte <- function(ID,joueur){
+  mainj <- c(joueur[[2]])
+  mainj <- mainj[-(mainj==1248)]
+  joueur <- list(LP,mainj,deckj)
+  return (joueur)
+}
+
+### d
+PointVie <- function(i,joueur){
+  joueur[[1]] <- joueur[[1]] + i
+  return (joueur)
+}
+
+######4
+####a
+
+# DeckDescriptifYugiCimetiere<- DeckDescriptifYugi %>% filter(ID>3642) %>% filter(ID<3663)
+PointVie <- function(i,joueur){
+  joueur[[1]] <- joueur[[1]] + i
+  return (joueur)
+}
+
+cimetiereYugi=data.frame()
+
+#------------------------------------------------------------------------------------------------------
+#  - PARTIE III : La théorie des jeux
+#------------------------------------------------------------------------------------------------------
+
+####1
+echantillon=sample(x=3,size=1000,replace=T,prob=c(1/8,1/6,25/24));echantillon
+hist(echantillon)

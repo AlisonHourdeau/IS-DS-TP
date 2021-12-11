@@ -1,0 +1,77 @@
+/* Fichier expEns.acc */
+
+%prelude{ /* Code C */
+   /* Inclusion de bibliotheques C */
+   #include <stdio.h>
+   #include <malloc.h>
+   #include "yystype.h" /* Redefinition du type yylval */
+   
+   /* Action de fin d analyse */
+   void fin_analyse(){
+        printf("Syntaxe correcte\n");
+   }
+   
+   void cmp_ens(char lettre_h, char val_nomEns) {
+        if (lettre_h == val_nomEns) {
+            printf("\n\n");
+            yyerror("Error : Un ensemble ne peut pas être défini par lui-même.\n");
+        }
+    }
+    
+    void affiche_op (char op_s) {
+        if (op_s == 'u') {
+            printf(" union ");
+        }
+        else if (op_s == 'i') {
+            printf(" inter ");
+        }
+        else if (op_s == 'd') {
+            printf(" diff ");
+        }
+        else if (op_s == 'c') {
+            printf("comp ");
+        }
+    }
+   
+}
+
+/* Declaration des tokens */
+%token RC, LETTRE, ENTIER, UNI, INT, COM, DIF, AFF, ACCOUV, ACCFER, PAROUV, PARFER, VIR;
+
+// Grammaire
+D : listeAffExp RC { printf("\n") ; } { fin_analyse(); }
+;
+
+listeAffExp : listeAffExp RC { printf("\n"); } affExp
+            | affExp
+;
+
+affExp : LETTRE <val> { printf("%c", val.nomEns); } AFF { printf(" := "); lettre_h = val.nomEns ; } ensemble <lettre_h>
+;
+
+ensemble <%in char lettre_h> : ACCOUV { printf("{") ; } listeEntiers ACCFER { printf("}") ; }
+                             | ACCOUV { printf("{") ; } ACCFER { printf("}") ; }
+                             | LETTRE <val> { printf("%c", val.nomEns); cmp_ens(lettre_h, val.nomEns); }
+                             | { lettre1_h = lettre_h ; } expr <lettre1_h>
+;
+
+listeEntiers : listeEntiers VIR { printf(", ") ; } ENTIER <val> { printf("%d", val.valEnt) ; }
+             | ENTIER <val> { printf("%d", val.valEnt) ; }
+;
+
+expr <%in char lettre_h> : PAROUV { printf("(") ; } opNaire <op_s> {lettre1_h = lettre_h ; } ensemble <lettre1_h> { affiche_op(op_s) ; lettre2_h = lettre_h ; } ensemble <lettre2_h> {lettre3_h = lettre_h ; op_h = op_s ; } listeEnsemble <lettre3_h, op_h> PARFER { printf(")") ; }
+                         
+                         | PAROUV { printf("(") ; } opBinaire <op_s> { if(op_s=='c'){affiche_op(op_s);} ; lettre4_h = lettre_h ; } ensemble <lettre4_h> { if(op_s=='d'){affiche_op(op_s);} ; lettre5_h = lettre_h ; } ensemble <lettre5_h> PARFER { printf(")") ; }
+;
+
+listeEnsemble <%in char lettre_h, char op_h> : { lettre1_h = lettre_h; } listeEnsemble <lettre1_h, op_h> { lettre2_h = lettre_h ; affiche_op(op_h) ; } ensemble <lettre2_h>
+                                             | 
+;
+
+opNaire <%out char op_s> : UNI { *op_s = 'u' ; }
+                         | INT { *op_s = 'i' ; }
+;
+
+opBinaire <%out char op_s> : COM { *op_s = 'c' ; }
+                           | DIF { *op_s = 'd' ; }
+;

@@ -1,0 +1,256 @@
+# TP R - PROBABILITES 2
+# mardi 6 avril 2021
+# thibault.moulin [at] univ-lille.fr
+
+# ================
+####   TP 1   ####
+# ================
+
+# PARTIE 3 - Les fonctions
+# ------------------------
+# Exemple 1 
+premiers_carres <- function(x){
+  u <- 1:x
+  return(u^2)
+}
+premiers_carres(5)
+
+# Exemple 2
+vpremiers_carres <- Vectorize(premiers_carres, 'x')
+x <- 1:7
+vpremiers_carres(x)
+
+# Exemple 3
+norme <- function(x, y){
+  return(sqrt(x^2 + y^2))
+}
+norme(3, 4)
+
+# Exemple 3
+x <- 1:5
+y <- 1:3
+M <- outer(x, y, 'norme') 
+# la fonction outer permet de calculer norme(x, y) 
+# pour toutes les combinaisons des valeurs de x et de y possibles
+M
+
+# Exemple 4
+premieres_puissances <- function(x, y){
+  u <- 1:x
+  return(u^y)
+}
+premieres_puissances(5, 3)
+
+# Exercice 5
+f_poisson <- function(x, lambda){
+  return(lambda^x/factorial(x)*exp(-lambda))
+}
+
+exo5 <- function(n){
+  res <- 0
+  for (i in 1:(n-1)){
+    res <- res + f_poisson(i, pi)
+  }
+  return(1 - res)
+}
+
+
+exo5_bis <- function(n){
+  x <- 1:(n-1)
+  y <- pi
+  res <- sum( outer(x, y, 'f_poisson') )
+  return(1 - res)
+}
+
+exo5(10)
+exo5_bis(10)
+
+# Exercice 6
+f_geom <- function(x, p){
+  res <- p*(1-p)^(x-1)
+  return(res)
+}
+exo6_bis <- function(n){
+  x <- 1:(n-1)
+  y <- 1/pi
+  res <- sum( outer(x, y, 'f_geom') )
+  return(1 - res)
+}
+exo6_bis(3)
+
+
+# Exercice 7
+p <- 1/pi
+f_binom <- function(k, n, p){
+  res <- (factorial(n)/(factorial(k)*factorial(n-k)))*(p^k)*(1-p)^(n-k) 
+  return(res)
+}
+
+sum <- 0
+for (i in 0:3){
+  sum <- sum + f_binom(i, 8, 1/pi) 
+}
+# sum
+1 - sum # c'est la probabilité cherchée !
+
+
+# PARTIE 4 - Les graphes
+# ------------------------
+# Superposition de deux courbes
+x <- seq(-pi, pi, 0.1)
+y <- sin(x^2 - x)
+z <- cos(x^2 - x)
+plot(x, y, type = "l", col = 'red')
+lines(x, z, type = "l", col = 'cyan')
+par(new = TRUE)
+plot(x, z, type = "l", col = 'blue', main = "superposition de 2 courbes")
+
+# Graphe en 3D
+x <- seq(-10, 10, length = 30)
+y <- x
+f <- function(x, y){
+  r <- sqrt(x^2 + y^2)
+  return(10*sin(r)/r)
+}
+z <- outer(x, y, f)
+persp(x, y, z, theta = 30, phi = 30, expand = 0.5, col = 'lightblue')
+
+
+# Histogrammes
+x <- sample(x=1:6, prob = rep(1/6, 6), size = 10000, replace = TRUE)
+bords <- seq(0.5, 6.5, 1)
+hist(x, breaks = bords, freq = F, plot = TRUE)
+hist(x, breaks = bords, plot = TRUE)
+
+
+
+
+# PARTIE 5 - Les probabilités avec R
+# ----------------------------------
+
+# Exercice 8
+# 1. Simuler le tirage de 1000 va indep de loi N(0, 1)
+xnorm <- rnorm(1000)
+# 2. Tracer l'histogramme
+# dev.new(width = 5, height = 4, noRStudioGD = TRUE)
+hist(xnorm, breaks = 50, freq = F, plot = TRUE)
+# 3. Ajouter le graph de la densité de x
+x <- seq(-4, 4, 0.01)
+fx <- dnorm(x)
+lines(x, fx, type = "l", col = 'magenta', lwd = 2)
+# Ou avec la fonction curve()
+curve(dnorm(x), from = -3.5, to = 3.5, col = 'magenta', lwd = 2, add = TRUE)
+
+# 4. Extrapolation linéaire de la famille de points
+n <- 1:1000
+xbar <- c(rep(NA, 1000))
+xbar[1] <- xnorm[1]
+for (i in 2:1000){
+  xbar[i] <- (1/i)*sum(xnorm[1:i])
+}
+# On met les données sous forme d'un data frame (plus facile à manipuler par la suite)
+dframe<-data.frame(n, xbar)
+# On trace la régression linéaire de la famille de points (n, xbar)
+reglin <- lm(xbar ~ n, dframe)
+
+# On trace la famille de point et sa régression linéaire
+plot(n, xbar, type = "l", xlab = "n", ylab = "famille de points des x_k" )
+abline(h = 0, col = 'magenta')
+abline(lm(xbar ~ n, dframe))
+
+
+# Exercice 9
+# 1. Simuler les tirages d'un dé pipé. On reprend l'exemple donnée plus haut pour un dé équitable et on ajuste les probabilités simulées
+x_de <- sample(x=1:6, prob = c(rep((2/3)/5, 3), 1/3, rep((2/3)/5, 2)), size = 1000, replace = TRUE)
+
+
+
+# 2. Toujours en appliquant l'exemple, on trace l'histogramme des 6 classes
+bords <- seq(0.5, 6.5, 1)
+hist(x_de, breaks = bords, freq = F, plot = TRUE)
+
+# 3. On effectue la régression linéaire sur ces points 
+n <- 1:1000
+x_de_bar <- c(rep(NA, length(n)))
+for (i in 1:length(n)){
+  x_de_bar[i] <- (1/i)*sum(x_de[1:i])
+}
+
+dframe2 <-data.frame(n, x_de_bar)
+reglin2 <- lm(x_de_bar ~ n, dframe2)
+
+# On calcule enfin l'espérance de x_de :
+Esp_x_de <-  sum(c(1:6)*c(rep((2/3)/5, 3), 1/3, rep((2/3)/5, 2))) 
+
+plot(n, x_de_bar, type = "l", xlab = "n", ylab = "famille de points des x_k pour le dé" )
+abline(h = Esp_x_de, col="magenta")
+abline(lm(x_de_bar ~ n, dframe), col = 'blue')
+
+# --> On observe que le nuage de point (n, xbar) converge vers l'espérance E[X_1] et on retrouve la loi forte des grands nombres !
+# Le comportement est similaire au cas de la loi normale en temps long, alors même que les lois sont complètement différentes.
+
+
+
+# PARTIE 6 - Itérations et structures de contrôle
+# -----------------------------------------------
+# Exemple 1
+for (i in 1:10){
+  print(i)
+}
+
+# Exemple 2
+i<- 1
+while(i < 11){
+  print(i); i <- i+1
+}
+
+# Exemple 3
+xlogx <- function(x){
+  if(x>0){return(x*log(x))}
+  else{ return(0)}
+}
+
+
+# Exercice 10 - Le paradoxe des anniversaires
+
+# 1. On calcule la probabilité qu'au moins 2 étudiants soient né le même jour 
+# On choisit N entre 2 et 365
+probanniv <- function(N){
+  num <- 365
+  for (i in 1:(N-1) ){
+    num <- num*(365-i)
+  }
+  proba <- 1 - num/(365^N)
+  return(proba)
+}
+
+# Quelques valeurs remarquables de N
+probanniv(4)
+probanniv(16)
+probanniv(22)
+probanniv(23)
+probanniv(40)
+probanniv(64)
+
+
+# 2. La plus petite valeur de N pour laquelle cette proba dépasse 1/2 vaut 23
+i<- 2
+while(probanniv(i) < 0.5){
+  i <- i+1
+}
+print(i) ; print(probanniv(i))
+
+
+# 3. Tracer cette probabilité
+n_etu <- c(2: 70)
+proba_etu <- c(rep(NA, length(n_etu)))
+for (i in 2:length(n_etu)){
+  proba_etu[i] <- probanniv(i)
+}
+plot(n_etu, proba_etu, 
+     type = "s", 
+     lwd = 2,
+     col = 'darkorange',
+     xlab = "Nombre d'étudiant dans la classe", 
+     ylab = "Probabilité", 
+     main = "Paradoxe des anniversaires" )

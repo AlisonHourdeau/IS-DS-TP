@@ -1,0 +1,69 @@
+b.
+prefix db-owl: <http://dbpedia.org/ontology/>
+
+SELECT ?acteur WHERE {
+   ?s rdf:type dbpedia-owl:Film .
+   ?s prop-fr:réalisation dbpedia-fr:Woody_Allen.
+   ?s prop-fr:acteur ?acteur
+        
+}
+LIMIT 50
+
+c. 
+prefix db-owl: <http://dbpedia.org/ontology/>
+
+SELECT ?genre (COUNT(DISTINCT ?item) AS ?nb) WHERE {
+   ?s rdf:type dbpedia-owl:Film .
+   ?s prop-fr:titre ?item .
+   ?s dbpedia-owl:genre ?dbgenre .
+   ?dbgenre prop-fr:wikiquote ?genre 
+}
+GROUP BY ?genre ORDER BY DESC(?nb)
+LIMIT 10
+
+d.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix db-owl: <http://dbpedia.org/ontology/>
+
+SELECT ?nomActeur WHERE {
+   ?s rdf:type dbpedia-owl:Film .
+   ?s dbpedia-owl:genre ?dbgenre .
+   ?s prop-fr:acteur ?acteur .
+   ?dbgenre prop-fr:wikiquote "Comédie"@fr .
+   ?acteur dbpedia-owl:birthName ?nomActeur
+   
+}
+LIMIT 50
+
+e.
+prefix db-owl: <http://dbpedia.org/ontology/>
+
+SELECT distinct ?nomActeur WHERE {
+   ?s rdf:type dbpedia-owl:Film .
+   ?s dbpedia-owl:genre ?dbgenre .
+   ?s prop-fr:acteur ?acteur .
+   ?dbgenre prop-fr:wikiquote "Comédie"@fr .
+   ?acteur dbpedia-owl:birthName ?nomActeur.
+   MINUS { ?dbgenre prop-fr:wikiquote "Policier"@fr . }
+}
+LIMIT 50
+
+f.
+prefix db-owl: <http://dbpedia.org/ontology/>
+
+SELECT distinct ?nomActeur1 ?nomActeur2 WHERE {
+   ?film rdf:type dbpedia-owl:Film .
+   ?film dbpedia-owl:starring ?acteur1 .
+   ?film dbpedia-owl:starring ?acteur2 .
+   ?acteur1 dbpedia-owl:birthName ?nomActeur1.
+   ?acteur2 dbpedia-owl:birthName ?nomActeur2.
+   ?film2 rdf:type dbpedia-owl:Film .
+   ?film2 dbpedia-owl:starring ?acteur1 .
+   ?film2 dbpedia-owl:starring ?acteur2 .
+   FILTER(?film != ?film2)
+   FILTER(?acteur1 < ?acteur2)
+}
+ORDER BY ?nomActeur1
+LIMIT 20

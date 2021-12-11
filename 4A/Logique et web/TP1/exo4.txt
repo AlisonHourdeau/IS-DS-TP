@@ -1,0 +1,47 @@
+Hourdeau Alison IS2A4
+
+TP1 - Exercice 4:
+
+-  Définir une règle Prolog permettant de tester si une personne donnée est inscrite à un module
+donné.
+
+code : 
+
+appartient(X,[X|_]).
+
+appartient(X,[_|LISTE]):- 
+	appartient(X,LISTE).
+
+
+inscrit(ETU,MODULE) :- 
+	listeEtu(MODULE, LISTE), 
+	appartient(ETU,LISTE).
+
+
+- Ecrire une règle Prolog permettant de tester s'il existe un module commun à deux personnes
+données.
+
+code : 
+
+module_commun(ETU1,ETU2) :- listeEtu(MOD,LISTE), appartient(ETU1,LISTE), appartient(ETU2,LISTE), ETU1\=ETU2. 
+
+- Définir un prédicat diff(M1,M2,L) permettant de déterminer la liste des personnes inscrites
+au module M1 et pas au module M2
+
+code :
+
+difference([],[_],[_]).
+
+difference([X|L1],L2,[X|L3]):- 
+	\+appartient(X,L2), 
+	difference(L1,L2,L3).
+
+difference([X|L1],L2,L3):- 
+	appartient(X,L2), 
+	difference(L1,L2,L3).
+	
+diff(M1,M2,L):- 
+	listeEtu(M1,L1), 
+	listeEtu(M2,L2), 
+	difference(L1,L2,L),
+	M1\=M2.

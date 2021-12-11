@@ -1,0 +1,19 @@
+HOURDEAU ALISON IS2A4 
+
+TP Sparql - requête f
+prefix db-owl: <http://dbpedia.org/ontology/>
+
+SELECT distinct ?nomActeur1 ?nomActeur2 WHERE {
+   ?film rdf:type dbpedia-owl:Film .
+   ?film dbpedia-owl:starring ?acteur1 .
+   ?film dbpedia-owl:starring ?acteur2 .
+   ?acteur1 dbpedia-owl:birthName ?nomActeur1.
+   ?acteur2 dbpedia-owl:birthName ?nomActeur2.
+   ?film2 rdf:type dbpedia-owl:Film .
+   ?film2 dbpedia-owl:starring ?acteur1 .
+   ?film2 dbpedia-owl:starring ?acteur2 .
+   FILTER(?film != ?film2)
+   FILTER(?acteur1 < ?acteur2)
+}
+ORDER BY ?nomActeur1
+LIMIT 20

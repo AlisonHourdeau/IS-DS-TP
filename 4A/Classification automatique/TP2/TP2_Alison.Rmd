@@ -1,0 +1,91 @@
+---
+title: "TP2_Alison"
+author: "Alison"
+date: "28/05/2021"
+output: pdf_document
+---
+
+#1.Chargement des données et analyse sommaire
+```{r}
+data <- mtcars
+data
+```
+
+```{r}
+summary(data)
+```
+
+```{r}
+cor(data)
+```
+
+#2.Sous-ensembles d'individus
+Visualisation des vars wt et qsec :
+```{r}
+g <- ggplot(mtcars,aes(x = wt,y = qsec)) +
+geom_point(size = 3)
+g
+```
+
+Visualisation des vars wt et mpg :
+```{r}
+g1 <- ggplot(mtcars,aes(x = wt,y = mpg)) +
+geom_point(size = 3)
+g1
+```
+On pourrait définir 3 sous-ensemble.
+
+
+#3. k-means
+```{r}
+kmeans1 <- kmeans(
+            cbind(data$wt,data$qsec),
+            centers=3,
+            algorithm = "MacQueen") 
+kmeans1
+```
+cluster: A vector of integers (from 1:k) indicating the cluster to which each point is allocated
+
+centers: matrice des CG de chaque groupe
+
+totss: Variance totale
+
+withinss: ??
+
+tot.withinss: variance intra
+
+betweenss: variance inter
+
+size: taille de chaque groupe(cluster)
+
+
+Les centres des classes correspond à cluster means 
+```{r}
+centers <- kmeans1$centers
+centers
+```
+
+Calcul des variances :
+```{r}
+var_tot <- kmeans1$totss
+var_inter <- kmeans1$betweenss
+var_intra <- kmeans1$tot.withinss
+
+print(paste("Var tot : ",var_tot))
+print(paste("Var inter : ",var_inter))
+print(paste("Var intra : ",var_intra))
+```
+
+Calcul du R² : variance inter / var total
+```{r}
+r_carre <- var_inter / var_tot
+r_carre
+```
+
+Visualisation du nuage de points :
+```{r}
+g <- plot(x=data$wt, y=data$qsec, colour=kmeans1$cluster)
+
+g
+```
+

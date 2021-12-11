@@ -1,0 +1,21 @@
+<map id="UML_map" name="UML_map">
+<area shape="rect" id="id1" href="java:Monopoly.Cases.Impot" title="java:Monopoly.Cases.Impot" alt="" coords="438,1292,542,1365"/>
+<area shape="rect" id="id2" href="java:Monopoly.Cases.Repos" title="java:Monopoly.Cases.Repos" alt="" coords="24,968,192,1042"/>
+<area shape="rect" id="id3" href="java:Monopoly.Plateaux.Plateau" title="java:Monopoly.Plateaux.Plateau" alt="" coords="1145,161,1303,247"/>
+<area shape="rect" id="id4" href="java:Monopoly.Joueurs.Etat" title="java:Monopoly.Joueurs.Etat" alt="" coords="1850,1157,2083,1218"/>
+<area shape="rect" id="id5" href="java:Monopoly.Cases.Case" title="java:Monopoly.Cases.Case" alt="" coords="1140,458,1308,544"/>
+<area shape="rect" id="id6" href="java:Monopoly.Configurations.Socialiste" title="java:Monopoly.Configurations.Socialiste" alt="" coords="4013,715,4282,776"/>
+<area shape="rect" id="id7" href="java:Monopoly.Configurations.Capitaliste" title="java:Monopoly.Configurations.Capitaliste" alt="" coords="3015,715,3289,776"/>
+<area shape="rect" id="id8" href="java:Monopoly.Configurations.NeoLiberale" title="java:Monopoly.Configurations.NeoLiberale" alt="" coords="2698,715,2979,776"/>
+<area shape="rect" id="id9" href="java:Monopoly.Configurations.Progressiste" title="java:Monopoly.Configurations.Progressiste" alt="" coords="3691,715,3978,776"/>
+<area shape="rect" id="id10" href="java:Monopoly.Configurations.EuropeApresCovid19" title="java:Monopoly.Configurations.EuropeApresCovid19" alt="" coords="3324,715,3656,776"/>
+<area shape="rect" id="id11" href="java:Monopoly.Joueurs.Agressif" title="java:Monopoly.Joueurs.Agressif" alt="" coords="2119,1145,2379,1231"/>
+<area shape="rect" id="id12" href="java:Monopoly.Joueurs.Prudent" title="java:Monopoly.Joueurs.Prudent" alt="" coords="2414,1145,2674,1231"/>
+<area shape="rect" id="id13" href="java:Monopoly.Cases.LoiAntitrust" title="java:Monopoly.Cases.LoiAntitrust" alt="" coords="787,956,1048,1055"/>
+<area shape="rect" id="id14" href="java:Monopoly.Cases.Subvention" title="java:Monopoly.Cases.Subvention" alt="" coords="1084,956,1364,1055"/>
+<area shape="rect" id="id15" href="java:Monopoly.Simulation" title="java:Monopoly.Simulation" alt="" coords="1781,161,2238,247"/>
+<area shape="rect" id="id16" href="java:Monopoly.Cases.Investissement" title="java:Monopoly.Cases.Investissement" alt="" coords="1399,943,1826,1067"/>
+<area shape="rect" id="id17" href="java:Monopoly.Cases.BureauFinancesPubliques" title="java:Monopoly.Cases.BureauFinancesPubliques" alt="" coords="227,949,752,1061"/>
+<area shape="rect" id="id18" href="java:Monopoly.Joueurs.Joueur" title="java:Monopoly.Joueurs.Joueur" alt="" coords="1851,626,2228,866"/>
+<area shape="rect" id="id19" href="java:Monopoly.Configurations.Configuration" title="java:Monopoly.Configurations.Configuration" alt="" coords="3319,33,3660,375"/>
+</map>

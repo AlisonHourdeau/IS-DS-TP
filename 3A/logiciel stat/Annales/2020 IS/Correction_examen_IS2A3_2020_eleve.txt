@@ -1,0 +1,138 @@
+#======================================================================================================
+# ELEMENTS DE CORRECTION : Examen GIS2A3
+# Sofiane MAAZI
+# 16/04/2020
+#======================================================================================================
+
+library(dplyr)
+
+
+# Q1 
+personnages <- read_delim("~/IS2A3/Examens/IS2A3/2020/Sujet/personnages.csv",";", escape_double = FALSE, trim_ws = TRUE)
+potions <- read_delim("~/IS2A3/Examens/IS2A3/2020/Sujet/potions.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+
+# Q2
+dim(personnages)
+
+# Q3
+table(personnages$Gender)
+
+# Q4 
+table(personnages$Gender,personnages$House)
+
+# Q5 
+
+#a)
+i<-which(personnages$Name=="Gilderoy Lockhart")
+
+#c)
+colhair<- personnages$Hair_colour[i]
+colyeux<- personnages$Eye_colour[i]
+
+#d) 
+
+# Methode 1 :
+j<-which(personnages$Eye_colour==colyeux)
+personnages$Name[j]
+
+# Methode 2 :
+personnages %>% filter(Eye_colour==colyeux,Hair_colour==colhair) %>% select(Name)
+
+# Q6
+personnages %>%filter(Name %in% c("Ernest Macmillan","Dolores Jane Umbridge")) %>% select( Patronus)
+
+# Q7
+boxplot(personnages$Sorts)
+
+# Q8
+
+personnages %>% filter(Gender=="Female") %>% filter(Job=="Student") %>% filter(Sorts==min(Sorts)) %>% select(House)
+
+# Q9 
+mean(personnages$Sorts)
+sd(personnages$Sorts)
+
+# Q10
+
+harmon<-function(x){ return(1/(sum(1.5/x)))}
+harmon(personnages$Sorts)
+
+# Q11 
+
+table(personnages$House)
+
+# Methode 1
+
+a<-which(personnages$House=="Gryffindor")
+b<-which(personnages$House=="Hufflepuff")
+c<-which(personnages$House=="Ravenclaw")
+d<-which(personnages$House=="Slytherin")
+
+sum(personnages$Points[a])
+sum(personnages$Points[b])
+sum(personnages$Points[c])
+sum(personnages$Points[d])
+
+# Methode 2 :
+
+personnages%>% filter(Job=="Student")  %>% group_by(House) %>% summarise(SOMME=sum(Points))
+
+# Q12 a)
+
+paquet<-c(rep("C",20),rep("M",30),rep("O",10),rep("E",10),rep("FT",30))
+
+# Q12 b) 
+
+# Bonbons de Ron
+Ron<-paquet
+
+# Bonbons de Harry
+Harry<- sample(paquet,7)
+
+# Bonbons de Hermione
+Hermione<-sample(Harry,2)
+
+# On enleve les bonbons de Hermione de la main d'Harry
+a_enlever_1<-which( Harry %in% Hermione[1])
+a_enlever_2<-which( Harry %in% Hermione[2])
+Harry<-Harry[-c(a_enlever_1[1],a_enlever_2[1])]
+
+# C'est exacement le meme raisonnement quand Hermione remet le bonbon dans le paquet
+
+
+# Q13 
+
+set.seed(99)
+
+CHOIX <- function(){
+  Z <- round( max(runif(4, 0, 3)+ rgeom(4, 0.9)))
+  House<-"Hufflepuff"
+  if (Z %% 2 == 1){
+    if (Z %% 3 == 0) {
+      House <- "Ravenclaw"
+    } else {
+      House <- "Slytherin"
+    }
+  } else {
+    if (Z %% 7 == 0) {
+      House <- "Gryffindor"
+    } 
+  }
+  return(House)
+}
+
+# Partie 2
+
+# 1) a)
+
+resultat<-merge(personnages,potions,by="Id")
+resultat%>% filter(House=="Ravenclaw") %>% filter(Gender=="Female")  %>% filter(Job=="Student") %>% group_by(Potions) %>% count(Potions)
+
+# 1) b) Par deduction ( cf bilan examen) : aucune !
+
+# 2)
+
+professeurs <- personnages %>% filter(startsWith(as.character(personnages$Job), "Professor"))
+professeurs<-  professeurs %>% select(Name,Sorts) %>% arrange(desc(Sorts))
+
+

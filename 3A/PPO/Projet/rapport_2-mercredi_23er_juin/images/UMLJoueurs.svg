@@ -1,0 +1,1269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   contentScriptType="application/ecmascript"
+   contentStyleType="text/css"
+   height="702.65729"
+   preserveAspectRatio="none"
+   version="1.1"
+   viewBox="0 0 1000 702.65727"
+   width="1000"
+   zoomAndPan="magnify"
+   id="svg784"
+   sodipodi:docname="UMLJoueurs.svg"
+   inkscape:export-filename="/home/cruz/Documents/Universite/IS2A3/Cours_S6_P4/POO/projet_monopoly/rapport_2-mercredi_23er_juin/images/UMLJoueurs.png"
+   inkscape:export-xdpi="90.234985"
+   inkscape:export-ydpi="90.234985"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview786"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.77346956"
+     inkscape:cx="517.15028"
+     inkscape:cy="300.5936"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g782"
+     inkscape:snap-global="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs11">
+    <filter
+       height="1.0319239"
+       id="fh1m58jdr7sw"
+       width="1.0176608"
+       x="-0.0064912281"
+       y="-0.011733615">
+      <feGaussianBlur
+         result="blurOut"
+         stdDeviation="2.0"
+         id="feGaussianBlur2" />
+      <feColorMatrix
+         in="blurOut"
+         result="blurOut2"
+         type="matrix"
+         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"
+         id="feColorMatrix4" />
+      <feOffset
+         dx="4.0"
+         dy="4.0"
+         in="blurOut2"
+         result="blurOut3"
+         id="feOffset6" />
+      <feBlend
+         in="SourceGraphic"
+         in2="blurOut3"
+         mode="normal"
+         id="feBlend8" />
+    </filter>
+  </defs>
+  <g
+     id="g782"
+     transform="translate(-1507.308,-533.45)">
+    <!--MD5=[20f4b5285d2c2b84b6e224381c1077c7]
+cluster Configurations-->
+    <!--MD5=[4d8cf2d9022c5a0ba6584a742968a58a]
+cluster Cases-->
+    <!--MD5=[a6f56d6693c4a2017e3a324b7653b0bd]
+cluster Joueur-->
+    <polygon
+       fill="#ffeebb"
+       filter="url(#fh1m58jdr7sw)"
+       points="2450,669 2457,691.2969 3248,691.2969 3248,1142 2393,1142 2393,669 "
+       style="stroke:#000000;stroke-width:1.5"
+       id="polygon25"
+       transform="translate(-767.14757,57.183551)" />
+    <line
+       style="stroke:#000000;stroke-width:1.5"
+       x1="1625.8524"
+       x2="1689.8524"
+       y1="748.48041"
+       y2="748.48041"
+       id="line27" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       lengthAdjust="spacing"
+       textLength="51"
+       x="2397"
+       y="683.99512"
+       id="text29"
+       transform="translate(-767.14757,57.183551)">Joueur</text>
+    <!--MD5=[9b7eb76f801c309757ef5968cb2349d9]
+class Configuration-->
+    <!--MD5=[d5393e788e829048e07a62074dcdb164]
+class Progressiste-->
+    <!--MD5=[b5c3e46bac749432a260f375b99f9a67]
+class Socialiste-->
+    <!--MD5=[195bade063853f516074d89877e642fd]
+class NeoLiberale-->
+    <!--MD5=[3127a4569692961c05f53beff88cfa5d]
+class Capitaliste-->
+    <!--MD5=[8a60224fad2250dd1090beb8f5babdb6]
+class EuropeApresCovid19-->
+    <!--MD5=[e8dcfdde5c6ce5239f59acd294696d72]
+class Case-->
+    <!--MD5=[a7052ea18ce8ec41f462a2090ee556c5]
+class Impot-->
+    <!--MD5=[ffcb54bf9f424039ba1589b30e9c7e9a]
+class BureauFinancesPubliques-->
+    <!--MD5=[034e5b9e1295dd900da7451a1086f07f]
+class LoiAntitrust-->
+    <!--MD5=[609766599d1d6737e363ed763c30299a]
+class Investissement-->
+    <!--MD5=[8f867df2291b730d0eac529f50a387ce]
+class Subvention-->
+    <!--MD5=[9103cb39bfd6c9c70e93897b70a6bba1]
+class Repos-->
+    <!--MD5=[f35b8d93951ba498799a84be5600c0ca]
+class Joueur-->
+    <a
+       href="java:Monopoly.Joueurs.Joueur"
+       target="_top"
+       title="java:Monopoly.Joueurs.Joueur"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Joueurs.Joueur"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Joueurs.Joueur"
+       xlink:type="simple"
+       id="a483"
+       transform="translate(-767.14757,57.183551)">
+      <rect
+         codeLine="290"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="240.0703"
+         id="Joueur"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="377"
+         x="2409.5"
+         y="723" />
+      <circle
+         cx="2573.75"
+         cy="739"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse413"
+         r="11" />
+      <path
+         d="m 2576.7188,744.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path415" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="40"
+         x="2594.25"
+         y="743.1543"
+         id="text417">Joueur</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2410.5"
+         x2="2785.5"
+         y1="755"
+         y2="755"
+         id="line419" />
+      <polygon
+         fill="none"
+         points="2416.5,765 2420.5,761 2424.5,765 2420.5,769 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon421" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="32"
+         x="2429.5"
+         y="769.21039"
+         id="text423">id: int</text>
+      <polygon
+         fill="none"
+         points="2416.5,777.8047 2420.5,773.8047 2424.5,777.8047 2420.5,781.8047 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon425" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="59"
+         x="2429.5"
+         y="782.01508"
+         id="text427">liquide: int</text>
+      <polygon
+         fill="none"
+         points="2416.5,790.6094 2420.5,786.6094 2424.5,790.6094 2420.5,794.6094 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon429" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="141"
+         x="2429.5"
+         y="794.81982"
+         id="text431">totalInvestissements: int</text>
+      <polygon
+         fill="none"
+         points="2416.5,803.4141 2420.5,799.4141 2424.5,803.4141 2420.5,807.4141 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon433" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="62"
+         x="2429.5"
+         y="807.62451"
+         id="text435">aPerdu: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2410.5"
+         x2="2785.5"
+         y1="814.21881"
+         y2="814.21881"
+         id="line437" />
+      <circle
+         cx="2420.5"
+         cy="825.21881"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse439"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="221"
+         x="2429.5"
+         y="828.4292"
+         id="text441">Joueur(id: int, sortie: Case, liquide: int)</text>
+      <circle
+         cx="2420.5"
+         cy="838.02338"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse443"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="159"
+         x="2429.5"
+         y="841.23389"
+         id="text445">addLiquide(liquide: int): void</text>
+      <circle
+         cx="2420.5"
+         cy="850.82812"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse447"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="181"
+         x="2429.5"
+         y="854.03857"
+         id="text449">removeLiquide(liquide: int): void</text>
+      <circle
+         cx="2420.5"
+         cy="863.63281"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse451"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="329"
+         x="2429.5"
+         y="866.84332"
+         id="text453">addInvestissement(investissement: Investissement): void</text>
+      <circle
+         cx="2420.5"
+         cy="876.4375"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse455"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="351"
+         x="2429.5"
+         y="879.64789"
+         id="text457">removeInvestissement(investissement: Investissement): void</text>
+      <circle
+         cx="2420.5"
+         cy="889.24219"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse459"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="239"
+         x="2429.5"
+         y="892.45258"
+         id="text461">payeAntitrust(somme: int, etat: Etat): void</text>
+      <circle
+         cx="2420.5"
+         cy="902.04688"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse463"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="219"
+         x="2429.5"
+         y="905.25732"
+         id="text465">paye(joueur: Joueur, somme: int): void</text>
+      <circle
+         cx="2420.5"
+         cy="914.85162"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse467"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="128"
+         x="2429.5"
+         y="918.06201"
+         id="text469">joue(c: Case): boolean</text>
+      <circle
+         cx="2420.5"
+         cy="927.65631"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse471"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="234"
+         x="2429.5"
+         y="930.8667"
+         id="text473">acheteOuPas(i: Investissement): boolean</text>
+      <circle
+         cx="2420.5"
+         cy="940.46088"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse475"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="174"
+         x="2429.5"
+         y="943.67139"
+         id="text477">compareTo(joueur: Joueur): int</text>
+      <circle
+         cx="2420.5"
+         cy="953.26562"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse479"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="150"
+         x="2429.5"
+         y="956.47607"
+         id="text481">equals(o: Object): boolean</text>
+    </a>
+    <!--MD5=[6bee7a1aa50d11fda966851552f48fda]
+class Agressif-->
+    <a
+       href="java:Monopoly.Joueurs.Agressif"
+       target="_top"
+       title="java:Monopoly.Joueurs.Agressif"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Joueurs.Agressif"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Joueurs.Agressif"
+       xlink:type="simple"
+       id="a508"
+       transform="translate(-767.14757,57.183551)">
+      <rect
+         codeLine="223"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="86.414101"
+         id="Agressif"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="260"
+         x="2677"
+         y="1040" />
+      <circle
+         cx="2777.75"
+         cy="1056"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse486"
+         r="11" />
+      <path
+         d="m 2780.7188,1061.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path488" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="50"
+         x="2798.25"
+         y="1060.1543"
+         id="text490">Agressif</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2678"
+         x2="2936"
+         y1="1072"
+         y2="1072"
+         id="line492" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2678"
+         x2="2936"
+         y1="1080"
+         y2="1080"
+         id="line494" />
+      <circle
+         cx="2688"
+         cy="1091"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse496"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="232"
+         x="2697"
+         y="1094.2104"
+         id="text498">Agressif(id: int, sortie: Case, liquide: int)</text>
+      <circle
+         cx="2688"
+         cy="1103.8047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse500"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="234"
+         x="2697"
+         y="1107.0151"
+         id="text502">acheteOuPas(i: Investissement): boolean</text>
+      <circle
+         cx="2688"
+         cy="1116.6094"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse504"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="128"
+         x="2697"
+         y="1119.8198"
+         id="text506">joue(c: Case): boolean</text>
+    </a>
+    <!--MD5=[390f8e1fec7019ab5fbd178189bb7e25]
+class Prudent-->
+    <a
+       href="java:Monopoly.Joueurs.Prudent"
+       target="_top"
+       title="java:Monopoly.Joueurs.Prudent"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Joueurs.Prudent"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Joueurs.Prudent"
+       xlink:type="simple"
+       id="a533"
+       transform="translate(-767.14757,57.183551)">
+      <rect
+         codeLine="110"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="86.414101"
+         id="Prudent"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="260"
+         x="2972"
+         y="1040" />
+      <circle
+         cx="3072.75"
+         cy="1056"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse511"
+         r="11" />
+      <path
+         d="m 3075.7188,1061.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path513" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="50"
+         x="3093.25"
+         y="1060.1543"
+         id="text515">Prudent</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2973"
+         x2="3231"
+         y1="1072"
+         y2="1072"
+         id="line517" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2973"
+         x2="3231"
+         y1="1080"
+         y2="1080"
+         id="line519" />
+      <circle
+         cx="2983"
+         cy="1091"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse521"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="229"
+         x="2992"
+         y="1094.2104"
+         id="text523">Prudent(id: int, sortie: Case, liquide: int)</text>
+      <circle
+         cx="2983"
+         cy="1103.8047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse525"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="234"
+         x="2992"
+         y="1107.0151"
+         id="text527">acheteOuPas(i: Investissement): boolean</text>
+      <circle
+         cx="2983"
+         cy="1116.6094"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse529"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="128"
+         x="2992"
+         y="1119.8198"
+         id="text531">joue(c: Case): boolean</text>
+    </a>
+    <!--MD5=[d7a86c142fdde356f8ae5a8b885bc91c]
+class Etat-->
+    <a
+       href="java:Monopoly.Joueurs.Etat"
+       target="_top"
+       title="java:Monopoly.Joueurs.Etat"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Joueurs.Etat"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Joueurs.Etat"
+       xlink:type="simple"
+       id="a554"
+       transform="translate(-767.14757,57.183551)">
+      <rect
+         codeLine="286"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="73.609398"
+         id="Etat"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="233"
+         x="2408.5"
+         y="1046" />
+      <circle
+         cx="2507.75"
+         cy="1062"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse536"
+         r="11" />
+      <path
+         d="m 2510.7188,1067.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path538" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="26"
+         x="2528.25"
+         y="1066.1543"
+         id="text540">Etat</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2409.5"
+         x2="2640.5"
+         y1="1078"
+         y2="1078"
+         id="line542" />
+      <polygon
+         fill="none"
+         points="2415.5,1088 2419.5,1084 2423.5,1088 2419.5,1092 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon544" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="57"
+         x="2428.5"
+         y="1092.2104"
+         id="text546">valeur: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2409.5"
+         x2="2640.5"
+         y1="1098.8047"
+         y2="1098.8047"
+         id="line548" />
+      <circle
+         cx="2419.5"
+         cy="1109.8047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse550"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="207"
+         x="2428.5"
+         y="1113.0151"
+         id="text552">Etat(id: int, sortie: Case, liquide: int)</text>
+    </a>
+    <!--MD5=[fef7ef7d6f7da5af1740cbc79498b682]
+entity ##22-->
+    <!--MD5=[4b1f9bab7c3104f7593051b0ee4897c4]
+entity ##24-->
+    <!--MD5=[ed5cd3bc81a4fc39a99282e0df433433]
+entity ##26-->
+    <!--MD5=[712b49a80551510261ad10524cc74d81]
+class Plateau-->
+    <!--MD5=[2f75943fc2e02b7767b70b1750c7e40a]
+class Comparable_Joueur_-->
+    <rect
+       codeLine="210"
+       fill="#fefece"
+       filter="url(#fh1m58jdr7sw)"
+       height="48"
+       id="Comparable_Joueur_"
+       style="stroke:#a80036;stroke-width:1.5"
+       width="152"
+       x="1754.8524"
+       y="596.18353" />
+    <circle
+       cx="1769.8524"
+       cy="612.18353"
+       fill="#b4a7e5"
+       style="stroke:#a80036;stroke-width:1"
+       id="ellipse582"
+       r="11" />
+    <path
+       d="m 1765.7744,607.94915 v -2.1562 h 7.3906 v 2.1562 h -2.4687 v 8.0782 h 2.4687 v 2.1562 h -7.3906 v -2.1562 h 2.4687 v -8.0782 z"
+       fill="#000000"
+       id="path584" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="12px"
+       font-style="italic"
+       lengthAdjust="spacing"
+       textLength="75"
+       x="2551"
+       y="559.1543"
+       id="text586"
+       transform="translate(-767.14757,57.183551)">Comparable</text>
+    <rect
+       fill="#ffffff"
+       height="15.9688"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:2, 2"
+       width="43"
+       x="1866.8524"
+       y="593.18353"
+       id="rect588" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="12px"
+       font-style="italic"
+       lengthAdjust="spacing"
+       textLength="41"
+       x="2635"
+       y="548.13867"
+       id="text590"
+       transform="translate(-767.14757,57.183551)">Joueur</text>
+    <line
+       style="stroke:#a80036;stroke-width:1.5"
+       x1="1755.8524"
+       x2="1905.8524"
+       y1="628.18353"
+       y2="628.18353"
+       id="line592" />
+    <line
+       style="stroke:#a80036;stroke-width:1.5"
+       x1="1755.8524"
+       x2="1905.8524"
+       y1="636.18353"
+       y2="636.18353"
+       id="line594" />
+    <!--MD5=[e36a4c0f7055b067b077b74a1222e806]
+class Simulation-->
+    <!--MD5=[fc56bad2386dbc249f78f4c121f49762]
+reverse link Configuration to Progressiste-->
+    <!--MD5=[7a5c8f350a9571f7cbfe31569f982e4a]
+reverse link Configuration to Socialiste-->
+    <!--MD5=[ac2671b14a830dea5558c00116fc3965]
+reverse link Case to Repos-->
+    <!--MD5=[4b495ba958d3784be220a6d7b54da6bc]
+link Plateau to Case-->
+    <!--MD5=[4b495ba958d3784be220a6d7b54da6bc]
+link Plateau to Case-->
+    <!--MD5=[2ce1b19515a5d8c383395ed8ab43dd4f]
+reverse link Configuration to NeoLiberale-->
+    <!--MD5=[0a5a4042684edfe3e7bce77a9793dd22]
+link Prudent to Investissement-->
+    <!--MD5=[76c8d554a110a1ebf7088de390c3575c]
+reverse link Joueur to Prudent-->
+    <path
+       codeLine="120"
+       d="m 2037.9125,998.96355 c 72.55,34.25995 150.22,70.93995 207.93,98.18995"
+       fill="none"
+       id="Joueur-backto-Prudent"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="2786.75,933.13 2807.82,935.34 2801.84,948 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon655"
+       transform="translate(-767.14757,57.183551)" />
+    <!--MD5=[e97a7e0e5cda5596a65c6d8a6f9be520]
+link LoiAntitrust to Etat-->
+    <!--MD5=[f40fae4a1886d1bc4201a722b9322ea8]
+reverse link Case to LoiAntitrust-->
+    <!--MD5=[e7473d949eccdd649dda05c828dac6d0]
+link Subvention to Etat-->
+    <!--MD5=[e7473d949eccdd649dda05c828dac6d0]
+link Subvention to Etat-->
+    <!--MD5=[c56f66e79c93772440f622dd16f416e0]
+reverse link Case to Subvention-->
+    <!--MD5=[6ada86f4ea62bbe06a8f669c735d4e62]
+reverse link Configuration to Capitaliste-->
+    <!--MD5=[3c1889bae9ca69e4dfa502394ce42a7a]
+link BureauFinancesPubliques to Impot-->
+    <!--MD5=[b94c96635680e54114012afdd4a09175]
+link BureauFinancesPubliques to Etat-->
+    <!--MD5=[b94c96635680e54114012afdd4a09175]
+link BureauFinancesPubliques to Etat-->
+    <!--MD5=[43f8d9149352c854cc2e9d0a0383aa38]
+reverse link Case to BureauFinancesPubliques-->
+    <!--MD5=[63b26ab0336da675bff7ee7846146590]
+link Joueur to Case-->
+    <path
+       codeLine="197"
+       d="m 1720.6825,780.12355 c -38.27,-33.98 -83.75,-67.13 -131.83,-86.94 -152,-62.64 -645.00007,-71.29 -848.69007,-72.12"
+       fill="none"
+       id="Joueur-to-Case"
+       style="stroke:#a80036;stroke-width:1" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="50"
+       x="2387"
+       y="649.06689"
+       id="text714"
+       transform="translate(-754.49282,65.26729)">position</text>
+    <!--MD5=[63b26ab0336da675bff7ee7846146590]
+link Joueur to Case-->
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="104"
+       x="1667"
+       y="649.06689"
+       id="text728"
+       transform="translate(-147.65196,121.37964)">investissements</text>
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <path
+       codeLine="206"
+       d="m 1691.3925,780.18355 c -28.02,-18.09 -107.3968,-60.03339 -138.4768,-70.01339 -280.59,-90.11 -575.64327,47.05339 -763.43327,125.43339"
+       fill="none"
+       id="Joueur-to-Investissement-1"
+       style="stroke:#a80036;stroke-width:1"
+       sodipodi:nodetypes="ccc" />
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <path
+       codeLine="209"
+       d="m 1671.2601,780.43557 c -28.02,-18.09 -151.5122,-53.57866 -182.5922,-63.55866 -280.59,-90.11 -511.39547,40.34664 -699.18547,118.72664"
+       fill="none"
+       id="Joueur-to-Investissement-2"
+       style="stroke:#a80036;stroke-width:1"
+       sodipodi:nodetypes="ccc" />
+    <!--MD5=[afdef7a250e702651674965f70135d1d]
+link Investissement to Joueur-->
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="74"
+       x="2128"
+       y="649.06689"
+       id="text749"
+       transform="translate(-580.74601,77.244772)">proprietaire</text>
+    <!--MD5=[afdef7a250e702651674965f70135d1d]
+link Investissement to Joueur-->
+    <!--MD5=[07ee21c95c8e2c6e9689c1f65a2426ac]
+reverse link Comparable_Joueur_ to Joueur-->
+    <path
+       codeLine="212"
+       d="m 1830.8525,664.63355 c 0,31.06 0,74.44 0,115.47"
+       fill="none"
+       id="Comparable_Joueur_-backto-Joueur"
+       style="stroke:#a80036;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="2598,587.22 2605,607.22 2591,607.22 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon761"
+       transform="translate(-767.14757,57.183551)" />
+    <!--MD5=[3fcf570feb5e9a8266acd57b169022a7]
+link Agressif to Investissement-->
+    <!--MD5=[0da5e441f5d7fe363f5498196b5d1e9a]
+reverse link Joueur to Agressif-->
+    <path
+       codeLine="233"
+       d="m 1948.6925,1035.3835 c 19.69,22.41 38.73,44.1 54.28,61.8"
+       fill="none"
+       id="Joueur-backto-Agressif"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="2702.5,963 2720.96,973.41 2710.44,982.65 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon771"
+       transform="translate(-767.14757,57.183551)" />
+    <!--MD5=[a67baf4ae2daf0dc97dcc1de29229f2c]
+reverse link Configuration to EuropeApresCovid19-->
+    <!--MD5=[b328f9f6b14b06957d96aa5f3614d3ad]
+reverse link Case to Investissement-->
+    <!--MD5=[509508ce58f686bb1ef539befb6fdada]
+reverse link Joueur to Etat-->
+    <path
+       codeLine="292"
+       d="m 1788.4025,1039.5835 c -7.19,23.44 -14.06,45.85 -19.46,63.45"
+       fill="none"
+       id="Joueur-backto-Etat"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="2561.5,963 2562.33,984.17 2548.94,980.07 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon780"
+       transform="translate(-767.14757,57.183551)" />
+    <!--MD5=[d1b6f2da79d67042ab92dc0f1749afe3]
+@startuml
+package "Configurations" #ffeebb {
+    class Configuration
+    class Progressiste
+    class Socialiste
+    class NeoLiberale
+    class Capitaliste
+    class EuropeApresCovid19
+}
+package "Cases" #ffeebb {
+    class Case
+    class Impot
+    class BureauFinancesPubliques
+    class LoiAntitrust
+    class Investissement
+    class Subvention
+    class Repos
+}
+package "Joueur" #ffeebb {
+    class Joueur
+    class Agressif
+    class Prudent
+    class Etat
+}
+together {
+    class Progressiste
+    class Socialiste
+    class NeoLiberale
+    class Capitaliste
+    class EuropeApresCovid19
+}
+together {
+    class Impot
+    class BureauFinancesPubliques
+    class LoiAntitrust
+    class Investissement
+    class Subvention
+    class Repos
+}
+together {
+    class Agressif
+    class Prudent
+    class Etat
+}
+
+class Progressiste [[java:Monopoly.Configurations.Progressiste]] {
+	+Progressiste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Progressiste
+class Investissement {
+}
+class Socialiste [[java:Monopoly.Configurations.Socialiste]] {
+	+Socialiste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Socialiste
+class Joueur {
+}
+class Repos [[java:Monopoly.Cases.Repos]] {
+	+Repos(id: int)
+	+action(j: Joueur): boolean
+}
+class Case {
+}
+Case <|- - Repos
+abstract class Configuration [[java:Monopoly.Configurations.Configuration]] {
+	#nbJoueursA: int
+	#nbJoueursP: int
+	#pourcentageCasesLoiAntitrust: int
+	#pourcentageCasesBureauFinancesPubliques: int
+	#pourcentageCasesInvestissement: int
+	#pourcentageCasesSubvention: int
+	#pourcentageCasesRepos: int
+	#defaultJoueurLiquideMax: int
+	#defaultJoueurLiquideMin: int
+	#defaultLoiAntitrustSeuil: int
+	#defaultBureauFinancesPubliquesValeur: int
+	#defaultBureauFinancesPubliquesPourcentageMax: int
+	#defaultBureauFinancesPubliquesPourcentageMin: int
+	#defaultInvestissementValeurMax: int
+	#defaultInvestissementValeurMin: int
+	#defaultInvestissementPourcentageMax: int
+	#defaultInvestissementPourcentageMin: int
+	#defaultSubventionMontantMax: int
+	#defaultSubventionMontantMin: int
+	+Configuration()
+	+initJeu(plateau: Plateau, joueurs: List<Joueur>): void
+	+initPlateau(plateau: Plateau, c: Case, etat: Joueur): void
+	+initJoueurs(joueurs: List<Joueur>, c: Case): void
+}
+class Plateau [[java:Monopoly.Plateaux.Plateau]] {
+	#nbCases: int
+	+Plateau(nbCases: int)
+	+addCase(c: Case): void
+}
+class Case {
+}
+Plateau - -> "*" Case : plateau
+class Case {
+}
+Plateau - -> "*" Case : getPlateau()
+class NeoLiberale [[java:Monopoly.Configurations.NeoLiberale]] {
+	+NeoLiberale(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - NeoLiberale
+class Prudent [[java:Monopoly.Joueurs.Prudent]] {
+	+Prudent(id: int, sortie: Case, liquide: int)
+	+acheteOuPas(i: Investissement): boolean
+	+joue(c: Case): boolean
+}
+class Investissement {
+}
+Prudent - -> "1" Investissement : antitrustInvestissementARevendre()
+class Joueur {
+}
+Joueur <|- - Prudent
+abstract class Case [[java:Monopoly.Cases.Case]] {
+	-id: int
+	+Case(id: int)
+	+{abstract} action(j: Joueur): boolean
+}
+class LoiAntitrust [[java:Monopoly.Cases.LoiAntitrust]] {
+	#seuil: int
+	+LoiAntitrust(id: int)
+	+LoiAntitrust(id: int, seuil: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Etat {
+}
+LoiAntitrust - -> "1" Etat : etat
+class Case {
+}
+Case <|- - LoiAntitrust
+class Subvention [[java:Monopoly.Cases.Subvention]] {
+	#montant: int
+	+Subvention(id: int)
+	+Subvention(id: int, montant: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Etat {
+}
+Subvention - -> "1" Etat : etat
+class Etat {
+}
+Subvention - -> "1" Etat : getEtat()
+class Case {
+}
+Case <|- - Subvention
+class Capitaliste [[java:Monopoly.Configurations.Capitaliste]] {
+	+Capitaliste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Capitaliste
+class BureauFinancesPubliques [[java:Monopoly.Cases.BureauFinancesPubliques]] {
+	#valeur: int
+	#pourcentage: int
+	+BureauFinancesPubliques(id: int)
+	+BureauFinancesPubliques(id: int, nom: Impot, valeur: int, pourcentage: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Impot {
+}
+BureauFinancesPubliques - -> "1" Impot : nom
+class Etat {
+}
+BureauFinancesPubliques - -> "1" Etat : etat
+class Etat {
+}
+BureauFinancesPubliques - -> "1" Etat : getEtat()
+class Case {
+}
+Case <|- - BureauFinancesPubliques
+abstract class Joueur [[java:Monopoly.Joueurs.Joueur]] {
+	#id: int
+	#liquide: int
+	#totalInvestissements: int
+	#aPerdu: int
+	+Joueur(id: int, sortie: Case, liquide: int)
+	+addLiquide(liquide: int): void
+	+removeLiquide(liquide: int): void
+	+addInvestissement(investissement: Investissement): void
+	+removeInvestissement(investissement: Investissement): void
+	+payeAntitrust(somme: int, etat: Etat): void
+	+paye(joueur: Joueur, somme: int): void
+	+joue(c: Case): boolean
+	+acheteOuPas(i: Investissement): boolean
+	+compareTo(joueur: Joueur): int
+	+equals(o: Object): boolean
+}
+class Case {
+}
+Joueur - -> "1" Case : position
+class Investissement {
+}
+Joueur - -> "*" Investissement : investissements
+class Case {
+}
+Joueur - -> "1" Case : getPosition()
+class Investissement {
+}
+Joueur - -> "*" Investissement : getInvestissements()
+class Investissement {
+}
+Joueur - -> "1" Investissement : antitrustInvestissementARevendre()
+interface "Comparable<Joueur>" as Comparable_Joueur_ {
+}
+Comparable_Joueur_ <|.. Joueur
+class Plateau {
+}
+class Joueur {
+}
+class Joueur {
+}
+class Case {
+}
+class Etat {
+}
+class Agressif [[java:Monopoly.Joueurs.Agressif]] {
+	+Agressif(id: int, sortie: Case, liquide: int)
+	+acheteOuPas(i: Investissement): boolean
+	+joue(c: Case): boolean
+}
+class Investissement {
+}
+Agressif - -> "1" Investissement : antitrustInvestissementARevendre()
+class Joueur {
+}
+Joueur <|- - Agressif
+enum Impot [[java:Monopoly.Cases.Impot]] {
+	SUR_LE_REVENU
+	FONCIER
+}
+class EuropeApresCovid19 [[java:Monopoly.Configurations.EuropeApresCovid19]] {
+	+EuropeApresCovid19(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - EuropeApresCovid19
+class Simulation [[java:Monopoly.Simulation]] {
+	+{static} assezJoueursEnLice(joueurs: List<Joueur>): boolean
+	+{static} displayTransitivState(joueurs: List<Joueur>, afficherOrdre: boolean): String
+	+{static} main(args: String[]): void
+}
+class Joueur {
+}
+class Joueur {
+}
+class Case {
+}
+class Investissement {
+}
+class Investissement {
+}
+class Investissement {
+}
+class Case {
+}
+class Plateau {
+}
+class Joueur {
+}
+class Configuration {
+}
+class Investissement [[java:Monopoly.Cases.Investissement]] {
+	#valeurNominale: int
+	#pourcentage: int
+	+Investissement(id: int)
+	+Investissement(id: int, valeurNominale: int, pourcentage: int, j: Joueur)
+	+changeProprietaire(j: Joueur): void
+	+action(j: Joueur): boolean
+}
+class Joueur {
+}
+Investissement - -> "1" Joueur : proprietaire
+class Joueur {
+}
+Investissement - -> "1" Joueur : getProprietaire()
+class Case {
+}
+Case <|- - Investissement
+class Etat [[java:Monopoly.Joueurs.Etat]] {
+	#valeur: int
+	+Etat(id: int, sortie: Case, liquide: int)
+}
+class Joueur {
+}
+Joueur <|- - Etat
+
+@enduml
+
+PlantUML version 1.2021.7(Sun May 23 14:40:07 CEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+-->
+  </g>
+</svg>

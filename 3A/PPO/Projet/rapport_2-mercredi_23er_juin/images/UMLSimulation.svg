@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   contentScriptType="application/ecmascript"
+   contentStyleType="text/css"
+   height="113.59853"
+   preserveAspectRatio="none"
+   version="1.1"
+   viewBox="0 0 523.35284 113.59853"
+   width="523.35284"
+   zoomAndPan="magnify"
+   id="svg784"
+   sodipodi:docname="UMLSimulation.svg"
+   inkscape:export-filename="/home/cruz/Documents/Universite/IS2A3/Cours_S6_P4/POO/projet_monopoly/rapport_2-mercredi_23er_juin/images/UMLSimulation.png"
+   inkscape:export-xdpi="90.234985"
+   inkscape:export-ydpi="90.234985"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview786"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.54692557"
+     inkscape:cx="-215.75148"
+     inkscape:cy="200.21006"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g782"
+     inkscape:snap-global="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs11">
+    <filter
+       height="1.17474"
+       id="fh1m58jdr7sw"
+       width="1.0330416"
+       x="-0.01214442"
+       y="-0.064225629">
+      <feGaussianBlur
+         result="blurOut"
+         stdDeviation="2.0"
+         id="feGaussianBlur2" />
+      <feColorMatrix
+         in="blurOut"
+         result="blurOut2"
+         type="matrix"
+         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"
+         id="feColorMatrix4" />
+      <feOffset
+         dx="4.0"
+         dy="4.0"
+         in="blurOut2"
+         result="blurOut3"
+         id="feOffset6" />
+      <feBlend
+         in="SourceGraphic"
+         in2="blurOut3"
+         mode="normal"
+         id="feBlend8" />
+    </filter>
+  </defs>
+  <g
+     id="g782"
+     transform="translate(-2719.5068,-349.14747)">
+    <!--MD5=[20f4b5285d2c2b84b6e224381c1077c7]
+cluster Configurations-->
+    <!--MD5=[4d8cf2d9022c5a0ba6584a742968a58a]
+cluster Cases-->
+    <!--MD5=[a6f56d6693c4a2017e3a324b7653b0bd]
+cluster Joueur-->
+    <!--MD5=[9b7eb76f801c309757ef5968cb2349d9]
+class Configuration-->
+    <!--MD5=[d5393e788e829048e07a62074dcdb164]
+class Progressiste-->
+    <!--MD5=[b5c3e46bac749432a260f375b99f9a67]
+class Socialiste-->
+    <!--MD5=[195bade063853f516074d89877e642fd]
+class NeoLiberale-->
+    <!--MD5=[3127a4569692961c05f53beff88cfa5d]
+class Capitaliste-->
+    <!--MD5=[8a60224fad2250dd1090beb8f5babdb6]
+class EuropeApresCovid19-->
+    <!--MD5=[e8dcfdde5c6ce5239f59acd294696d72]
+class Case-->
+    <!--MD5=[a7052ea18ce8ec41f462a2090ee556c5]
+class Impot-->
+    <!--MD5=[ffcb54bf9f424039ba1589b30e9c7e9a]
+class BureauFinancesPubliques-->
+    <!--MD5=[034e5b9e1295dd900da7451a1086f07f]
+class LoiAntitrust-->
+    <!--MD5=[609766599d1d6737e363ed763c30299a]
+class Investissement-->
+    <!--MD5=[8f867df2291b730d0eac529f50a387ce]
+class Subvention-->
+    <!--MD5=[9103cb39bfd6c9c70e93897b70a6bba1]
+class Repos-->
+    <!--MD5=[f35b8d93951ba498799a84be5600c0ca]
+class Joueur-->
+    <!--MD5=[6bee7a1aa50d11fda966851552f48fda]
+class Agressif-->
+    <!--MD5=[390f8e1fec7019ab5fbd178189bb7e25]
+class Prudent-->
+    <!--MD5=[d7a86c142fdde356f8ae5a8b885bc91c]
+class Etat-->
+    <!--MD5=[fef7ef7d6f7da5af1740cbc79498b682]
+entity ##22-->
+    <!--MD5=[4b1f9bab7c3104f7593051b0ee4897c4]
+entity ##24-->
+    <!--MD5=[ed5cd3bc81a4fc39a99282e0df433433]
+entity ##26-->
+    <!--MD5=[712b49a80551510261ad10524cc74d81]
+class Plateau-->
+    <!--MD5=[2f75943fc2e02b7767b70b1750c7e40a]
+class Comparable_Joueur_-->
+    <!--MD5=[e36a4c0f7055b067b077b74a1222e806]
+class Simulation-->
+    <a
+       href="java:Monopoly.Simulation"
+       target="_top"
+       title="java:Monopoly.Simulation"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Simulation"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Simulation"
+       xlink:type="simple"
+       id="a619"
+       transform="translate(868.39475,170.6391)">
+      <rect
+         codeLine="244"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="86.414101"
+         id="Simulation"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="457"
+         x="1875.5"
+         y="188.5" />
+      <circle
+         cx="2067.25"
+         cy="204.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse597"
+         r="11" />
+      <path
+         d="m 2070.2188,210.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path599" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="65"
+         x="2087.75"
+         y="208.6543"
+         id="text601">Simulation</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1876.5"
+         x2="2331.5"
+         y1="220.5"
+         y2="220.5"
+         id="line603" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1876.5"
+         x2="2331.5"
+         y1="228.5"
+         y2="228.5"
+         id="line605" />
+      <circle
+         cx="1886.5"
+         cy="239.5"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse607"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         text-decoration="underline"
+         textLength="298"
+         x="1895.5"
+         y="242.7104"
+         id="text609"
+         style="text-decoration:underline;text-decoration-line:underline">assezJoueursEnLice(joueurs: List&lt;Joueur&gt;): boolean</text>
+      <circle
+         cx="1886.5"
+         cy="252.3047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse611"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         text-decoration="underline"
+         textLength="431"
+         x="1895.5"
+         y="255.51511"
+         id="text613"
+         style="text-decoration:underline;text-decoration-line:underline">displayTransitivState(joueurs: List&lt;Joueur&gt;, afficherOrdre: boolean): String</text>
+      <circle
+         cx="1886.5"
+         cy="265.10941"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse615"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         text-decoration="underline"
+         textLength="143"
+         x="1895.5"
+         y="268.31979"
+         id="text617"
+         style="text-decoration:underline;text-decoration-line:underline">main(args: String[]): void</text>
+    </a>
+    <!--MD5=[fc56bad2386dbc249f78f4c121f49762]
+reverse link Configuration to Progressiste-->
+    <!--MD5=[7a5c8f350a9571f7cbfe31569f982e4a]
+reverse link Configuration to Socialiste-->
+    <!--MD5=[ac2671b14a830dea5558c00116fc3965]
+reverse link Case to Repos-->
+    <!--MD5=[4b495ba958d3784be220a6d7b54da6bc]
+link Plateau to Case-->
+    <!--MD5=[4b495ba958d3784be220a6d7b54da6bc]
+link Plateau to Case-->
+    <!--MD5=[2ce1b19515a5d8c383395ed8ab43dd4f]
+reverse link Configuration to NeoLiberale-->
+    <!--MD5=[0a5a4042684edfe3e7bce77a9793dd22]
+link Prudent to Investissement-->
+    <!--MD5=[76c8d554a110a1ebf7088de390c3575c]
+reverse link Joueur to Prudent-->
+    <!--MD5=[e97a7e0e5cda5596a65c6d8a6f9be520]
+link LoiAntitrust to Etat-->
+    <!--MD5=[f40fae4a1886d1bc4201a722b9322ea8]
+reverse link Case to LoiAntitrust-->
+    <!--MD5=[e7473d949eccdd649dda05c828dac6d0]
+link Subvention to Etat-->
+    <!--MD5=[e7473d949eccdd649dda05c828dac6d0]
+link Subvention to Etat-->
+    <!--MD5=[c56f66e79c93772440f622dd16f416e0]
+reverse link Case to Subvention-->
+    <!--MD5=[6ada86f4ea62bbe06a8f669c735d4e62]
+reverse link Configuration to Capitaliste-->
+    <!--MD5=[3c1889bae9ca69e4dfa502394ce42a7a]
+link BureauFinancesPubliques to Impot-->
+    <!--MD5=[b94c96635680e54114012afdd4a09175]
+link BureauFinancesPubliques to Etat-->
+    <!--MD5=[b94c96635680e54114012afdd4a09175]
+link BureauFinancesPubliques to Etat-->
+    <!--MD5=[43f8d9149352c854cc2e9d0a0383aa38]
+reverse link Case to BureauFinancesPubliques-->
+    <!--MD5=[63b26ab0336da675bff7ee7846146590]
+link Joueur to Case-->
+    <!--MD5=[63b26ab0336da675bff7ee7846146590]
+link Joueur to Case-->
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <!--MD5=[afdef7a250e702651674965f70135d1d]
+link Investissement to Joueur-->
+    <!--MD5=[afdef7a250e702651674965f70135d1d]
+link Investissement to Joueur-->
+    <!--MD5=[07ee21c95c8e2c6e9689c1f65a2426ac]
+reverse link Comparable_Joueur_ to Joueur-->
+    <!--MD5=[3fcf570feb5e9a8266acd57b169022a7]
+link Agressif to Investissement-->
+    <!--MD5=[0da5e441f5d7fe363f5498196b5d1e9a]
+reverse link Joueur to Agressif-->
+    <!--MD5=[a67baf4ae2daf0dc97dcc1de29229f2c]
+reverse link Configuration to EuropeApresCovid19-->
+    <!--MD5=[b328f9f6b14b06957d96aa5f3614d3ad]
+reverse link Case to Investissement-->
+    <!--MD5=[509508ce58f686bb1ef539befb6fdada]
+reverse link Joueur to Etat-->
+    <!--MD5=[d1b6f2da79d67042ab92dc0f1749afe3]
+@startuml
+package "Configurations" #ffeebb {
+    class Configuration
+    class Progressiste
+    class Socialiste
+    class NeoLiberale
+    class Capitaliste
+    class EuropeApresCovid19
+}
+package "Cases" #ffeebb {
+    class Case
+    class Impot
+    class BureauFinancesPubliques
+    class LoiAntitrust
+    class Investissement
+    class Subvention
+    class Repos
+}
+package "Joueur" #ffeebb {
+    class Joueur
+    class Agressif
+    class Prudent
+    class Etat
+}
+together {
+    class Progressiste
+    class Socialiste
+    class NeoLiberale
+    class Capitaliste
+    class EuropeApresCovid19
+}
+together {
+    class Impot
+    class BureauFinancesPubliques
+    class LoiAntitrust
+    class Investissement
+    class Subvention
+    class Repos
+}
+together {
+    class Agressif
+    class Prudent
+    class Etat
+}
+
+class Progressiste [[java:Monopoly.Configurations.Progressiste]] {
+	+Progressiste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Progressiste
+class Investissement {
+}
+class Socialiste [[java:Monopoly.Configurations.Socialiste]] {
+	+Socialiste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Socialiste
+class Joueur {
+}
+class Repos [[java:Monopoly.Cases.Repos]] {
+	+Repos(id: int)
+	+action(j: Joueur): boolean
+}
+class Case {
+}
+Case <|- - Repos
+abstract class Configuration [[java:Monopoly.Configurations.Configuration]] {
+	#nbJoueursA: int
+	#nbJoueursP: int
+	#pourcentageCasesLoiAntitrust: int
+	#pourcentageCasesBureauFinancesPubliques: int
+	#pourcentageCasesInvestissement: int
+	#pourcentageCasesSubvention: int
+	#pourcentageCasesRepos: int
+	#defaultJoueurLiquideMax: int
+	#defaultJoueurLiquideMin: int
+	#defaultLoiAntitrustSeuil: int
+	#defaultBureauFinancesPubliquesValeur: int
+	#defaultBureauFinancesPubliquesPourcentageMax: int
+	#defaultBureauFinancesPubliquesPourcentageMin: int
+	#defaultInvestissementValeurMax: int
+	#defaultInvestissementValeurMin: int
+	#defaultInvestissementPourcentageMax: int
+	#defaultInvestissementPourcentageMin: int
+	#defaultSubventionMontantMax: int
+	#defaultSubventionMontantMin: int
+	+Configuration()
+	+initJeu(plateau: Plateau, joueurs: List<Joueur>): void
+	+initPlateau(plateau: Plateau, c: Case, etat: Joueur): void
+	+initJoueurs(joueurs: List<Joueur>, c: Case): void
+}
+class Plateau [[java:Monopoly.Plateaux.Plateau]] {
+	#nbCases: int
+	+Plateau(nbCases: int)
+	+addCase(c: Case): void
+}
+class Case {
+}
+Plateau - -> "*" Case : plateau
+class Case {
+}
+Plateau - -> "*" Case : getPlateau()
+class NeoLiberale [[java:Monopoly.Configurations.NeoLiberale]] {
+	+NeoLiberale(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - NeoLiberale
+class Prudent [[java:Monopoly.Joueurs.Prudent]] {
+	+Prudent(id: int, sortie: Case, liquide: int)
+	+acheteOuPas(i: Investissement): boolean
+	+joue(c: Case): boolean
+}
+class Investissement {
+}
+Prudent - -> "1" Investissement : antitrustInvestissementARevendre()
+class Joueur {
+}
+Joueur <|- - Prudent
+abstract class Case [[java:Monopoly.Cases.Case]] {
+	-id: int
+	+Case(id: int)
+	+{abstract} action(j: Joueur): boolean
+}
+class LoiAntitrust [[java:Monopoly.Cases.LoiAntitrust]] {
+	#seuil: int
+	+LoiAntitrust(id: int)
+	+LoiAntitrust(id: int, seuil: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Etat {
+}
+LoiAntitrust - -> "1" Etat : etat
+class Case {
+}
+Case <|- - LoiAntitrust
+class Subvention [[java:Monopoly.Cases.Subvention]] {
+	#montant: int
+	+Subvention(id: int)
+	+Subvention(id: int, montant: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Etat {
+}
+Subvention - -> "1" Etat : etat
+class Etat {
+}
+Subvention - -> "1" Etat : getEtat()
+class Case {
+}
+Case <|- - Subvention
+class Capitaliste [[java:Monopoly.Configurations.Capitaliste]] {
+	+Capitaliste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Capitaliste
+class BureauFinancesPubliques [[java:Monopoly.Cases.BureauFinancesPubliques]] {
+	#valeur: int
+	#pourcentage: int
+	+BureauFinancesPubliques(id: int)
+	+BureauFinancesPubliques(id: int, nom: Impot, valeur: int, pourcentage: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Impot {
+}
+BureauFinancesPubliques - -> "1" Impot : nom
+class Etat {
+}
+BureauFinancesPubliques - -> "1" Etat : etat
+class Etat {
+}
+BureauFinancesPubliques - -> "1" Etat : getEtat()
+class Case {
+}
+Case <|- - BureauFinancesPubliques
+abstract class Joueur [[java:Monopoly.Joueurs.Joueur]] {
+	#id: int
+	#liquide: int
+	#totalInvestissements: int
+	#aPerdu: int
+	+Joueur(id: int, sortie: Case, liquide: int)
+	+addLiquide(liquide: int): void
+	+removeLiquide(liquide: int): void
+	+addInvestissement(investissement: Investissement): void
+	+removeInvestissement(investissement: Investissement): void
+	+payeAntitrust(somme: int, etat: Etat): void
+	+paye(joueur: Joueur, somme: int): void
+	+joue(c: Case): boolean
+	+acheteOuPas(i: Investissement): boolean
+	+compareTo(joueur: Joueur): int
+	+equals(o: Object): boolean
+}
+class Case {
+}
+Joueur - -> "1" Case : position
+class Investissement {
+}
+Joueur - -> "*" Investissement : investissements
+class Case {
+}
+Joueur - -> "1" Case : getPosition()
+class Investissement {
+}
+Joueur - -> "*" Investissement : getInvestissements()
+class Investissement {
+}
+Joueur - -> "1" Investissement : antitrustInvestissementARevendre()
+interface "Comparable<Joueur>" as Comparable_Joueur_ {
+}
+Comparable_Joueur_ <|.. Joueur
+class Plateau {
+}
+class Joueur {
+}
+class Joueur {
+}
+class Case {
+}
+class Etat {
+}
+class Agressif [[java:Monopoly.Joueurs.Agressif]] {
+	+Agressif(id: int, sortie: Case, liquide: int)
+	+acheteOuPas(i: Investissement): boolean
+	+joue(c: Case): boolean
+}
+class Investissement {
+}
+Agressif - -> "1" Investissement : antitrustInvestissementARevendre()
+class Joueur {
+}
+Joueur <|- - Agressif
+enum Impot [[java:Monopoly.Cases.Impot]] {
+	SUR_LE_REVENU
+	FONCIER
+}
+class EuropeApresCovid19 [[java:Monopoly.Configurations.EuropeApresCovid19]] {
+	+EuropeApresCovid19(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - EuropeApresCovid19
+class Simulation [[java:Monopoly.Simulation]] {
+	+{static} assezJoueursEnLice(joueurs: List<Joueur>): boolean
+	+{static} displayTransitivState(joueurs: List<Joueur>, afficherOrdre: boolean): String
+	+{static} main(args: String[]): void
+}
+class Joueur {
+}
+class Joueur {
+}
+class Case {
+}
+class Investissement {
+}
+class Investissement {
+}
+class Investissement {
+}
+class Case {
+}
+class Plateau {
+}
+class Joueur {
+}
+class Configuration {
+}
+class Investissement [[java:Monopoly.Cases.Investissement]] {
+	#valeurNominale: int
+	#pourcentage: int
+	+Investissement(id: int)
+	+Investissement(id: int, valeurNominale: int, pourcentage: int, j: Joueur)
+	+changeProprietaire(j: Joueur): void
+	+action(j: Joueur): boolean
+}
+class Joueur {
+}
+Investissement - -> "1" Joueur : proprietaire
+class Joueur {
+}
+Investissement - -> "1" Joueur : getProprietaire()
+class Case {
+}
+Case <|- - Investissement
+class Etat [[java:Monopoly.Joueurs.Etat]] {
+	#valeur: int
+	+Etat(id: int, sortie: Case, liquide: int)
+}
+class Joueur {
+}
+Joueur <|- - Etat
+
+@enduml
+
+PlantUML version 1.2021.7(Sun May 23 14:40:07 CEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+-->
+  </g>
+</svg>

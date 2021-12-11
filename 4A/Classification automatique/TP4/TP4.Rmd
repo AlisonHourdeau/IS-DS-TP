@@ -1,0 +1,66 @@
+---
+title: "TP4"
+output: html_document
+---
+
+## Question 1 : Chargement des données
+```{r}
+data<-read.table("C:/Users/Charlotte/Documents/Polytech/S8/CA/TP4/hotel.txt",header=TRUE,sep=",")
+summary(data)
+```
+```{r}
+z <- data.frame(variable = names(data), 
+                classe = sapply(data, class), 
+                distinct_values = sapply(data, function(x) paste0(length(unique(x)))),
+                first_values = sapply(data, function(x) paste0(head(x)[1:4], collapse=',')),
+                row.names=NULL)
+z
+
+```
+
+## Question 2 : Donner les différentes stats descriptives et liaisons entre les variables quantitatives du fichier
+```{r}
+str(data)
+```
+
+```{r}
+ind.quanti<-sapply(data, function(x) is.numeric(x) | is.integer(x))
+
+data.quanti<-data[,ind.quanti]
+
+ind.quali<-sapply(data, function(x) is.factor(x))
+
+data.quali<-data[,ind.quali]
+```
+
+```{r}
+dtf<-data.frame(round(sapply(data.quanti, each(min,max,mean,sd,var,median,IQR)),2))
+
+dtf
+```
+
+
+
+
+
+
+## Question 4 :
+```{r}
+data.quanti<-data[,ind.quanti]
+data.norm<-scale(data.quanti,center=T,scale=T)
+
+dist.eucli<-dist(data.norm, method="euclidean")
+
+cah <-hclust(dist.eucli, method = "ward.D2")
+```
+## Question 5 :
+
+```{r}
+library(ClustOfVar)
+cah.var<-hclustvar(X.quanti=data.norm, X.quali=data.quali)
+h<-cah.var$height
+
+plot((ncol(data.norm)+ncol(data.quali)-1):1)
+h
+```
+

@@ -1,0 +1,3612 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   contentScriptType="application/ecmascript"
+   contentStyleType="text/css"
+   height="1597.155"
+   preserveAspectRatio="none"
+   version="1.1"
+   viewBox="0 0 3436.0808 1597.155"
+   width="3436.0808"
+   zoomAndPan="magnify"
+   id="svg784"
+   sodipodi:docname="UML.svg"
+   inkscape:export-filename="/home/cruz/Documents/Universite/IS2A3/Cours_S6_P4/POO/projet_monopoly/diagram_UML/uml.png"
+   inkscape:export-xdpi="90.234985"
+   inkscape:export-ydpi="90.234985"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview786"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.54692557"
+     inkscape:cx="2612.787"
+     inkscape:cy="876.71894"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g782"
+     inkscape:snap-global="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs11">
+    <filter
+       height="1.0319239"
+       id="fh1m58jdr7sw"
+       width="1.0176608"
+       x="-0.0064912281"
+       y="-0.011733615">
+      <feGaussianBlur
+         result="blurOut"
+         stdDeviation="2.0"
+         id="feGaussianBlur2" />
+      <feColorMatrix
+         in="blurOut"
+         result="blurOut2"
+         type="matrix"
+         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"
+         id="feColorMatrix4" />
+      <feOffset
+         dx="4.0"
+         dy="4.0"
+         in="blurOut2"
+         result="blurOut3"
+         id="feOffset6" />
+      <feBlend
+         in="SourceGraphic"
+         in2="blurOut3"
+         mode="normal"
+         id="feBlend8" />
+    </filter>
+  </defs>
+  <g
+     id="g782"
+     transform="translate(109.56875,327.85296)">
+    <!--MD5=[20f4b5285d2c2b84b6e224381c1077c7]
+cluster Configurations-->
+    <polygon
+       fill="#ffeebb"
+       filter="url(#fh1m58jdr7sw)"
+       points="4309,609.5 2693,609.5 2693,6 2815,6 2822,28.2969 4309,28.2969 "
+       style="stroke:#000000;stroke-width:1.5"
+       id="polygon13"
+       transform="translate(-1695.2289,-264.07327)" />
+    <line
+       style="stroke:#000000;stroke-width:1.5"
+       x1="997.77106"
+       x2="1126.771"
+       y1="-235.77634"
+       y2="-235.77634"
+       id="line15" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       lengthAdjust="spacing"
+       textLength="116"
+       x="2697"
+       y="20.9951"
+       id="text17"
+       transform="translate(-1695.2289,-264.07327)">Configurations</text>
+    <!--MD5=[4d8cf2d9022c5a0ba6584a742968a58a]
+cluster Cases-->
+    <polygon
+       fill="#ffeebb"
+       filter="url(#fh1m58jdr7sw)"
+       points="77,488.2969 2369,488.2969 2369,1136 16,1136 16,466 70,466 "
+       style="stroke:#000000;stroke-width:1.5"
+       id="polygon19" />
+    <line
+       style="stroke:#000000;stroke-width:1.5"
+       x1="16"
+       x2="77"
+       y1="488.29691"
+       y2="488.29691"
+       id="line21" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       lengthAdjust="spacing"
+       textLength="48"
+       x="20"
+       y="480.99509"
+       id="text23">Cases</text>
+    <!--MD5=[a6f56d6693c4a2017e3a324b7653b0bd]
+cluster Joueur-->
+    <polygon
+       fill="#ffeebb"
+       filter="url(#fh1m58jdr7sw)"
+       points="2457,691.2969 3248,691.2969 3248,1142 2393,1142 2393,669 2450,669 "
+       style="stroke:#000000;stroke-width:1.5"
+       id="polygon25" />
+    <line
+       style="stroke:#000000;stroke-width:1.5"
+       x1="2393"
+       x2="2457"
+       y1="691.29688"
+       y2="691.29688"
+       id="line27" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       lengthAdjust="spacing"
+       textLength="51"
+       x="2397"
+       y="683.99512"
+       id="text29">Joueur</text>
+    <!--MD5=[9b7eb76f801c309757ef5968cb2349d9]
+class Configuration-->
+    <a
+       href="java:Monopoly.Configurations.Configuration"
+       target="_top"
+       title="java:Monopoly.Configurations.Configuration"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Configurations.Configuration"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Configurations.Configuration"
+       xlink:type="simple"
+       id="a134"
+       transform="translate(-1695.2289,-264.07327)">
+      <rect
+         codeLine="267"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="342.50781"
+         id="Configuration"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="341"
+         x="3305.5"
+         y="60" />
+      <circle
+         cx="3429.75"
+         cy="76"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse32"
+         r="11" />
+      <path
+         d="m 3432.7188,81.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path34" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="84"
+         x="3450.25"
+         y="80.154297"
+         id="text36">Configuration</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3306.5"
+         x2="3645.5"
+         y1="92"
+         y2="92"
+         id="line38" />
+      <polygon
+         fill="none"
+         points="3316.5,98 3320.5,102 3316.5,106 3312.5,102 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon40" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="86"
+         x="3325.5"
+         y="106.2104"
+         id="text42">nbJoueursA: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,110.8047 3320.5,114.8047 3316.5,118.8047 3312.5,114.8047 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon44" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="86"
+         x="3325.5"
+         y="119.0151"
+         id="text46">nbJoueursP: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,123.6094 3320.5,127.6094 3316.5,131.6094 3312.5,127.6094 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon48" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="193"
+         x="3325.5"
+         y="131.81979"
+         id="text50">pourcentageCasesLoiAntitrust: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,136.4141 3320.5,140.4141 3316.5,144.4141 3312.5,140.4141 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon52" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="275"
+         x="3325.5"
+         y="144.6245"
+         id="text54">pourcentageCasesBureauFinancesPubliques: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,149.2188 3320.5,153.2188 3316.5,157.2188 3312.5,153.2188 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon56" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="216"
+         x="3325.5"
+         y="157.4292"
+         id="text58">pourcentageCasesInvestissement: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,162.0234 3320.5,166.0234 3316.5,170.0234 3312.5,166.0234 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon60" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="192"
+         x="3325.5"
+         y="170.2339"
+         id="text62">pourcentageCasesSubvention: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,174.8281 3320.5,178.8281 3316.5,182.8281 3312.5,178.8281 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon64" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="164"
+         x="3325.5"
+         y="183.0386"
+         id="text66">pourcentageCasesRepos: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,187.6328 3320.5,191.6328 3316.5,195.6328 3312.5,191.6328 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon68" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="159"
+         x="3325.5"
+         y="195.84331"
+         id="text70">defaultJoueurLiquideMax: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,200.4375 3320.5,204.4375 3316.5,208.4375 3312.5,204.4375 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon72" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="156"
+         x="3325.5"
+         y="208.6479"
+         id="text74">defaultJoueurLiquideMin: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,213.2422 3320.5,217.2422 3316.5,221.2422 3312.5,217.2422 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon76" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="153"
+         x="3325.5"
+         y="221.45261"
+         id="text78">defaultLoiAntitrustSeuil: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,226.0469 3320.5,230.0469 3316.5,234.0469 3312.5,230.0469 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon80" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="243"
+         x="3325.5"
+         y="234.25729"
+         id="text82">defaultBureauFinancesPubliquesValeur: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,238.8516 3320.5,242.8516 3316.5,246.8516 3312.5,242.8516 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon84" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="300"
+         x="3325.5"
+         y="247.062"
+         id="text86">defaultBureauFinancesPubliquesPourcentageMax: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,251.6563 3320.5,255.6563 3316.5,259.6563 3312.5,255.6563 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon88" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="297"
+         x="3325.5"
+         y="259.8667"
+         id="text90">defaultBureauFinancesPubliquesPourcentageMin: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,264.4609 3320.5,268.4609 3316.5,272.4609 3312.5,268.4609 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon92" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="206"
+         x="3325.5"
+         y="272.67139"
+         id="text94">defaultInvestissementValeurMax: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,277.2656 3320.5,281.2656 3316.5,285.2656 3312.5,281.2656 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon96" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="203"
+         x="3325.5"
+         y="285.4761"
+         id="text98">defaultInvestissementValeurMin: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,290.0703 3320.5,294.0703 3316.5,298.0703 3312.5,294.0703 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon100" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="241"
+         x="3325.5"
+         y="298.28079"
+         id="text102">defaultInvestissementPourcentageMax: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,302.875 3320.5,306.875 3316.5,310.875 3312.5,306.875 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon104" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="238"
+         x="3325.5"
+         y="311.08539"
+         id="text106">defaultInvestissementPourcentageMin: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,315.6797 3320.5,319.6797 3316.5,323.6797 3312.5,319.6797 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon108" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="191"
+         x="3325.5"
+         y="323.89011"
+         id="text110">defaultSubventionMontantMax: int</text>
+      <polygon
+         fill="none"
+         points="3316.5,328.4844 3320.5,332.4844 3316.5,336.4844 3312.5,332.4844 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon112" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="188"
+         x="3325.5"
+         y="336.69479"
+         id="text114">defaultSubventionMontantMin: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3306.5"
+         x2="3645.5"
+         y1="343.28909"
+         y2="343.28909"
+         id="line116" />
+      <circle
+         cx="3316.5"
+         cy="354.28909"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse118"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="84"
+         x="3325.5"
+         y="357.49951"
+         id="text120">Configuration()</text>
+      <circle
+         cx="3316.5"
+         cy="367.09381"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse122"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="298"
+         x="3325.5"
+         y="370.3042"
+         id="text124">initJeu(plateau: Plateau, joueurs: List&lt;Joueur&gt;): void</text>
+      <circle
+         cx="3316.5"
+         cy="379.89841"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse126"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="315"
+         x="3325.5"
+         y="383.10889"
+         id="text128">initPlateau(plateau: Plateau, c: Case, etat: Joueur): void</text>
+      <circle
+         cx="3316.5"
+         cy="392.70309"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse130"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="275"
+         x="3325.5"
+         y="395.9136"
+         id="text132">initJoueurs(joueurs: List&lt;Joueur&gt;, c: Case): void</text>
+    </a>
+    <!--MD5=[d5393e788e829048e07a62074dcdb164]
+class Progressiste-->
+    <a
+       href="java:Monopoly.Configurations.Progressiste"
+       target="_top"
+       title="java:Monopoly.Configurations.Progressiste"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Configurations.Progressiste"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Configurations.Progressiste"
+       xlink:type="simple"
+       id="a151"
+       transform="translate(-1695.2289,-264.07327)">
+      <rect
+         codeLine="45"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="60.804699"
+         id="Progressiste"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="287"
+         x="2709.5"
+         y="532.5" />
+      <circle
+         cx="2809.25"
+         cy="548.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse137"
+         r="11" />
+      <path
+         d="m 2812.2188,554.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path139" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="79"
+         x="2829.75"
+         y="552.6543"
+         id="text141">Progressiste</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2710.5"
+         x2="2995.5"
+         y1="564.5"
+         y2="564.5"
+         id="line143" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2710.5"
+         x2="2995.5"
+         y1="572.5"
+         y2="572.5"
+         id="line145" />
+      <circle
+         cx="2720.5"
+         cy="583.5"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse147"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="261"
+         x="2729.5"
+         y="586.71039"
+         id="text149">Progressiste(nbJoueursA: int, nbJoueursP: int)</text>
+    </a>
+    <!--MD5=[b5c3e46bac749432a260f375b99f9a67]
+class Socialiste-->
+    <a
+       href="java:Monopoly.Configurations.Socialiste"
+       target="_top"
+       title="java:Monopoly.Configurations.Socialiste"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Configurations.Socialiste"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Configurations.Socialiste"
+       xlink:type="simple"
+       id="a168"
+       transform="translate(-1695.2289,-264.07327)">
+      <rect
+         codeLine="53"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="60.804699"
+         id="Socialiste"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="269"
+         x="3031.5"
+         y="532.5" />
+      <circle
+         cx="3131.75"
+         cy="548.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse154"
+         r="11" />
+      <path
+         d="m 3134.7188,554.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path156" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="60"
+         x="3152.25"
+         y="552.6543"
+         id="text158">Socialiste</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3032.5"
+         x2="3299.5"
+         y1="564.5"
+         y2="564.5"
+         id="line160" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3032.5"
+         x2="3299.5"
+         y1="572.5"
+         y2="572.5"
+         id="line162" />
+      <circle
+         cx="3042.5"
+         cy="583.5"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse164"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="243"
+         x="3051.5"
+         y="586.71039"
+         id="text166">Socialiste(nbJoueursA: int, nbJoueursP: int)</text>
+    </a>
+    <!--MD5=[195bade063853f516074d89877e642fd]
+class NeoLiberale-->
+    <a
+       href="java:Monopoly.Configurations.NeoLiberale"
+       target="_top"
+       title="java:Monopoly.Configurations.NeoLiberale"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Configurations.NeoLiberale"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Configurations.NeoLiberale"
+       xlink:type="simple"
+       id="a185"
+       transform="translate(-1695.2289,-264.07327)">
+      <rect
+         codeLine="104"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="60.804699"
+         id="NeoLiberale"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="281"
+         x="3335.5"
+         y="532.5" />
+      <circle
+         cx="3434.75"
+         cy="548.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse171"
+         r="11" />
+      <path
+         d="m 3437.7188,554.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path173" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="74"
+         x="3455.25"
+         y="552.6543"
+         id="text175">NeoLiberale</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3336.5"
+         x2="3615.5"
+         y1="564.5"
+         y2="564.5"
+         id="line177" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3336.5"
+         x2="3615.5"
+         y1="572.5"
+         y2="572.5"
+         id="line179" />
+      <circle
+         cx="3346.5"
+         cy="583.5"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse181"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="255"
+         x="3355.5"
+         y="586.71039"
+         id="text183">NeoLiberale(nbJoueursA: int, nbJoueursP: int)</text>
+    </a>
+    <!--MD5=[3127a4569692961c05f53beff88cfa5d]
+class Capitaliste-->
+    <a
+       href="java:Monopoly.Configurations.Capitaliste"
+       target="_top"
+       title="java:Monopoly.Configurations.Capitaliste"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Configurations.Capitaliste"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Configurations.Capitaliste"
+       xlink:type="simple"
+       id="a202"
+       transform="translate(-1695.2289,-264.07327)">
+      <rect
+         codeLine="153"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="60.804699"
+         id="Capitaliste"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="274"
+         x="3652"
+         y="532.5" />
+      <circle
+         cx="3751.75"
+         cy="548.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse188"
+         r="11" />
+      <path
+         d="m 3754.7188,554.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path190" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="66"
+         x="3772.25"
+         y="552.6543"
+         id="text192">Capitaliste</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3653"
+         x2="3925"
+         y1="564.5"
+         y2="564.5"
+         id="line194" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3653"
+         x2="3925"
+         y1="572.5"
+         y2="572.5"
+         id="line196" />
+      <circle
+         cx="3663"
+         cy="583.5"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse198"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="248"
+         x="3672"
+         y="586.71039"
+         id="text200">Capitaliste(nbJoueursA: int, nbJoueursP: int)</text>
+    </a>
+    <!--MD5=[8a60224fad2250dd1090beb8f5babdb6]
+class EuropeApresCovid19-->
+    <a
+       href="java:Monopoly.Configurations.EuropeApresCovid19"
+       target="_top"
+       title="java:Monopoly.Configurations.EuropeApresCovid19"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Configurations.EuropeApresCovid19"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Configurations.EuropeApresCovid19"
+       xlink:type="simple"
+       id="a219"
+       transform="translate(-1695.2289,-264.07327)">
+      <rect
+         codeLine="238"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="60.804699"
+         id="EuropeApresCovid19"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="332"
+         x="3961"
+         y="532.5" />
+      <circle
+         cx="4057.75"
+         cy="548.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse205"
+         r="11" />
+      <path
+         d="m 4060.7188,554.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path207" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="130"
+         x="4078.25"
+         y="552.6543"
+         id="text209">EuropeApresCovid19</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3962"
+         x2="4292"
+         y1="564.5"
+         y2="564.5"
+         id="line211" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="3962"
+         x2="4292"
+         y1="572.5"
+         y2="572.5"
+         id="line213" />
+      <circle
+         cx="3972"
+         cy="583.5"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse215"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="306"
+         x="3981"
+         y="586.71039"
+         id="text217">EuropeApresCovid19(nbJoueursA: int, nbJoueursP: int)</text>
+    </a>
+    <!--MD5=[e8dcfdde5c6ce5239f59acd294696d72]
+class Case-->
+    <a
+       href="java:Monopoly.Cases.Case"
+       target="_top"
+       title="java:Monopoly.Cases.Case"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Cases.Case"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Cases.Case"
+       xlink:type="simple"
+       id="a244">
+      <rect
+         codeLine="283"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="86.414101"
+         id="Case"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="168"
+         x="1334"
+         y="520" />
+      <circle
+         cx="1398.25"
+         cy="536"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse222"
+         r="11" />
+      <path
+         d="m 1401.2188,541.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path224" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="31"
+         x="1418.75"
+         y="540.1543"
+         id="text226">Case</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1335"
+         x2="1501"
+         y1="552"
+         y2="552"
+         id="line228" />
+      <rect
+         fill="none"
+         height="6"
+         style="stroke:#c82930;stroke-width:1"
+         width="6"
+         x="1342"
+         y="560"
+         id="rect230" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="32"
+         x="1354"
+         y="566.21039"
+         id="text232">id: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1335"
+         x2="1501"
+         y1="572.80469"
+         y2="572.80469"
+         id="line234" />
+      <circle
+         cx="1345"
+         cy="583.80469"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse236"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="69"
+         x="1354"
+         y="587.01508"
+         id="text238">Case(id: int)</text>
+      <circle
+         cx="1345"
+         cy="596.60938"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse240"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         font-style="italic"
+         lengthAdjust="spacing"
+         textLength="142"
+         x="1354"
+         y="599.81982"
+         id="text242">action(j: Joueur): boolean</text>
+    </a>
+    <!--MD5=[a7052ea18ce8ec41f462a2090ee556c5]
+class Impot-->
+    <a
+       href="java:Monopoly.Cases.Impot"
+       target="_top"
+       title="java:Monopoly.Cases.Impot"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Cases.Impot"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Cases.Impot"
+       xlink:type="simple"
+       id="a261">
+      <rect
+         codeLine="234"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="73.609398"
+         id="Impot"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="104"
+         x="243"
+         y="1046" />
+      <circle
+         cx="274.64999"
+         cy="1062"
+         fill="#eb937f"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse247"
+         r="11" />
+      <path
+         d="m 278.7594,1068 h -7.7188 v -12.3906 h 7.7188 v 2.1562 h -5.2656 v 2.6719 h 4.7656 v 2.1563 h -4.7656 v 3.25 h 5.2656 z"
+         fill="#000000"
+         id="path249" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="35"
+         x="292.35001"
+         y="1066.1543"
+         id="text251">Impot</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="244"
+         x2="346"
+         y1="1078"
+         y2="1078"
+         id="line253" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="92"
+         x="249"
+         y="1092.2104"
+         id="text255">SUR_LE_REVENU</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="48"
+         x="249"
+         y="1105.0151"
+         id="text257">FONCIER</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="244"
+         x2="346"
+         y1="1111.6094"
+         y2="1111.6094"
+         id="line259" />
+    </a>
+    <!--MD5=[ffcb54bf9f424039ba1589b30e9c7e9a]
+class BureauFinancesPubliques-->
+    <a
+       href="java:Monopoly.Cases.BureauFinancesPubliques"
+       target="_top"
+       title="java:Monopoly.Cases.BureauFinancesPubliques"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Cases.BureauFinancesPubliques"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Cases.BureauFinancesPubliques"
+       xlink:type="simple"
+       id="a294">
+      <rect
+         codeLine="159"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="112.0234"
+         id="BureauFinancesPubliques"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="525"
+         x="32.5"
+         y="787" />
+      <circle
+         cx="209.75"
+         cy="803"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse264"
+         r="11" />
+      <path
+         d="m 212.7188,808.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path266" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="162"
+         x="230.25"
+         y="807.1543"
+         id="text268">BureauFinancesPubliques</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="33.5"
+         x2="556.5"
+         y1="819"
+         y2="819"
+         id="line270" />
+      <polygon
+         fill="none"
+         points="43.5,833 39.5,829 43.5,825 47.5,829 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon272" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="57"
+         x="52.5"
+         y="833.21039"
+         id="text274">valeur: int</text>
+      <polygon
+         fill="none"
+         points="43.5,845.8047 39.5,841.8047 43.5,837.8047 47.5,841.8047 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon276" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="93"
+         x="52.5"
+         y="846.01508"
+         id="text278">pourcentage: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="33.5"
+         x2="556.5"
+         y1="852.60938"
+         y2="852.60938"
+         id="line280" />
+      <circle
+         cx="43.5"
+         cy="863.60938"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse282"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="186"
+         x="52.5"
+         y="866.81982"
+         id="text284">BureauFinancesPubliques(id: int)</text>
+      <circle
+         cx="43.5"
+         cy="876.41412"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse286"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="499"
+         x="52.5"
+         y="879.62451"
+         id="text288">BureauFinancesPubliques(id: int, nom: Impot, valeur: int, pourcentage: int, etat: Joueur)</text>
+      <circle
+         cx="43.5"
+         cy="889.21881"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse290"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="142"
+         x="52.5"
+         y="892.4292"
+         id="text292">action(j: Joueur): boolean</text>
+    </a>
+    <!--MD5=[034e5b9e1295dd900da7451a1086f07f]
+class LoiAntitrust-->
+    <a
+       href="java:Monopoly.Cases.LoiAntitrust"
+       target="_top"
+       title="java:Monopoly.Cases.LoiAntitrust"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Cases.LoiAntitrust"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Cases.LoiAntitrust"
+       xlink:type="simple"
+       id="a323">
+      <rect
+         codeLine="126"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="99.218803"
+         id="LoiAntitrust"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="261"
+         x="592.5"
+         y="793.5" />
+      <circle
+         cx="683.25"
+         cy="809.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse297"
+         r="11" />
+      <path
+         d="m 686.2188,815.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path299" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="71"
+         x="703.75"
+         y="813.6543"
+         id="text301">LoiAntitrust</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="593.5"
+         x2="852.5"
+         y1="825.5"
+         y2="825.5"
+         id="line303" />
+      <polygon
+         fill="none"
+         points="603.5,839.5 599.5,835.5 603.5,831.5 607.5,835.5 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon305" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="49"
+         x="612.5"
+         y="839.71039"
+         id="text307">seuil: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="593.5"
+         x2="852.5"
+         y1="846.30469"
+         y2="846.30469"
+         id="line309" />
+      <circle
+         cx="603.5"
+         cy="857.30469"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse311"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="104"
+         x="612.5"
+         y="860.51508"
+         id="text313">LoiAntitrust(id: int)</text>
+      <circle
+         cx="603.5"
+         cy="870.10938"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse315"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="235"
+         x="612.5"
+         y="873.31982"
+         id="text317">LoiAntitrust(id: int, seuil: int, etat: Joueur)</text>
+      <circle
+         cx="603.5"
+         cy="882.91412"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse319"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="142"
+         x="612.5"
+         y="886.12451"
+         id="text321">action(j: Joueur): boolean</text>
+    </a>
+    <!--MD5=[609766599d1d6737e363ed763c30299a]
+class Investissement-->
+    <a
+       href="java:Monopoly.Cases.Investissement"
+       target="_top"
+       title="java:Monopoly.Cases.Investissement"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Cases.Investissement"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Cases.Investissement"
+       xlink:type="simple"
+       id="a360">
+      <rect
+         codeLine="269"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="124.8281"
+         id="Investissement"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="427"
+         x="1204.5"
+         y="780.5" />
+      <circle
+         cx="1366.75"
+         cy="796.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse326"
+         r="11" />
+      <path
+         d="m 1369.7188,802.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path328" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="94"
+         x="1387.25"
+         y="800.6543"
+         id="text330">Investissement</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1205.5"
+         x2="1630.5"
+         y1="812.5"
+         y2="812.5"
+         id="line332" />
+      <polygon
+         fill="none"
+         points="1215.5,826.5 1211.5,822.5 1215.5,818.5 1219.5,822.5 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon334" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="110"
+         x="1224.5"
+         y="826.71039"
+         id="text336">valeurNominale: int</text>
+      <polygon
+         fill="none"
+         points="1215.5,839.3047 1211.5,835.3047 1215.5,831.3047 1219.5,835.3047 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon338" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="93"
+         x="1224.5"
+         y="839.51508"
+         id="text340">pourcentage: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1205.5"
+         x2="1630.5"
+         y1="846.10938"
+         y2="846.10938"
+         id="line342" />
+      <circle
+         cx="1215.5"
+         cy="857.10938"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse344"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="127"
+         x="1224.5"
+         y="860.31982"
+         id="text346">Investissement(id: int)</text>
+      <circle
+         cx="1215.5"
+         cy="869.91412"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse348"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="401"
+         x="1224.5"
+         y="873.12451"
+         id="text350">Investissement(id: int, valeurNominale: int, pourcentage: int, j: Joueur)</text>
+      <circle
+         cx="1215.5"
+         cy="882.71881"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse352"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="194"
+         x="1224.5"
+         y="885.9292"
+         id="text354">changeProprietaire(j: Joueur): void</text>
+      <circle
+         cx="1215.5"
+         cy="895.52338"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse356"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="142"
+         x="1224.5"
+         y="898.73389"
+         id="text358">action(j: Joueur): boolean</text>
+    </a>
+    <!--MD5=[8f867df2291b730d0eac529f50a387ce]
+class Subvention-->
+    <a
+       href="java:Monopoly.Cases.Subvention"
+       target="_top"
+       title="java:Monopoly.Cases.Subvention"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Cases.Subvention"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Cases.Subvention"
+       xlink:type="simple"
+       id="a389">
+      <rect
+         codeLine="138"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="99.218803"
+         id="Subvention"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="280"
+         x="889"
+         y="793.5" />
+      <circle
+         cx="989.75"
+         cy="809.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse363"
+         r="11" />
+      <path
+         d="m 992.7188,815.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path365" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="70"
+         x="1010.25"
+         y="813.6543"
+         id="text367">Subvention</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="890"
+         x2="1168"
+         y1="825.5"
+         y2="825.5"
+         id="line369" />
+      <polygon
+         fill="none"
+         points="900,839.5 896,835.5 900,831.5 904,835.5 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon371" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="69"
+         x="909"
+         y="839.71039"
+         id="text373">montant: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="890"
+         x2="1168"
+         y1="846.30469"
+         y2="846.30469"
+         id="line375" />
+      <circle
+         cx="900"
+         cy="857.30469"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse377"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="103"
+         x="909"
+         y="860.51508"
+         id="text379">Subvention(id: int)</text>
+      <circle
+         cx="900"
+         cy="870.10938"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse381"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="254"
+         x="909"
+         y="873.31982"
+         id="text383">Subvention(id: int, montant: int, etat: Joueur)</text>
+      <circle
+         cx="900"
+         cy="882.91412"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse385"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="142"
+         x="909"
+         y="886.12451"
+         id="text387">action(j: Joueur): boolean</text>
+    </a>
+    <!--MD5=[9103cb39bfd6c9c70e93897b70a6bba1]
+class Repos-->
+    <a
+       href="java:Monopoly.Cases.Repos"
+       target="_top"
+       title="java:Monopoly.Cases.Repos"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Cases.Repos"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Cases.Repos"
+       xlink:type="simple"
+       id="a410">
+      <rect
+         codeLine="61"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="73.609398"
+         id="Repos"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="168"
+         x="2185"
+         y="806" />
+      <circle
+         cx="2245.25"
+         cy="822"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse392"
+         r="11" />
+      <path
+         d="m 2248.2188,827.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path394" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="39"
+         x="2265.75"
+         y="826.1543"
+         id="text396">Repos</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2186"
+         x2="2352"
+         y1="838"
+         y2="838"
+         id="line398" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2186"
+         x2="2352"
+         y1="846"
+         y2="846"
+         id="line400" />
+      <circle
+         cx="2196"
+         cy="857"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse402"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="75"
+         x="2205"
+         y="860.21039"
+         id="text404">Repos(id: int)</text>
+      <circle
+         cx="2196"
+         cy="869.80469"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse406"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="142"
+         x="2205"
+         y="873.01508"
+         id="text408">action(j: Joueur): boolean</text>
+    </a>
+    <!--MD5=[f35b8d93951ba498799a84be5600c0ca]
+class Joueur-->
+    <a
+       href="java:Monopoly.Joueurs.Joueur"
+       target="_top"
+       title="java:Monopoly.Joueurs.Joueur"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Joueurs.Joueur"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Joueurs.Joueur"
+       xlink:type="simple"
+       id="a483">
+      <rect
+         codeLine="290"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="240.0703"
+         id="Joueur"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="377"
+         x="2409.5"
+         y="723" />
+      <circle
+         cx="2573.75"
+         cy="739"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse413"
+         r="11" />
+      <path
+         d="m 2576.7188,744.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path415" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="40"
+         x="2594.25"
+         y="743.1543"
+         id="text417">Joueur</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2410.5"
+         x2="2785.5"
+         y1="755"
+         y2="755"
+         id="line419" />
+      <polygon
+         fill="none"
+         points="2420.5,769 2416.5,765 2420.5,761 2424.5,765 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon421" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="32"
+         x="2429.5"
+         y="769.21039"
+         id="text423">id: int</text>
+      <polygon
+         fill="none"
+         points="2420.5,781.8047 2416.5,777.8047 2420.5,773.8047 2424.5,777.8047 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon425" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="59"
+         x="2429.5"
+         y="782.01508"
+         id="text427">liquide: int</text>
+      <polygon
+         fill="none"
+         points="2420.5,794.6094 2416.5,790.6094 2420.5,786.6094 2424.5,790.6094 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon429" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="141"
+         x="2429.5"
+         y="794.81982"
+         id="text431">totalInvestissements: int</text>
+      <polygon
+         fill="none"
+         points="2420.5,807.4141 2416.5,803.4141 2420.5,799.4141 2424.5,803.4141 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon433" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="62"
+         x="2429.5"
+         y="807.62451"
+         id="text435">aPerdu: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2410.5"
+         x2="2785.5"
+         y1="814.21881"
+         y2="814.21881"
+         id="line437" />
+      <circle
+         cx="2420.5"
+         cy="825.21881"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse439"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="221"
+         x="2429.5"
+         y="828.4292"
+         id="text441">Joueur(id: int, sortie: Case, liquide: int)</text>
+      <circle
+         cx="2420.5"
+         cy="838.02338"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse443"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="159"
+         x="2429.5"
+         y="841.23389"
+         id="text445">addLiquide(liquide: int): void</text>
+      <circle
+         cx="2420.5"
+         cy="850.82812"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse447"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="181"
+         x="2429.5"
+         y="854.03857"
+         id="text449">removeLiquide(liquide: int): void</text>
+      <circle
+         cx="2420.5"
+         cy="863.63281"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse451"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="329"
+         x="2429.5"
+         y="866.84332"
+         id="text453">addInvestissement(investissement: Investissement): void</text>
+      <circle
+         cx="2420.5"
+         cy="876.4375"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse455"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="351"
+         x="2429.5"
+         y="879.64789"
+         id="text457">removeInvestissement(investissement: Investissement): void</text>
+      <circle
+         cx="2420.5"
+         cy="889.24219"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse459"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="239"
+         x="2429.5"
+         y="892.45258"
+         id="text461">payeAntitrust(somme: int, etat: Etat): void</text>
+      <circle
+         cx="2420.5"
+         cy="902.04688"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse463"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="219"
+         x="2429.5"
+         y="905.25732"
+         id="text465">paye(joueur: Joueur, somme: int): void</text>
+      <circle
+         cx="2420.5"
+         cy="914.85162"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse467"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="128"
+         x="2429.5"
+         y="918.06201"
+         id="text469">joue(c: Case): boolean</text>
+      <circle
+         cx="2420.5"
+         cy="927.65631"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse471"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="234"
+         x="2429.5"
+         y="930.8667"
+         id="text473">acheteOuPas(i: Investissement): boolean</text>
+      <circle
+         cx="2420.5"
+         cy="940.46088"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse475"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="174"
+         x="2429.5"
+         y="943.67139"
+         id="text477">compareTo(joueur: Joueur): int</text>
+      <circle
+         cx="2420.5"
+         cy="953.26562"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse479"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="150"
+         x="2429.5"
+         y="956.47607"
+         id="text481">equals(o: Object): boolean</text>
+    </a>
+    <!--MD5=[6bee7a1aa50d11fda966851552f48fda]
+class Agressif-->
+    <a
+       href="java:Monopoly.Joueurs.Agressif"
+       target="_top"
+       title="java:Monopoly.Joueurs.Agressif"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Joueurs.Agressif"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Joueurs.Agressif"
+       xlink:type="simple"
+       id="a508">
+      <rect
+         codeLine="223"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="86.414101"
+         id="Agressif"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="260"
+         x="2677"
+         y="1040" />
+      <circle
+         cx="2777.75"
+         cy="1056"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse486"
+         r="11" />
+      <path
+         d="m 2780.7188,1061.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path488" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="50"
+         x="2798.25"
+         y="1060.1543"
+         id="text490">Agressif</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2678"
+         x2="2936"
+         y1="1072"
+         y2="1072"
+         id="line492" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2678"
+         x2="2936"
+         y1="1080"
+         y2="1080"
+         id="line494" />
+      <circle
+         cx="2688"
+         cy="1091"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse496"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="232"
+         x="2697"
+         y="1094.2104"
+         id="text498">Agressif(id: int, sortie: Case, liquide: int)</text>
+      <circle
+         cx="2688"
+         cy="1103.8047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse500"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="234"
+         x="2697"
+         y="1107.0151"
+         id="text502">acheteOuPas(i: Investissement): boolean</text>
+      <circle
+         cx="2688"
+         cy="1116.6094"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse504"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="128"
+         x="2697"
+         y="1119.8198"
+         id="text506">joue(c: Case): boolean</text>
+    </a>
+    <!--MD5=[390f8e1fec7019ab5fbd178189bb7e25]
+class Prudent-->
+    <a
+       href="java:Monopoly.Joueurs.Prudent"
+       target="_top"
+       title="java:Monopoly.Joueurs.Prudent"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Joueurs.Prudent"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Joueurs.Prudent"
+       xlink:type="simple"
+       id="a533">
+      <rect
+         codeLine="110"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="86.414101"
+         id="Prudent"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="260"
+         x="2972"
+         y="1040" />
+      <circle
+         cx="3072.75"
+         cy="1056"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse511"
+         r="11" />
+      <path
+         d="m 3075.7188,1061.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path513" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="50"
+         x="3093.25"
+         y="1060.1543"
+         id="text515">Prudent</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2973"
+         x2="3231"
+         y1="1072"
+         y2="1072"
+         id="line517" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2973"
+         x2="3231"
+         y1="1080"
+         y2="1080"
+         id="line519" />
+      <circle
+         cx="2983"
+         cy="1091"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse521"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="229"
+         x="2992"
+         y="1094.2104"
+         id="text523">Prudent(id: int, sortie: Case, liquide: int)</text>
+      <circle
+         cx="2983"
+         cy="1103.8047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse525"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="234"
+         x="2992"
+         y="1107.0151"
+         id="text527">acheteOuPas(i: Investissement): boolean</text>
+      <circle
+         cx="2983"
+         cy="1116.6094"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse529"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="128"
+         x="2992"
+         y="1119.8198"
+         id="text531">joue(c: Case): boolean</text>
+    </a>
+    <!--MD5=[d7a86c142fdde356f8ae5a8b885bc91c]
+class Etat-->
+    <a
+       href="java:Monopoly.Joueurs.Etat"
+       target="_top"
+       title="java:Monopoly.Joueurs.Etat"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Joueurs.Etat"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Joueurs.Etat"
+       xlink:type="simple"
+       id="a554">
+      <rect
+         codeLine="286"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="73.609398"
+         id="Etat"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="233"
+         x="2408.5"
+         y="1046" />
+      <circle
+         cx="2507.75"
+         cy="1062"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse536"
+         r="11" />
+      <path
+         d="m 2510.7188,1067.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path538" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="26"
+         x="2528.25"
+         y="1066.1543"
+         id="text540">Etat</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2409.5"
+         x2="2640.5"
+         y1="1078"
+         y2="1078"
+         id="line542" />
+      <polygon
+         fill="none"
+         points="2419.5,1092 2415.5,1088 2419.5,1084 2423.5,1088 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon544" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="57"
+         x="2428.5"
+         y="1092.2104"
+         id="text546">valeur: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="2409.5"
+         x2="2640.5"
+         y1="1098.8047"
+         y2="1098.8047"
+         id="line548" />
+      <circle
+         cx="2419.5"
+         cy="1109.8047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse550"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="207"
+         x="2428.5"
+         y="1113.0151"
+         id="text552">Etat(id: int, sortie: Case, liquide: int)</text>
+    </a>
+    <!--MD5=[fef7ef7d6f7da5af1740cbc79498b682]
+entity ##22-->
+    <!--MD5=[4b1f9bab7c3104f7593051b0ee4897c4]
+entity ##24-->
+    <!--MD5=[ed5cd3bc81a4fc39a99282e0df433433]
+entity ##26-->
+    <!--MD5=[712b49a80551510261ad10524cc74d81]
+class Plateau-->
+    <a
+       href="java:Monopoly.Plateaux.Plateau"
+       target="_top"
+       title="java:Monopoly.Plateaux.Plateau"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Plateaux.Plateau"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Plateaux.Plateau"
+       xlink:type="simple"
+       id="a579"
+       transform="translate(-770.99112,152.49336)">
+      <rect
+         codeLine="263"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="86.414101"
+         id="Plateau"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="158"
+         x="1339"
+         y="188.5" />
+      <ellipse
+         cx="1389.75"
+         cy="204.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse557"
+         r="11" />
+      <path
+         d="m 1392.7188,210.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path559" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="48"
+         x="1410.25"
+         y="208.6543"
+         id="text561">Plateau</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1340"
+         x2="1496"
+         y1="220.5"
+         y2="220.5"
+         id="line563" />
+      <polygon
+         fill="none"
+         points="1350,226.5 1354,230.5 1350,234.5 1346,230.5 "
+         style="stroke:#b38d22;stroke-width:1"
+         id="polygon565" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="72"
+         x="1359"
+         y="234.7104"
+         id="text567">nbCases: int</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1340"
+         x2="1496"
+         y1="241.3047"
+         y2="241.3047"
+         id="line569" />
+      <ellipse
+         cx="1350"
+         cy="252.3047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse571"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="122"
+         x="1359"
+         y="255.51511"
+         id="text573">Plateau(nbCases: int)</text>
+      <ellipse
+         cx="1350"
+         cy="265.10941"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse575"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         textLength="132"
+         x="1359"
+         y="268.31979"
+         id="text577">addCase(c: Case): void</text>
+    </a>
+    <!--MD5=[2f75943fc2e02b7767b70b1750c7e40a]
+class Comparable_Joueur_-->
+    <rect
+       codeLine="210"
+       fill="#fefece"
+       filter="url(#fh1m58jdr7sw)"
+       height="48"
+       id="Comparable_Joueur_"
+       style="stroke:#a80036;stroke-width:1.5"
+       width="152"
+       x="2522"
+       y="539" />
+    <circle
+       cx="2537"
+       cy="555"
+       fill="#b4a7e5"
+       style="stroke:#a80036;stroke-width:1"
+       id="ellipse582"
+       r="11" />
+    <path
+       d="m 2532.9219,550.7656 v -2.1562 h 7.3906 v 2.1562 h -2.4687 v 8.0782 h 2.4687 V 561 h -7.3906 v -2.1562 h 2.4687 v -8.0782 z"
+       fill="#000000"
+       id="path584" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="12px"
+       font-style="italic"
+       lengthAdjust="spacing"
+       textLength="75"
+       x="2551"
+       y="559.1543"
+       id="text586">Comparable</text>
+    <rect
+       fill="#ffffff"
+       height="15.9688"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:2, 2"
+       width="43"
+       x="2634"
+       y="536"
+       id="rect588" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="12px"
+       font-style="italic"
+       lengthAdjust="spacing"
+       textLength="41"
+       x="2635"
+       y="548.13867"
+       id="text590">Joueur</text>
+    <line
+       style="stroke:#a80036;stroke-width:1.5"
+       x1="2523"
+       x2="2673"
+       y1="571"
+       y2="571"
+       id="line592" />
+    <line
+       style="stroke:#a80036;stroke-width:1.5"
+       x1="2523"
+       x2="2673"
+       y1="579"
+       y2="579"
+       id="line594" />
+    <!--MD5=[e36a4c0f7055b067b077b74a1222e806]
+class Simulation-->
+    <a
+       href="java:Monopoly.Simulation"
+       target="_top"
+       title="java:Monopoly.Simulation"
+       xlink:actuate="onRequest"
+       xlink:href="java:Monopoly.Simulation"
+       xlink:show="new"
+       xlink:title="java:Monopoly.Simulation"
+       xlink:type="simple"
+       id="a619"
+       transform="translate(868.39475,170.6391)">
+      <rect
+         codeLine="244"
+         fill="#fefece"
+         filter="url(#fh1m58jdr7sw)"
+         height="86.414101"
+         id="Simulation"
+         style="stroke:#a80036;stroke-width:1.5"
+         width="457"
+         x="1875.5"
+         y="188.5" />
+      <circle
+         cx="2067.25"
+         cy="204.5"
+         fill="#add1b2"
+         style="stroke:#a80036;stroke-width:1"
+         id="ellipse597"
+         r="11" />
+      <path
+         d="m 2070.2188,210.1406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
+         fill="#000000"
+         id="path599" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="12px"
+         lengthAdjust="spacing"
+         textLength="65"
+         x="2087.75"
+         y="208.6543"
+         id="text601">Simulation</text>
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1876.5"
+         x2="2331.5"
+         y1="220.5"
+         y2="220.5"
+         id="line603" />
+      <line
+         style="stroke:#a80036;stroke-width:1.5"
+         x1="1876.5"
+         x2="2331.5"
+         y1="228.5"
+         y2="228.5"
+         id="line605" />
+      <circle
+         cx="1886.5"
+         cy="239.5"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse607"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         text-decoration="underline"
+         textLength="298"
+         x="1895.5"
+         y="242.7104"
+         id="text609"
+         style="text-decoration:underline;text-decoration-line:underline">assezJoueursEnLice(joueurs: List&lt;Joueur&gt;): boolean</text>
+      <circle
+         cx="1886.5"
+         cy="252.3047"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse611"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         text-decoration="underline"
+         textLength="431"
+         x="1895.5"
+         y="255.51511"
+         id="text613"
+         style="text-decoration:underline;text-decoration-line:underline">displayTransitivState(joueurs: List&lt;Joueur&gt;, afficherOrdre: boolean): String</text>
+      <circle
+         cx="1886.5"
+         cy="265.10941"
+         fill="#84be84"
+         style="stroke:#038048;stroke-width:1"
+         id="ellipse615"
+         r="3" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="11px"
+         lengthAdjust="spacing"
+         text-decoration="underline"
+         textLength="143"
+         x="1895.5"
+         y="268.31979"
+         id="text617"
+         style="text-decoration:underline;text-decoration-line:underline">main(args: String[]): void</text>
+    </a>
+    <!--MD5=[fc56bad2386dbc249f78f4c121f49762]
+reverse link Configuration to Progressiste-->
+    <path
+       codeLine="50"
+       d="m 1592.0111,54.29673 c -84.75,40.14 -185.25,89.97 -273.24,139.63 -41.15,23.22 -86.19,52.68 -118.14,74.31"
+       fill="none"
+       id="Configuration-backto-Progressiste"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="3305.35,309.82 3290.25,324.69 3284.28,312.03 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon622"
+       transform="translate(-1695.2289,-264.07327)" />
+    <!--MD5=[7a5c8f350a9571f7cbfe31569f982e4a]
+reverse link Configuration to Socialiste-->
+    <path
+       codeLine="58"
+       d="m 1606.5911,153.55673 c -42.12,44.78 -82.33,87.52 -107.91,114.71"
+       fill="none"
+       id="Configuration-backto-Socialiste"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="3315.55,403.04 3306.95,422.4 3296.75,412.81 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon625"
+       transform="translate(-1695.2289,-264.07327)" />
+    <!--MD5=[ac2671b14a830dea5558c00116fc3965]
+reverse link Case to Repos-->
+    <path
+       codeLine="67"
+       d="m 1522.05,564.29 c 230.83,1.73 769.85,12.18 824.95,71.71 23.51,25.4 -25.22,117.86 -55.79,169.86"
+       fill="none"
+       id="Case-backto-Repos"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="1522.06,557.29 1521.96,571.29 1502.01,564.16 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon628" />
+    <!--MD5=[4b495ba958d3784be220a6d7b54da6bc]
+link Plateau to Case-->
+    <path
+       codeLine="100"
+       d="m 601.66034,427.2949 c -28.50337,46.02161 218.92511,40.91041 316.28677,45.48812 69.43243,3.26454 460.50289,21.67038 474.75459,42.22495"
+       fill="none"
+       id="Plateau-to-Case"
+       style="stroke:#a80036;stroke-width:1.28212"
+       sodipodi:nodetypes="csc" />
+    <polygon
+       fill="#a80036"
+       points="1393.0459,515.4631 1387.717,513.5648 1395.19,519.98 1394.9441,510.1342 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon631" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="48"
+       x="1371"
+       y="446.06689"
+       id="text633"
+       transform="translate(-342.20106,32.501403)">plateau</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="7"
+       x="1383.9968"
+       y="508.9729"
+       id="text635">*</text>
+    <!--MD5=[4b495ba958d3784be220a6d7b54da6bc]
+link Plateau to Case-->
+    <path
+       codeLine="103"
+       d="m 677.70593,429.76298 c 3.57844,45.68068 115.1714,13.74958 436.84297,36.76024 75.3605,5.3909 308.0974,27.37612 306.2926,48.18841"
+       fill="none"
+       id="Plateau-to-Case-1"
+       style="stroke:#a80036;stroke-width:1.27369"
+       sodipodi:nodetypes="csc" />
+    <polygon
+       fill="#a80036"
+       points="1421.0861,514.7482 1417.3215,510.5259 1420.8,519.74 1425.3084,510.9836 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon638" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="79"
+       x="1425"
+       y="446.06689"
+       id="text640"
+       transform="translate(-347.98981,16.162512)">getPlateau()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="7"
+       x="1413.6927"
+       y="509.0127"
+       id="text642">*</text>
+    <!--MD5=[2ce1b19515a5d8c383395ed8ab43dd4f]
+reverse link Configuration to NeoLiberale-->
+    <path
+       codeLine="109"
+       d="m 1780.7711,159.07673 c 0,42.75 0,83.11 0,109.19"
+       fill="none"
+       id="Configuration-backto-NeoLiberale"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="3476,403.04 3483,423.04 3469,423.04 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon645"
+       transform="translate(-1695.2289,-264.07327)" />
+    <!--MD5=[0a5a4042684edfe3e7bce77a9793dd22]
+link Prudent to Investissement-->
+    <path
+       codeLine="117"
+       d="m 2971.65,1043.43 c -5.61,-1.24 -11.17,-2.39 -16.65,-3.43 -86.32,-16.41 -699.85,-65.83 -787,-77 -179.31,-22.98 -381.72,-55.48 -531.02,-80.71"
+       fill="none"
+       id="Prudent-to-Investissement"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="1636.6185,882.2328 1641.2355,878.9643 1631.69,881.39 1639.8869,886.8499 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon648" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="230"
+       x="2666"
+       y="1006.0669"
+       id="text650">antitrustInvestissementARevendre()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="1639.5132"
+       y="879.57251"
+       id="text652">1</text>
+    <!--MD5=[76c8d554a110a1ebf7088de390c3575c]
+reverse link Joueur to Prudent-->
+    <path
+       codeLine="120"
+       d="m 2805.06,941.78 c 72.55,34.26 150.22,70.94 207.93,98.19"
+       fill="none"
+       id="Joueur-backto-Prudent"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="2807.82,935.34 2801.84,948 2786.75,933.13 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon655" />
+    <!--MD5=[e97a7e0e5cda5596a65c6d8a6f9be520]
+link LoiAntitrust to Etat-->
+    <path
+       codeLine="134"
+       d="m 770.24,892.79 c 27.3,25.16 63.72,53.92 101.76,70.21 142.25,60.93 190.75,34.52 345,47 255.25,20.65 898.58,-6.88 1152,30 11.17,1.63 22.69,3.78 34.16,6.25"
+       fill="none"
+       id="LoiAntitrust-to-Etat"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="2403.1861,1046.259 2398.4221,1049.3093 2408.07,1047.33 2400.1357,1041.495 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon658" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="26"
+       x="1218"
+       y="1006.0669"
+       id="text660">etat</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="2392.1892"
+       y="1038.3629"
+       id="text662">1</text>
+    <!--MD5=[f40fae4a1886d1bc4201a722b9322ea8]
+reverse link Case to LoiAntitrust-->
+    <path
+       codeLine="137"
+       d="M 1313.55,573.89 C 1176.63,588.32 945.28,618.17 872,661 818.06,692.53 775.24,751.32 749.59,793.35"
+       fill="none"
+       id="Case-backto-LoiAntitrust"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="1314.68,580.81 1313.24,566.89 1333.85,571.79 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon665" />
+    <!--MD5=[e7473d949eccdd649dda05c828dac6d0]
+link Subvention to Etat-->
+    <path
+       codeLine="146"
+       d="m 1083.64,892.67 c 52.07,42.34 134.85,99.62 219.36,117.33 231.95,48.6 831.52,-4.37 1066,30 11.29,1.66 22.93,3.85 34.53,6.36"
+       fill="none"
+       id="Subvention-to-Etat"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="2403.6161,1046.379 2398.8521,1049.4293 2408.5,1047.45 2400.5657,1041.615 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon668" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="26"
+       x="1304"
+       y="1006.0669"
+       id="text670">etat</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="2392.4038"
+       y="1041.6421"
+       id="text672">1</text>
+    <!--MD5=[e7473d949eccdd649dda05c828dac6d0]
+link Subvention to Etat-->
+    <path
+       codeLine="149"
+       d="m 1078.23,892.65 c 29.13,25.62 68.19,54.86 108.77,70.35 122.96,46.93 1051.98,56.6 1182,77 11.27,1.77 22.91,4.04 34.49,6.6"
+       fill="none"
+       id="Subvention-to-Etat-1"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="2403.5791,1046.6253 2398.8066,1049.6624 2408.46,1047.71 2400.542,1041.8529 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon675" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="57"
+       x="1713"
+       y="1006.0669"
+       id="text677">getEtat()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="2392.3611"
+       y="1057.9272"
+       id="text679">1</text>
+    <!--MD5=[c56f66e79c93772440f622dd16f416e0]
+reverse link Case to Subvention-->
+    <path
+       codeLine="152"
+       d="m 1315.05,595.75 c -41.98,15.77 -89.59,37.48 -128.05,65.25 -50.73,36.63 -96.25,92.47 -125.26,132.44"
+       fill="none"
+       id="Case-backto-Subvention"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="1317.48,602.31 1312.71,589.15 1333.89,588.91 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon682" />
+    <!--MD5=[6ada86f4ea62bbe06a8f669c735d4e62]
+reverse link Configuration to Capitaliste-->
+    <path
+       codeLine="158"
+       d="m 1956.6311,153.55673 c 42.54,44.78 83.13,87.52 108.96,114.71"
+       fill="none"
+       id="Configuration-backto-Capitaliste"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="3638,403.04 3656.85,412.72 3646.7,422.36 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon685"
+       transform="translate(-1695.2289,-264.07327)" />
+    <!--MD5=[3c1889bae9ca69e4dfa502394ce42a7a]
+link BureauFinancesPubliques to Impot-->
+    <path
+       codeLine="168"
+       d="m 295,899.2 c 0,43.24 0,102.43 0,141.6"
+       fill="none"
+       id="BureauFinancesPubliques-to-Impot"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="295,1040.95 291,1036.95 295,1045.95 299,1036.95 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon688" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="29"
+       x="296"
+       y="1006.0669"
+       id="text690">nom</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="286.26251"
+       y="1034.8512"
+       id="text692">1</text>
+    <!--MD5=[b94c96635680e54114012afdd4a09175]
+link BureauFinancesPubliques to Etat-->
+    <path
+       codeLine="171"
+       d="m 385.49,899.04 c 69.98,39.28 170.76,88.91 266.51,110.96 185.94,42.82 1528.07,3.33 1717,30 11.18,1.58 22.7,3.7 34.18,6.15"
+       fill="none"
+       id="BureauFinancesPubliques-to-Etat"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="2403.2061,1046.149 2398.4421,1049.1993 2408.09,1047.22 2400.1557,1041.385 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon695" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="26"
+       x="653"
+       y="1006.0669"
+       id="text697">etat</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="2392.3442"
+       y="1041.531"
+       id="text699">1</text>
+    <!--MD5=[b94c96635680e54114012afdd4a09175]
+link BureauFinancesPubliques to Etat-->
+    <path
+       codeLine="174"
+       d="M 406.39,899.08 C 456.8,921.97 517.8,946.9 575,963 c 137.53,38.7 175.63,35.08 318,47 326.92,27.37 1151.22,-16.32 1476,30 11.18,1.59 22.69,3.72 34.17,6.18"
+       fill="none"
+       id="BureauFinancesPubliques-to-Etat-1"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="2403.2031,1046.2026 2398.4476,1049.2662 2408.09,1047.26 2400.1395,1041.4471 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon702" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="57"
+       x="894"
+       y="1006.0669"
+       id="text704">getEtat()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="2392.3442"
+       y="1057.5345"
+       id="text706">1</text>
+    <!--MD5=[43f8d9149352c854cc2e9d0a0383aa38]
+reverse link Case to BureauFinancesPubliques-->
+    <path
+       codeLine="177"
+       d="M 1313.75,570.05 C 1119.26,582.31 708.7,613.07 575,661 495.04,689.66 414.74,744.94 360.77,786.9"
+       fill="none"
+       id="Case-backto-BureauFinancesPubliques"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="1314.32,577.03 1313.45,563.05 1333.85,568.8 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon709" />
+    <!--MD5=[63b26ab0336da675bff7ee7846146590]
+link Joueur to Case-->
+    <path
+       codeLine="197"
+       d="M 2487.83,722.94 C 2449.56,688.96 2404.08,655.81 2356,636 2204,573.36 1711,564.71 1507.31,563.88"
+       fill="none"
+       id="Joueur-to-Case"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="1507.26,563.8743 1511.2714,559.8857 1502.26,563.86 1511.2485,567.8857 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon712" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="50"
+       x="2387"
+       y="649.06689"
+       id="text714">position</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="1510.1207"
+       y="560.323"
+       id="text716">1</text>
+    <!--MD5=[63b26ab0336da675bff7ee7846146590]
+link Joueur to Case-->
+    <path
+       codeLine="203"
+       d="M 2536.23,722.83 C 2512.67,689.07 2491.3099,622.82151 2454.7899,602.75151 2373.6099,558.14151 1742.22,571.84 1507.32,565.99"
+       fill="none"
+       id="Joueur-to-Case-1"
+       style="stroke:#a80036;stroke-width:1"
+       sodipodi:nodetypes="ccc" />
+    <polygon
+       fill="#a80036"
+       points="1507.1783,565.9985 1511.2798,562.1027 1502.18,565.87 1511.0742,570.1 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon719" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="81"
+       x="2470"
+       y="649.06689"
+       id="text721">getPosition()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="1510.0334"
+       y="578.8479"
+       id="text723">1</text>
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <path
+       codeLine="200"
+       d="M 2458.54,723 C 2430.52,704.91 2347.3796,685.47861 2316.2996,675.49861 2035.7096,585.38861 1744.42,700.04 1556.63,778.42"
+       fill="none"
+       id="Joueur-to-Investissement"
+       style="stroke:#a80036;stroke-width:1"
+       sodipodi:nodetypes="ccc" />
+    <polygon
+       fill="#a80036"
+       points="1556.5633,778.4519 1558.7114,773.2187 1551.95,780.38 1561.7964,780.6 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon726" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="104"
+       x="1667"
+       y="649.06689"
+       id="text728">investissements</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="7"
+       x="1560.0333"
+       y="769.35687"
+       id="text730">*</text>
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <path
+       codeLine="206"
+       d="M 2458.54,723 C 2430.52,704.91 2351.1432,662.96661 2320.0632,652.98661 2039.4732,562.87661 1744.42,700.04 1556.63,778.42"
+       fill="none"
+       id="Joueur-to-Investissement-1"
+       style="stroke:#a80036;stroke-width:1"
+       sodipodi:nodetypes="ccc" />
+    <polygon
+       fill="#a80036"
+       points="1556.5633,778.4519 1558.7114,773.2187 1551.95,780.38 1561.7964,780.6 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon733" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="135"
+       x="1651.5"
+       y="649.06689"
+       id="text735"
+       transform="translate(-28.502554,16.119213)">getInvestissements()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="7"
+       x="1567.8427"
+       y="769.35687"
+       id="text737">*</text>
+    <!--MD5=[ae42103ad8e4749236e70a74a15787a0]
+link Joueur to Investissement-->
+    <path
+       codeLine="209"
+       d="M 2458.54,723 C 2430.52,704.91 2286.8954,669.67336 2255.8154,659.69336 1975.2254,569.58336 1744.42,700.04 1556.63,778.42"
+       fill="none"
+       id="Joueur-to-Investissement-2"
+       style="stroke:#a80036;stroke-width:1"
+       sodipodi:nodetypes="ccc" />
+    <polygon
+       fill="#a80036"
+       points="1556.5633,778.4519 1558.7114,773.2187 1551.95,780.38 1561.7964,780.6 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon740" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="230"
+       x="1604"
+       y="649.06689"
+       id="text742"
+       transform="translate(70.3101,-19.979179)">antitrustInvestissementARevendre()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="1558.9755"
+       y="769.35687"
+       id="text744">1</text>
+    <!--MD5=[afdef7a250e702651674965f70135d1d]
+link Investissement to Joueur-->
+    <path
+       codeLine="279"
+       d="m 1551.95,780.38 c 186.7,-78.46 412.533,-248.13857 695.473,-157.26857 29.5,9.47 179.997,80.18857 206.827,97.14857"
+       fill="none"
+       id="Investissement-to-Joueur"
+       style="stroke:#a80036;stroke-width:1"
+       sodipodi:nodetypes="ccc" />
+    <polygon
+       fill="#a80036"
+       points="2454.3299,720.3027 2448.8041,721.5129 2458.54,723 2453.1197,714.7768 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon747" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="74"
+       x="2128"
+       y="649.06689"
+       id="text749"
+       transform="translate(29.537615,-3.4782498)">proprietaire</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="2441.3496"
+       y="711.90088"
+       id="text751">1</text>
+    <!--MD5=[afdef7a250e702651674965f70135d1d]
+link Investissement to Joueur-->
+    <path
+       codeLine="282"
+       d="m 1556.5633,778.4519 c 186.7,-78.46 418.0635,-228.94293 701.0035,-138.07293 29.5,9.47 169.8532,62.92103 196.6832,79.88103"
+       fill="none"
+       id="Investissement-to-Joueur-1"
+       style="stroke:#a80036;stroke-width:1"
+       sodipodi:nodetypes="ccc" />
+    <polygon
+       fill="#a80036"
+       points="2454.3299,720.3027 2448.8041,721.5129 2458.54,723 2453.1197,714.7768 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon754" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="105"
+       x="2112.5"
+       y="649.06689"
+       id="text756"
+       transform="translate(-92.025643,0.0666233)">getProprietaire()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="2449.8621"
+       y="711.90088"
+       id="text758">1</text>
+    <!--MD5=[07ee21c95c8e2c6e9689c1f65a2426ac]
+reverse link Comparable_Joueur_ to Joueur-->
+    <path
+       codeLine="212"
+       d="m 2598,607.45 c 0,31.06 0,74.44 0,115.47"
+       fill="none"
+       id="Comparable_Joueur_-backto-Joueur"
+       style="stroke:#a80036;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="2605,607.22 2591,607.22 2598,587.22 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon761" />
+    <!--MD5=[3fcf570feb5e9a8266acd57b169022a7]
+link Agressif to Investissement-->
+    <path
+       codeLine="230"
+       d="m 2676.64,1043.19 c -5.94,-1.2 -11.84,-2.27 -17.64,-3.19 -342.63,-54.41 -439.45,36.21 -780,-30 -110.75,-21.53 -230.48,-65.31 -320.16,-102.5"
+       fill="none"
+       id="Agressif-to-Investissement"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="#a80036"
+       points="1558.6733,907.4381 1563.9064,905.29 1554.06,905.51 1560.8214,912.6713 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon764" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="230"
+       x="1880"
+       y="1006.0669"
+       id="text766">antitrustInvestissementARevendre()</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="8"
+       x="1560.5042"
+       y="925.25092"
+       id="text768">1</text>
+    <!--MD5=[0da5e441f5d7fe363f5498196b5d1e9a]
+reverse link Joueur to Agressif-->
+    <path
+       codeLine="233"
+       d="m 2715.84,978.2 c 19.69,22.41 38.73,44.1 54.28,61.8"
+       fill="none"
+       id="Joueur-backto-Agressif"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="2720.96,973.41 2710.44,982.65 2702.5,963 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon771" />
+    <!--MD5=[a67baf4ae2daf0dc97dcc1de29229f2c]
+reverse link Configuration to EuropeApresCovid19-->
+    <path
+       codeLine="243"
+       d="m 1969.7211,55.89673 c 85.83,40.64 188.26,90.43 279.05,138.03 45.63,23.93 96.51,53.05 133.02,74.38"
+       fill="none"
+       id="Configuration-backto-EuropeApresCovid19"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="3646.62,311.3 3667.69,313.52 3661.71,326.18 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon774"
+       transform="translate(-1695.2289,-264.07327)" />
+    <!--MD5=[b328f9f6b14b06957d96aa5f3614d3ad]
+reverse link Case to Investissement-->
+    <path
+       codeLine="285"
+       d="m 1418,626.38 c 0,45.93 0,108.1 0,153.88"
+       fill="none"
+       id="Case-backto-Investissement"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="1425,626.22 1411,626.22 1418,606.22 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon777" />
+    <!--MD5=[509508ce58f686bb1ef539befb6fdada]
+reverse link Joueur to Etat-->
+    <path
+       codeLine="292"
+       d="m 2555.55,982.4 c -7.19,23.44 -14.06,45.85 -19.46,63.45"
+       fill="none"
+       id="Joueur-backto-Etat"
+       style="stroke:#a80036;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="2562.33,984.17 2548.94,980.07 2561.5,963 "
+       style="stroke:#a80036;stroke-width:1"
+       id="polygon780" />
+    <!--MD5=[d1b6f2da79d67042ab92dc0f1749afe3]
+@startuml
+package "Configurations" #ffeebb {
+    class Configuration
+    class Progressiste
+    class Socialiste
+    class NeoLiberale
+    class Capitaliste
+    class EuropeApresCovid19
+}
+package "Cases" #ffeebb {
+    class Case
+    class Impot
+    class BureauFinancesPubliques
+    class LoiAntitrust
+    class Investissement
+    class Subvention
+    class Repos
+}
+package "Joueur" #ffeebb {
+    class Joueur
+    class Agressif
+    class Prudent
+    class Etat
+}
+together {
+    class Progressiste
+    class Socialiste
+    class NeoLiberale
+    class Capitaliste
+    class EuropeApresCovid19
+}
+together {
+    class Impot
+    class BureauFinancesPubliques
+    class LoiAntitrust
+    class Investissement
+    class Subvention
+    class Repos
+}
+together {
+    class Agressif
+    class Prudent
+    class Etat
+}
+
+class Progressiste [[java:Monopoly.Configurations.Progressiste]] {
+	+Progressiste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Progressiste
+class Investissement {
+}
+class Socialiste [[java:Monopoly.Configurations.Socialiste]] {
+	+Socialiste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Socialiste
+class Joueur {
+}
+class Repos [[java:Monopoly.Cases.Repos]] {
+	+Repos(id: int)
+	+action(j: Joueur): boolean
+}
+class Case {
+}
+Case <|- - Repos
+abstract class Configuration [[java:Monopoly.Configurations.Configuration]] {
+	#nbJoueursA: int
+	#nbJoueursP: int
+	#pourcentageCasesLoiAntitrust: int
+	#pourcentageCasesBureauFinancesPubliques: int
+	#pourcentageCasesInvestissement: int
+	#pourcentageCasesSubvention: int
+	#pourcentageCasesRepos: int
+	#defaultJoueurLiquideMax: int
+	#defaultJoueurLiquideMin: int
+	#defaultLoiAntitrustSeuil: int
+	#defaultBureauFinancesPubliquesValeur: int
+	#defaultBureauFinancesPubliquesPourcentageMax: int
+	#defaultBureauFinancesPubliquesPourcentageMin: int
+	#defaultInvestissementValeurMax: int
+	#defaultInvestissementValeurMin: int
+	#defaultInvestissementPourcentageMax: int
+	#defaultInvestissementPourcentageMin: int
+	#defaultSubventionMontantMax: int
+	#defaultSubventionMontantMin: int
+	+Configuration()
+	+initJeu(plateau: Plateau, joueurs: List<Joueur>): void
+	+initPlateau(plateau: Plateau, c: Case, etat: Joueur): void
+	+initJoueurs(joueurs: List<Joueur>, c: Case): void
+}
+class Plateau [[java:Monopoly.Plateaux.Plateau]] {
+	#nbCases: int
+	+Plateau(nbCases: int)
+	+addCase(c: Case): void
+}
+class Case {
+}
+Plateau - -> "*" Case : plateau
+class Case {
+}
+Plateau - -> "*" Case : getPlateau()
+class NeoLiberale [[java:Monopoly.Configurations.NeoLiberale]] {
+	+NeoLiberale(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - NeoLiberale
+class Prudent [[java:Monopoly.Joueurs.Prudent]] {
+	+Prudent(id: int, sortie: Case, liquide: int)
+	+acheteOuPas(i: Investissement): boolean
+	+joue(c: Case): boolean
+}
+class Investissement {
+}
+Prudent - -> "1" Investissement : antitrustInvestissementARevendre()
+class Joueur {
+}
+Joueur <|- - Prudent
+abstract class Case [[java:Monopoly.Cases.Case]] {
+	-id: int
+	+Case(id: int)
+	+{abstract} action(j: Joueur): boolean
+}
+class LoiAntitrust [[java:Monopoly.Cases.LoiAntitrust]] {
+	#seuil: int
+	+LoiAntitrust(id: int)
+	+LoiAntitrust(id: int, seuil: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Etat {
+}
+LoiAntitrust - -> "1" Etat : etat
+class Case {
+}
+Case <|- - LoiAntitrust
+class Subvention [[java:Monopoly.Cases.Subvention]] {
+	#montant: int
+	+Subvention(id: int)
+	+Subvention(id: int, montant: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Etat {
+}
+Subvention - -> "1" Etat : etat
+class Etat {
+}
+Subvention - -> "1" Etat : getEtat()
+class Case {
+}
+Case <|- - Subvention
+class Capitaliste [[java:Monopoly.Configurations.Capitaliste]] {
+	+Capitaliste(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - Capitaliste
+class BureauFinancesPubliques [[java:Monopoly.Cases.BureauFinancesPubliques]] {
+	#valeur: int
+	#pourcentage: int
+	+BureauFinancesPubliques(id: int)
+	+BureauFinancesPubliques(id: int, nom: Impot, valeur: int, pourcentage: int, etat: Joueur)
+	+action(j: Joueur): boolean
+}
+class Impot {
+}
+BureauFinancesPubliques - -> "1" Impot : nom
+class Etat {
+}
+BureauFinancesPubliques - -> "1" Etat : etat
+class Etat {
+}
+BureauFinancesPubliques - -> "1" Etat : getEtat()
+class Case {
+}
+Case <|- - BureauFinancesPubliques
+abstract class Joueur [[java:Monopoly.Joueurs.Joueur]] {
+	#id: int
+	#liquide: int
+	#totalInvestissements: int
+	#aPerdu: int
+	+Joueur(id: int, sortie: Case, liquide: int)
+	+addLiquide(liquide: int): void
+	+removeLiquide(liquide: int): void
+	+addInvestissement(investissement: Investissement): void
+	+removeInvestissement(investissement: Investissement): void
+	+payeAntitrust(somme: int, etat: Etat): void
+	+paye(joueur: Joueur, somme: int): void
+	+joue(c: Case): boolean
+	+acheteOuPas(i: Investissement): boolean
+	+compareTo(joueur: Joueur): int
+	+equals(o: Object): boolean
+}
+class Case {
+}
+Joueur - -> "1" Case : position
+class Investissement {
+}
+Joueur - -> "*" Investissement : investissements
+class Case {
+}
+Joueur - -> "1" Case : getPosition()
+class Investissement {
+}
+Joueur - -> "*" Investissement : getInvestissements()
+class Investissement {
+}
+Joueur - -> "1" Investissement : antitrustInvestissementARevendre()
+interface "Comparable<Joueur>" as Comparable_Joueur_ {
+}
+Comparable_Joueur_ <|.. Joueur
+class Plateau {
+}
+class Joueur {
+}
+class Joueur {
+}
+class Case {
+}
+class Etat {
+}
+class Agressif [[java:Monopoly.Joueurs.Agressif]] {
+	+Agressif(id: int, sortie: Case, liquide: int)
+	+acheteOuPas(i: Investissement): boolean
+	+joue(c: Case): boolean
+}
+class Investissement {
+}
+Agressif - -> "1" Investissement : antitrustInvestissementARevendre()
+class Joueur {
+}
+Joueur <|- - Agressif
+enum Impot [[java:Monopoly.Cases.Impot]] {
+	SUR_LE_REVENU
+	FONCIER
+}
+class EuropeApresCovid19 [[java:Monopoly.Configurations.EuropeApresCovid19]] {
+	+EuropeApresCovid19(nbJoueursA: int, nbJoueursP: int)
+}
+class Configuration {
+}
+Configuration <|- - EuropeApresCovid19
+class Simulation [[java:Monopoly.Simulation]] {
+	+{static} assezJoueursEnLice(joueurs: List<Joueur>): boolean
+	+{static} displayTransitivState(joueurs: List<Joueur>, afficherOrdre: boolean): String
+	+{static} main(args: String[]): void
+}
+class Joueur {
+}
+class Joueur {
+}
+class Case {
+}
+class Investissement {
+}
+class Investissement {
+}
+class Investissement {
+}
+class Case {
+}
+class Plateau {
+}
+class Joueur {
+}
+class Configuration {
+}
+class Investissement [[java:Monopoly.Cases.Investissement]] {
+	#valeurNominale: int
+	#pourcentage: int
+	+Investissement(id: int)
+	+Investissement(id: int, valeurNominale: int, pourcentage: int, j: Joueur)
+	+changeProprietaire(j: Joueur): void
+	+action(j: Joueur): boolean
+}
+class Joueur {
+}
+Investissement - -> "1" Joueur : proprietaire
+class Joueur {
+}
+Investissement - -> "1" Joueur : getProprietaire()
+class Case {
+}
+Case <|- - Investissement
+class Etat [[java:Monopoly.Joueurs.Etat]] {
+	#valeur: int
+	+Etat(id: int, sortie: Case, liquide: int)
+}
+class Joueur {
+}
+Joueur <|- - Etat
+
+@enduml
+
+PlantUML version 1.2021.7(Sun May 23 14:40:07 CEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+-->
+  </g>
+</svg>

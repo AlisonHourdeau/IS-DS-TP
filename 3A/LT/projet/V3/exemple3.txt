@@ -1,0 +1,8 @@
+Z := (union A B Z D)
+A := {21, 4, 18, 129}
+C := {}
+B := (union A {1} C {10, 3})
+F := (diff B {4, 18, 0, 100})
+E := (comp B {1, 4, 10})
+D := (inter A (diff A {21}) B {18, 4})
+G := {15}

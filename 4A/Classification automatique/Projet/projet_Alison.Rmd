@@ -1,0 +1,252 @@
+---
+title: "Projet_Alison"
+author: "Alison"
+date: "04/06/2021"
+output: pdf_document
+---
+
+https://mrmint.fr/algorithme-k-means
+
+http://eric.univ-lyon2.fr/~ricco/cours/slides/classif_centres_mobiles.pdf
+
+Fonction qui calcule pour un ensemble de points d'un vecteur les coordonnées de son barycentre
+
+
+```{r}
+barycentre <- function(vect) {
+  # On doit retourner un vecteur dont les valeurs sont la moyenne de chaque colonne du vect en paramètre 
+  # On applique la fonction mean sur les colonnes (2e paramètre de la fonction apply=2) de vect
+  return(apply(vect, 2, mean))
+}
+```
+ 
+ 
+Fonction qui calcule les distances entre un ensemble de points et son barycentre
+```{r}
+cluster_by_indiv <- function(indiv, barycentres) {
+  min <- NULL
+  cluster <- NULL
+  for(i in 1:nrow(barycentres)){
+    matrice <- rbind(indiv,barycentres[i,])
+    distance <- as.matrix(dist(matrice, method = "euclidean"))[2,1]
+    if(!is.na(distance) && (min > distance || is.null(min))) {
+      min <- distance
+      cluster <- i
+    }
+  }
+  return(cluster)
+}
+```
+
+Fonction qui calcule l'inertie totale d'une matrice
+L'inertie totale est égale à la moyenne pondérée des distances carrée des points avec leur barycentre
+
+```{r}
+inertie_totale <- function(vect) {
+  nrow <- nrow(vect)
+  #Récupération des distances au carrée entre les points et le barycentre :
+  #Il s'agit de la dernière ligne (ou dernière colonne).
+  #On ne prend pas en compte la dernière valeur car il s'agit de la distance entre le barycentre et lui même (0).
+  distances_carres_points_barycentre <- distances(data)[nrow+1,1:nrow]^2
+  
+  #Enfin, on somme les distances au carré préalablement obtenues, que l'on divise par le nombre de points (nombre de lignes)
+  return(sum(distances_carres_points_barycentre)/nrow)
+}
+```
+
+Fonction qui calcule l'inertie intra classe
+Il s'agit de la moyenne pondérée des inerties de chacune des classes.
+vect comprend le jeu de données + une colonne indiquant la classe à laquelle le point appartient
+
+```{r}
+inertie_intra <- function(vect, k) {
+  #for()
+  
+}
+```
+
+
+
+
+
+
+```{r}
+vect1 <- rbind(c(1,3,5), c(2,4,6))
+vect1
+nrow <- nrow(vect1)
+ncol <- ncol(vect1)
+vect1[,-ncol]
+```
+
+
+implémentation de la méthode des k-means :
+En entrée :
+  k : nombre de classes (>1 et <nombre d'individus )
+  data : jeu de données
+  
+Fonction qui renvoie true si les matrices A et B sont égales, false sinon
+```{r}
+matrices_egales <- function(A, B) {
+  if( isTRUE(ncol(A) != ncol(B)) ) return(FALSE)
+  if( isTRUE(nrow(A) != nrow(B)) ) return(FALSE)
+  
+  for( i in 1:nrow(A) ){
+    for( j in 1:ncol(A) ) {
+      if( A[i,j] != B[i,j] ) return(FALSE)
+    }
+  }
+  return(TRUE)
+}
+```
+
+Fonction qui renvoie true si on doit s'arrêter, false sinon
+```{r}
+haveToStop <- function(i, max_iter, data, old_data){
+  if(i>=max_iter) return(TRUE)
+  else return(matrices_egales(as.matrix(data$cluster),as.matrix(old_data$cluster)))
+}
+```
+
+```{r}
+algo_Lloyd <- function(k, data) {
+  
+  #En premier lieu, on vérifie la valeur de k :
+  nb_indiv <- nrow(data)
+  
+  if(k<1) {
+    stop("Le nombre de classes doit être supérieur à 1.")
+  }
+  
+  if(k>nb_indiv) {
+    stop("Le nombre de classes doit être inférieur au nombre d'individus.")
+  }
+  
+  
+  # On choisit aléatoirement et sans remise k points parmi les données data, ces points seront les barycentres des k classes
+  barycentres <- data[sample(1:nrow(data),k, replace = FALSE),]
+  
+  # i : nombre d'itérations, initialisé à 0
+  i <- 0
+  
+  # max_iter : nombre d'itérations maximum, initialisé à 100
+  max_iter <- 5
+  
+
+  # stop : booleen indiquant si l'on doit arrêter l'algorithme
+  # On arrete si une des conditions suivantes est vraie :
+  # min intra max inter
+    # 1 - i >= max_iter
+    # 2 - aucun indiv ne change de classe
+    # 3 - inertie intra ne diminue plus
+    # 4 - le vecteur des barycentres est stable
+  stop <- FALSE
+  
+  #faire une fonction qui verifie data cluster != null 
+  
+  cluster <- c()
+  for(d in 1:nrow(data)){
+    cluster <- rbind(cluster,-1)
+  }
+  
+  data <- cbind(data, cluster)
+  
+  while(!stop){
+    old_data <- data
+    
+    data$cluster <- cluster
+    
+    if(i>0) {
+      barycentres <- NULL
+      for(j in 1:k){
+        vect_barycentre <- colMeans(subset(old_data[,-ncol(old_data)], old_data$cluster == j))
+        barycentres <- rbind(barycentres, vect_barycentre)
+      }
+    }
+    
+    for(j in 1:nrow(data)){
+      data[j,-1] <- cluster_by_indiv(data[j,-ncol(data)], barycentres)
+    }
+    
+    stop <- haveToStop(i, max_iter, data, old_data)
+    i <- i+1
+  }
+  return(data)
+}
+```
+
+```{r}
+algo_McQueen <- function(k, data) {
+  
+  #En premier lieu, on vérifie la valeur de k :
+  nb_indiv <- nrow(data)
+  nb_var <- ncol(data)
+  
+  if(k<1) {
+    stop("Le nombre de classes doit être supérieur à 1.")
+  }
+  
+  if(k>nb_indiv) {
+    stop("Le nombre de classes doit être inférieur au nombre d'individus.")
+  }
+  
+  
+  # On choisit aléatoirement et sans remise k points parmi les données data, ces points seront les barycentres des k classes
+  barycentres <- data[sample(1:nrow(data), k, replace = FALSE),]
+  
+  # i : nombre d'itérations, initialisé à 0
+  i <- 0
+  
+  # max_iter : nombre d'itérations maximum, initialisé à 15
+  max_iter <- 3
+  
+
+  # stop : booleen indiquant si l'on doit arrêter l'algorithme
+  # On arrete si une des conditions suivantes est vraie :
+  # min intra max inter
+    # 1 - i >= max_iter
+    # 2 - aucun indiv ne change de classe
+    # <=> inertie intra ne diminue plus
+    # <=> le vecteur des barycentres est stable
+  stop <- FALSE
+  
+  #faire une fonction qui verifie data cluster != null 
+  
+  cluster <- c()
+  for(d in 1:nrow(data)){
+    cluster <- rbind(cluster,-1)
+  }
+  
+  data <- cbind(data, cluster)
+  
+  while(!stop){
+    
+    old_data <- data
+    
+    data$cluster <- cluster
+    
+    for(j in 1:nrow(data)){
+      data[j,-1] <- cluster_by_indiv(data[j,-ncol(data)], barycentres)
+      if(old_data[j,-1] != data[j,-1])
+      barycentres[data[j,-1]] <- colMeans(subset(data[,-ncol(data)], data$cluster == data[j,-1]))
+    }
+    
+    stop <- haveToStop(i, max_iter, data, old_data)
+    i <- i+1
+  }
+  return(data)
+}
+```
+
+
+```{r}
+data <- read.csv("Camera.csv", sep=";")
+data = na.omit(data)
+
+data.quanti=data[,cbind(3:13)]
+
+data_new <- algo_Lloyd(3,data.quanti)
+print(table(data_new$cluster))
+
+
+```
+

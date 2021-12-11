@@ -1,0 +1,195 @@
+# TP R - PROBABILITES 2
+# vendredi 21 mai 2021
+# thibault.moulin [at] univ-lille.fr
+
+#################################################
+###########  CORRECTION DU  TP 3   ##############
+#################################################
+
+# -------------------------------------
+# EXERCICE 1 - Simulation : loi normale
+# -------------------------------------
+## Question 1. simuler des couples gaussiens indépendants avec la méthode de Box-Muller.
+
+# Contexte - l'idée de cette méthode est de simuler des couples de nombres qui suivent
+# une loi normale centrée réduite à partir du tirage d'une loi uniforme (en effet,
+# sous R, il est aisé de simuler des tirages de loi uniforme)
+
+# Ici, on effectue le passage en coordonnées polaires, en posant x = p*cos(theta) et y = p*sin(theta)
+# La densité jointe du couple (X, Y) s'écrit alors : f_{Y, Y}(x,y) dxdy = f_{R, theta}(p, theta) dp dtheta
+
+# METHODE :
+# 1. On tire U1 de loi uniforme, puis on calcule: R = \sqrt(-2 * \log(U1) )
+# 2. On tire U2 de loi uniforme, puis on calcule : theta = 2*pi*U2
+# 3. On pose : X = R*cos(theta) et Y = R*sin(theta)
+# Remarque : ces deux va sont indépendantes par constructions 
+# donc leur densité jointe est définie comme le produit de leurs densités respectives
+
+box_muller <- function(n){
+  u=runif(n)
+  v=runif(n)
+  mat=matrix(NA,n,2)
+  for (i in 1:n){
+    mat[i,] = c(sqrt(-2*log(u[i]))*cos(2*pi*v[i]), sqrt(-2*log(u[i]))*sin(2*pi*v[i]))
+  }
+  return (mat)
+}
+x <- box_muller(1000)
+plot(x[,1], x[,2])
+
+
+## Question 2. simuler des couples gaussiens indépendants avec la fonction rmvnorm()
+install.packages("mvtnorm")
+library(mvtnorm)
+
+# Chosir un nombre de simulations n
+n = 500
+K1 <-  matrix(c(1,0,0,1), ncol=2)
+K2 <- matrix(c(2,1,1,2), ncol=2)
+mean = c(0,0)
+z1 <- rmvnorm(n, mean, K1)
+plot(z1)
+z2 <- rmvnorm(n, mean, K2)
+plot(z2)
+
+# Comparaison : le nuage de point Z1 de couples de va simulée avec la matrice K1 semble uniformément réparti autour de l'origine, 
+# alors que les couples de points Z2 simulés avec la matrice K2 semblent répartis autour de la droite y = x.
+
+
+## Question 3. simuler des couples gaussiens indépendants avec la fonction rmvnorm()
+# choisir une valeur pour eps = 1,0.1,0.01
+eps = 0.01
+K3 <- matrix(c(4+eps, 2, 2, 4+eps), ncol=2)
+mean=c(0,0)
+z3 <- rmvnorm(n,mean,K3)
+plot(z3)
+
+
+# Pour information, ce que l'on obtient avec la fonction rnorm() pour tirer des lois normales avec R
+X = matrix(0,nrow=2,ncol=1000)
+A = rbind(c(1,1,0),c(1,0,1))
+for(i in 1:1000){
+  Z = rnorm(3) # on tire 3 valeurs de lois normales centrées réduites
+  X[,i] = A %*% Z
+}
+plot(X[1,],X[2,],main="Loi normale bivariée (variance  = 2, covariance = 1)",asp=1,xlim=c(-5,5),ylim=c(-5,5))
+
+
+
+# ----------------------------------
+# EXERCICE 2 - Estimation ponctuelle
+# ----------------------------------
+# Donner une valeur du paramètre inconnu à estimer
+theta <- rnorm(1)
+
+# Question 1. 
+# On utilise les propriétés de calcul de l'espérance et de la variance et l'indépendance des va Xi pour obtenir :
+# Esp (Xbar) = theta
+# Var (Xbar) = 1/n
+
+# Question 2.
+### Ici, on va estimer le paramètre inconnu theta à l'aide de l'estimateur de la moyenne empirique. 
+### On choisit donc un nb de tirage, par exemple 50, et on calcule la moyenne des valeurs obtenues. 
+### Puisque Esp (Xbar) = theta, pour n suffisamment grand, la valeur moyenne obtenue doit être proche de la vrai moyenne 
+### et l'estimation sera plutôt bonne.
+
+n = 50
+
+x <- rnorm(n, theta,  1) # on effectue n tirages de loi normale N(theta, 1)
+
+est_theta = mean(x)
+est_theta
+theta
+erreur = abs(est_theta - theta)
+
+## au vue des tésultats, l'estimateur "est_theta" est proche de "theta"
+
+# Question 3.
+n = 50
+x <- rnorm(n, theta,  1) # on effectue n tirages de loi normale N(theta, 1)
+est_theta = mean(x)
+err1 = abs(est_theta - theta)
+
+n = 500
+x <- rnorm(n, theta,  1) # on effectue n tirages de loi normale N(theta, 1)
+est_theta = mean(x)
+err2 = abs(est_theta - theta)
+
+n = 5000
+x <- rnorm(n, theta,  1) # on effectue n tirages de loi normale N(theta, 1)
+est_theta = mean(x)
+err3 = abs(est_theta - theta)
+
+n = 50000
+x <- rnorm(n, theta,  1) # on effectue n tirages de loi normale N(theta, 1)
+est_theta = mean(x)
+err4 = abs(est_theta - theta)
+
+erreur <- as.data.frame(matrix(c(50, err1, 500, err2, 5000, err3, 50000, err4), ncol=4), row.names = c("n", "erreur") )
+colnames(erreur) <- c("50", "500", "5000", "50000")
+
+# Comme attendu, plus n est grand, plus l'estimation de la valeur de theta est bonne et l'erreur devient de plus en plus petite.
+
+
+
+# --------------------------
+# EXERCICE 3 - Urne de Polya
+# --------------------------
+
+# Question 1.
+n <- 30
+urne_polya <- function(n){
+  Y <- rep(NA,n) # vecteur décrivant le nombre de boules vertes sur l'intervalle de temps [1, n]
+  Z <- rep(NA,n) # vecteur décrivant le nombre de boules rouges sur l'intervalle de temps [1, n]``
+  Y[1] <- 1 # A l'instant t0 = 1, il y a 1 boule verte
+  Z[1] <- 1 # A l'instant t0 = 1, il y a 1 boule rouge
+  tirage <- NA # selon la couleur de la boule tirée, on ajoute une boule rouge, ou une boule verte
+  for (i in 2:n){
+    nb_boules <- Y[i-1] + Z[i-1]
+    tirage <- sample(1:nb_boules,1)
+    if (tirage <= Y[i-1]){
+      Y[i] <- Y[i-1] + 1
+      Z[i] <- Z[i-1] 
+    }
+    else{
+      Y[i] <- Y[i-1] 
+      Z[i] <- Z[i-1] + 1
+    }
+  }
+  res <- rbind(Y, Z)
+  return (Z)
+}
+urne_polya(30)
+
+# Question 2.
+R = rep(NA,1000)
+
+for (i in 1:1000){
+  R[i] = urne_polya(30)[30]
+}
+R
+bords <- seq(0.5, 30.5, 1)
+hist(R, breaks = bords, freq = T, plot = TRUE)
+abline(h = 1000/30, col = "darkorange", lty = 2)
+
+
+# Question 3.
+### Convegrence vers la loi uniforme sur [0,1]
+# Choisir le temps final de chaque simulation
+tf = 1000
+# Choisir le nombre de simulation que l'on effectue
+m = 10000
+R_lim = rep(NA, m)
+
+for (i in 1:m){
+  R_lim[i] = urne_polya(tf)[tf]
+}
+R_lim <- R_lim / tf
+bords2 <- seq(0, 1, 1/20)
+hist(R_lim, bords2, freq = T, plot = TRUE)
+abline(h = m/20, col = "darkorange", lty = 2)
+
+# La distribution semble bien uniforme, car sur un grand nombre de simulation, on remarque que la probabilité de trouver chacune des valeurs 
+# de l'intervalle [0, 1] semble identique.
+# Ceci est particulièrement flagrant pour les paramètres tf = 1000, m = 10000 (prévoir 3min de simulation)
+

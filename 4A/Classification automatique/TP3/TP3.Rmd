@@ -1,0 +1,94 @@
+---
+title: "TP3"
+output: html_document
+---
+```{r}
+c("tidyverse","xtable","klaR","clusteval,FactoMineR","cluster")
+
+library(tidyselect)
+library(xtable)
+library(klaR)
+library(clusteval)
+library(cluster)
+library("FactoMineR")
+library("factoextra")
+```
+
+## Question 1 : Chargement des données, nommées et analyser les différentes variables du fichier
+```{r}
+data<-read.csv("C:/Users/Charlotte/Documents/Polytech/S8/CA/TP3/breast_cancer.csv", sep=",")
+colnames(data) <- c("class","age","menopause","tumor_size","inv_nodes","node_caps","deg_maling","breast","brest_quad","irradiat")
+data
+```
+
+```{r}
+summary(data)
+```
+
+## Question 2 : Réaliser une ACM
+
+```{r}
+data.active<-data[,-c(1)]
+
+res.mca<-MCA(data.active,quali.sup=6, graph=FALSE)
+
+```
+
+```{r}
+barplot(res.mca$eig[,2], names.arg =1:nrow(res.mca$eig) )
+```
+
+```{r}
+plot(res.mca, invisible=c("var","quali.sup","quanti.sup"),cex=0.8, autoLab="yes")
+```
+
+## Question 3 : Réaliser une segmentation à partir de l'ACM
+
+# Déterminer le nombre de classe optimal
+```{r}
+head(res.mca$ind$coord)
+```
+
+
+```{r}
+# Silhouette
+fviz_nbclust(res.mca$ind$coord,kmeans,method="silhouette",k.max=20)
+```
+
+Donc ici le nombre de classes k optimal est 2.
+
+### Proposer une segmentation 
+```{r}
+km<-kmeans(res.mca$ind$coord, centers = 2, nstart=10)
+km
+```
+
+Le pourcentage d'inertie expliqué est très faible (20%).
+
+```{r}
+res.bc_data<-cbind(data,km$cluster)
+res.bc_data
+table(res.bc_data[,1],res.bc_data[,11])
+```
+
+```{r}
+modes<-kmodes(res.bc_data,2,iter.max = 100)
+modes
+```
+
+```{r}
+res.bc_data<-cbind(res.bc_data,modes$cluster)
+table(res.bc_data[,1],res.bc_data[,12])
+```
+
+
+## Question 5 : calcul des indices de Rand
+
+```{r}
+cluster_similarity(km$cluster, data[,1],similarity="rand")
+```
+
+```{r}
+cluster_similarity(modes$cluster, res.bc_data$class,similarity="rand")
+```
+

@@ -1,0 +1,44 @@
+
+#ontologie cours
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix ex:  <http://www.example.org/excours#>.
+
+ex:UE a rdfs:Class.
+
+ex:Module a rdfs:Class.
+
+ex:fait_partie a rdfs:Property;
+	rdfs:domain ex:Module;
+	rdfs:range  ex:UE.
+
+ex:intitule a rdfs:Property;
+	rdfs:domain ex:Module;
+	rdfs:domain ex:UE.
+
+ex:nbheures a rdfs:Property;
+	rdfs:domain ex:Module.
+
+ex:nbects a rdfs:Property;
+	rdfs:domain ex:Module.
+
+#données
+#LWS
+ex:UE8.2 a ex:UE.
+ex:UE8.2 ex:intitule "Ingénierie Logicielle".
+
+ex:LWS a ex:Module;
+	ex:intitule "Logique et Web sémantique";
+	ex:nbheures 30;
+	ex:nbects 2;
+	ex:fait_partie ex:UE8.2.
+
+
+
+
+
+
+
+
+
