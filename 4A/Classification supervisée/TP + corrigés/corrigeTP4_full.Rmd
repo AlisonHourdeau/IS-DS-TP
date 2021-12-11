@@ -1,0 +1,741 @@
+---
+title: 'Classification supervisée : Corrigé TP4'
+output:
+  pdf_document:
+    number_sections: yes
+    toc: yes
+  html_notebook:
+    number_sections: yes
+    toc: yes
+  html_document:
+    number_sections: yes
+    df_print: paged
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+**Réponse 1 :** Chargement des données : 
+```{r}
+load("prema.RData")
+str(prema)
+prema$DIAB = as.factor(prema$DIAB)
+attach(prema)
+```
+
+Résumé des données : 
+```{r}
+summary(prema)
+```
+La variable DIAB comporte 3 valeurs manquantes ... Ainsi par la suite cela peut poser des problèmes dans les modèles comportant cette variable. En effet, si on lance une régression logistique  prenant en compte cette variable, R supprimera (sans vous en informer ...) les trois individus avec des données manquantes pour réaliser la régression logistique (en effet toutes les données doivent êtes complètes pour utiliser la régression logistique). Diverses solutions existent pour gérer ce problème des données manquantes :
+
+* Supprimer les individus avec des données manquantes
+* Supprimer la variable si elle comporte trop de valeurs manquantes
+* Imputer les valeurs manquantes : c'est-à-dire leur affecter arbitrairement une valeur (moyenne, mode, espérance conditionnelle)
+
+
+# Etude d'une variable binaire
+
+## Statistique descriptive
+
+Etude du type de grossesse pour retrouver les résultats donnés en cours.
+
+Remarque : en cours, le tableau de contingence se basait sur 390 femmes mais 2 ont été retirées à cause de valeurs aberrantes pour certaines variables (notamment contractions).
+
+**Réponse 2 :** Tableau de contingence
+```{r}
+table(GEMEL,PREMATURE)
+```
+
+Tableau des profils ligne (distribution de PREMATURE sachant GEMEL)
+```{r}
+prop.table(table(GEMEL,PREMATURE),1)
+```
+
+**Réponse 3 :** Probabilité d'accouchement prématuré lors d'une grossesse multiple (se lit aussi dans le talbeau précédent).
+```{r}
+35/(35+4)
+```
+
+Enfin on aurait pu représenter graphiquement les données comme suit
+```{r}
+plot(PREMATURE ~ GEMEL)
+```
+
+
+## Détails des premières sorties de glm
+
+**Réponse 4 :** Ajustement du modèle de régression logistique
+```{r}
+model1  <- glm(PREMATURE ~ GEMEL, family="binomial", data=prema)
+model1
+```
+Ici : 
+
+  * Call : affiche le modèle qui a été ajusté
+  * Coefficients : affiche les coefficients estimés, ici $\hat\beta_0 = 0,659$ et $\hat\beta_1 = 1,510$
+  * Degrees of Freedom : 
+    - 387 Total : Pour le modèle Null (sans variable explicative), nombre de données 388 - 1 car estimation de la proportion de grossesses prématurées
+    - 386 Residual : 388 - 2 car estimation de deux paramètres
+  * Null Deviance: 484,7, déviance du moddèle Null c'est-à-dire $D_0 = -2\ell_0$ avec $\ell_0$ la log-vraisemblance du modèle Null
+  * Residual Deviance: 473,7, déviance du modèle c'est-à-dire $D = -2\ell$ avec $\ell$ la log-vraisemblance du modèle
+  * AIC: 477,7, critère AIC : $AIC = -2\ell + 2\nu = D + 2\nu$ où $\nu$ est le nombre de paramètres du modèle
+
+
+Ici les modalités "negative" de PREMATURE et "Simple" de GEMEL servent de modalités de références (premiers niveaux de la variable).
+```{r}
+levels(PREMATURE)
+levels(GEMEL)
+```
+La fonction relevel permet au besoin de redéfinir la modalité de référence. 
+
+Pour faire le lien avec les notations du cours, l'ajustement précédent est équivalent à 
+```{r}
+Y = ifelse(PREMATURE == "positif", 1,0)
+X = ifelse(GEMEL == "Multiple",1,0)
+head(cbind.data.frame(Y,PREMATURE,X,GEMEL)) # Pour comprendre le recodage
+glm(Y ~ X, family = "binomial") # Fidèle aux notations du cours
+```
+en fait un recodage binaire des variables est implicitement opéré par l'appel à glm.
+
+Enfin le modèle permet de calculer les différentes probabilités
+```{r}
+b0 = model1$coefficients[1]
+b1 = model1$coefficients[2]
+b0
+b1
+# P(PREMATURE = positif | GEMEL = Simple) = 0,65
+exp(b0)/(1+exp(b0))
+# P(PREMATURE = positif | GEMEL = Multiple) = 0,89
+exp(b0+b1)/(1+exp(b0+b1))
+```
+
+### Calcul de la log-vraisemblance, de la déviance, et du critère AIC.
+
+En l'absence de variable explicative $Y \sim \mathcal{B}(\pi_1)$ c'est-à-dire que $Y$ suit une loi de Bernoulli de paramètre $\pi_1$ : $P(Y = 0) = 1-\pi_1$ et $P(Y=1) = \pi_1$ qu'on peut aussi écrire pour $y \in \{0,1\}$
+$$
+P(Y = y) = \pi_1^{y}(1-\pi_1)^{1 - y}
+$$
+et donc
+$$
+\ln P(Y=y) = y\ln \pi_1 + (1-y)\ln(1-\pi_1)
+$$
+Donc sur un échantillon de $n$ individus la log-vraisemblance est la somme des log-probabilités individuelles
+$$
+\ell_0(\pi_1) = \sum_{i=1}^{n} \ln P(Y_i=y_i) =  \sum_{i=1}^{n}  \left(y_i\ln \pi_1 + (1-y_i)\ln(1-\pi_1)\right) = n_1 \ln \pi_1 + n_0\ln(1-\pi_1) 
+$$
+en notant $n_0$ le nombre d'individus dans la classe $0$, et $n_1$ le nombre d'individus dans la classe $1$. Cette vraisemblance est maximale pour $\hat\pi_1 = \frac{n_1}{n}$ (estimateur usuel d'une proportion !!!). On note simplement par la suite $\ell_0 = \ell_0(\hat\pi_1)$. Ici le calcul est simplement 
+```{r}
+table(PREMATURE)
+n = 388
+n0 = 123
+n1 = 265
+# l0 : log-vraisemblance du modèle Null
+l0 =  n1 * log(n1/n) + n0 * log(n0/n)
+l0
+```
+
+On en déduit simplement la déviance $D_0$ du modèle nul
+```{r}
+D0 = -2*l0
+D0
+```
+
+Dans le cas du modèle logistique qu'on souhaite ajuster la log-vraisemblance s'écrit :
+$$
+\ell(\beta) =  \sum_{i=1}^n [y_i \log P(Y_i=1 | X_i = x_i;\beta) + (1-y_i)\log P(Y_i=0| X_i = x_i;\beta)]
+$$
+Ici le maximum n'est plus explicite (algorithme de Newton-Raphson nécessaire, opéré via la fonction glm). Par la suite on note simplement $\ell = \ell(\hat\beta)$.
+
+```{r}
+p = predict(model1,prema,type = "response") # calcul des probabilités : P(Y=1|X=x_i)
+y = ifelse(PREMATURE == "positif",1,0) 
+# log-vraisemblance
+l = sum(y * log(p) + (1-y) * log(1-p))
+```
+
+La déviance du modèle s'obtient simplement en faisant $D = -2\ell$
+```{r}
+D = -2*l
+D
+```
+
+Enfin le calcul du critère AIC est le suivant
+```{r}
+nu = length(model1$coefficients)
+AIC = D + 2*nu
+AIC
+```
+
+## Test de la nullité d'un coefficent, et calcul d'intervalles de confiance
+
+### Test de la nullité d'un coefficent
+$$
+H_0 : \{\beta_1 = 0\} \mbox{ contre } H_1 : \{\beta_1 \neq 0\} 
+$$
+
+**Réponse 5 :** En affichant le résumé du modèle on a 
+```{r}
+summary(model1)
+```
+
+Le détail du calcul de la p-value associé au test de nullité du coefficient $\beta_{GEMELMultiple}$ est le suivant
+```{r}
+# Calcul de la p-value
+b1h = 1.5101 # Estimate
+sigmab1h = 0.5397 # Std. Error
+# z = 2.798  
+z = b1h/sigmab1h # z value, sous H0, z est la réalisation d'une N(0,1) 
+z
+# p-value = 0.00514
+p.value = 2*pnorm(-abs(z))
+p.value
+# pchisq(z^2,df = 1,lower.tail = F) # en utilisant un Chi-deux à 1 dégré de liberté
+```
+Ici on rejetterai l'hypothèse de nullité du coefficent au niveau de confiance de 95\%. Donc la variable GEMEL a un effet significatif sur la variable PREMATURE.
+
+Remarquons que d'un point de vue interprétation, tester la nullité du coefficient $\beta_{GEMELMultiple}$ est en fait équivalent à tester l'indépendance des variables PREMATURE et GEMEL, ce qui aurait pu être réalisé à l'aide d'un test du Chi-deux.
+```{r}
+chisq.test(PREMATURE,GEMEL) # Test du Chi2 d'indépendance
+```
+
+
+### Calcul d'intervalles de confiance
+
+Enfin on peut aussi être intéressé à faire des intervalles de confiance sur les paramètres :
+```{r}
+confint.default(model1)
+```
+qui peut être calculé à la main comme suit
+```{r}
+coef(model1) # Paramètre estimé 
+vcov(model1) # Matrice de variance-covariance des estimateurs
+# Pour b1 on calcule donc 
+coef(model1)[2] + c(-1,1)*qnorm(1-0.05/2)*sqrt(vcov(model1)[2,2])
+```
+
+En fait à la lecture de vcov(model1) on voit que les deux estimateurs $\hat\beta_0$ et $\hat\beta_1$ ne sont pas indépendants (covariance non nulle). On peut construire un ellipsoïde de confiance sur le couple $(\beta_0,\beta_1)$
+```{r}
+library(car)
+confidenceEllipse(model1)
+```
+
+La fonction confint peut aussi être utilisée, par contre elle calcule l'intervalle de confiance à l'aide de la vraisemblance profilée 
+(http://www.math.umt.edu/patterson/ProfileLikelihoodCI.pdf), d'où le message "Waiting for profiling to be done...". Cela produit des intervalles de confiance sensiblement différents. 
+```{r}
+# Calcul d'intervalles de confiance
+confint(model1)
+```
+En notant $\theta$ le paramètre sur lequel on souhaite calculer l'invervalle. Il s'agit de déterminer l'ensemble des valeurs $\theta_0$ telles que l'hypothèse nulle $H_0 : \{\theta = \theta_0\}$ ne soit pas rejetée au niveau de confiance $1-\alpha$ en considérant un test bilatéral ($H_1 : \{\theta \neq \theta_0\}$). On retrouve le lien "classique" entre test d'hypothèses et intervalle de confiance (http://www.mit.edu/~6.s085/notes/lecture2.pdf) ... Cependant, ici on considère le test des vraisemblances maximales (Likelihood Ratio Test), une inversion de la log-vraisemblance profilée est alors nécessaire pour déterminer cet ensemble de valeurs $\theta_0$ (cf. plus loin dans le corrigé pour plus de détails).
+
+## Calculs des odds-ratios
+
+Calcul de l'odds-ratio à partir du coefficient estimé
+
+```{r}
+exp(coef(model1))[2]
+```
+
+Calcul de l'odds-ratio à partir du tableau de contingence
+```{r}
+cotegrmultiple=35/4 #(35/39)/(4/39)
+cotegrsimple=230/119
+OR=cotegrmultiple/cotegrsimple
+OR
+```
+La côte de l'évenement "l'accouchement est prématuré" est multiplié par 4,52 quand on passe de la modalité "Simple" à la modalité "Multiple" pour la variable GEMEL.
+
+# Etude d'une variable quantitative
+
+## Statistique descriptive
+
+**Réponse 6 :** Moyenne de l'effacement du col classe par classe 
+```{r}
+by(EFFACE, PREMATURE, mean)
+```
+
+On peut aussi faire les graphiques
+```{r}
+plot(EFFACE ~ PREMATURE)
+```
+et
+```{r}
+plot(PREMATURE ~ EFFACE)
+```
+qui lui est basé sur un découpage en classe de la variable EFFACE.
+
+On peut aussi visualiser la distribution de EFFACE dans chacune des classes comme suit :
+```{r}
+library("ggplot2")
+ggplot(prema, aes(EFFACE, fill = PREMATURE)) + geom_density(alpha = 0.2)
+```
+
+On remarque donc que plus l'effacement du col est grand, et plus l'accouchement a de chances d'être prématuré.
+
+## Ajustment du modèle 
+
+**Réponse 7 :**
+
+```{r}
+model2 <- glm(PREMATURE ~ EFFACE, family="binomial", data=prema)
+summary(model2)
+```
+
+**Réponse 8 :** Calcul de la probabilité d'accouchement prématuré sachant que l'effacement du col est égal à 60% (attention EFFACE est la valeur exprimée en pourcentage)
+```{r}
+beta=coef(model2)
+beta
+b0=beta[1]
+b1=beta[2]
+calculpi=function(x){
+  exp(b0+b1*x)/(1+exp(b0+b1*x))
+}
+calculpi(60)
+```
+**Réponse 9 :** La probabilité d'accouchement prématuré sachant EFFACE = 60 est donc de 77\% :
+$$
+P(PREAMTURE = \mbox{"positif"} | EFFACE = 60) = 77\%
+$$
+
+L'allure de la fonction est la suivante
+```{r}
+plot(calculpi,-200,200)
+abline(v = c(0,100),col = "red")
+```
+On retrouve donc la forme sigmoïde cependant dans le cadre d'étude x ne varie qu'entre 0 et 100 (zone limitée par les traits rouges).
+
+Ici on a bien entendu croissance de la probabilité de grossesse prématurée en fonction de la variable EFFACE (coefficent $\hat\beta_1$ positif).
+
+**Réponse 10 :**
+```{r}
+pi_hat=predict(model2, prema, type="response")
+max(abs(pi_hat-calculpi(EFFACE))) # on retrouve donc numériquement les mêmes valeurs
+```
+
+**Réponse 11 :** Comparaison de la distribution des probabilités calculées entre les patientes ayant accouché prématurément et les autres.
+```{r}
+boxplot(pi_hat ~ PREMATURE)
+```
+Ici on a bien des probabilités en moyennes plus petites pour les patientes avec grossesses prematurées que pour les autres. Cependant la séparation est assez faible (boxplot chevauchantes)
+
+On peut aussi comparer la densité de $\pi(x)$ dans chacune des classes : 
+```{r}
+library(lattice)
+gS = densityplot(~pi_hat, data = data.frame(prema, pi_hat), groups = PREMATURE,
+                 plot.points = FALSE, ref = TRUE, auto.key = list(columns = 1))
+print(gS)
+```
+
+Ou en utilisant ggplot
+```{r}
+ggplot(data.frame(prema, pi_hat), aes(pi_hat, fill = PREMATURE)) + geom_density(alpha = 0.2)
+```
+
+
+# En route vers la vraisemblance profilée suite !
+
+## La vraisemblance profilée c'est quoi en fait ??
+
+Supposons qu'on veuille réaliser un intervalle de confiance sur $\beta_1$ dans le cas de model1, on considère la vraisemblance profilée définie comme suit
+$$
+\ell^p_{1}(\beta_1) =  \max_{\beta_0} \ell(\beta_0,\beta_1).
+$$
+$\ell_1^p$ est la vraisemblance profilée de $\beta_1$, on peut calculer la vraisemblance profilée à partir de glm avec l'argument offset (valeurs fixes) 
+```{r}
+b1 = 1.510 # exemple de valeur de b1 ; ici la valeur correspondant au maximum de vraisemblance
+GEMELMultiple = ifelse(GEMEL == "Multiple",1,0) # Colonne sur laquelle est faite la régression
+logLik(glm(PREMATURE~1,offset = b1*GEMELMultiple,family = "binomial")) # vraisemblance profilée associée à b1
+# En fait pour ici on retrouve simplement la vraisemblance maximale en b0, b1
+l # logique ...
+```
+
+On peut écrire maintenant la fonction vraisemblance profilée lp, et faire son tracé sur l'intervalle $[0;4]$.
+```{r}
+lp <- function(b1){
+  return(logLik(glm(PREMATURE~1,offset = b1*GEMELMultiple,family = "binomial")))
+}
+b1 = seq(0,4,length = 100)
+plot(b1,sapply(b1,lp),main = "Vraisemblance profilée",ylab = "lp",type = "l")
+```
+
+## Test du rapport des vraisemblances maximales ? Likelihood Ratio Test (LRT) !
+
+### Rappel sur le LRT : 
+
+De façon générale la statistique de test du LRT s'écrit
+$$
+LRT = - 2 \ln\frac{\max_{\beta \in B_{H_0}}L(\beta)}{\max_{\beta \in B_{H_1}}L(\beta)}
+$$
+où $L$ est la vraisemblance, $B_{H_0}$ l'espace des paramètres sous $H_0$ et  $B_{H_1}$ l'espace des paramètres sous $H_1$ (on a $B_{H_0} \subset B_{H_1}$). On peut la ré-écrire 
+$$
+LRT = -2\max_{\beta \in B_{H_0}}\ell(\beta) - [-2 \max_{\beta \in B_{H_1}}\ell(\beta)] = D_{H_0} - D_{H_1}
+$$
+avec $\ell(\beta)$ la log-vraisemblance en $\beta$ et $D_{H_0}$ et $D_{H_1}$ les déviances respectives sous $H_0$ et sous $H_1$.
+
+Sous $H_0$ 
+$$
+LRT \stackrel{\longrightarrow}{\tiny\mbox{approx}} \chi^2_{\nu_{H_1}-\nu_{H_0}}
+$$
+où $\nu_{H_1}$ et $\nu_{H_0}$ représentent respectivement les degrés de liberté des modèles sous $H_0$ et sous $H_1$.
+
+### Application à la vraisemblance profilée
+
+Revenons à notre objectif d'intervalle de confiance sur $\beta_1$ à l'aide de la vraisemblance profilée. Pour $\tilde\beta_{1}$ fixé, on teste $H_0 : \{\beta_1 = \tilde\beta_{1}\}$ contre $H_1 : \{\beta_1 \neq \tilde\beta_{1}\}$.
+
+Sous $H_0$
+$$
+2[\max_{\beta_0,\beta_1}\ell(\beta_0,\beta_1)  - \max_{\beta_0}\ell(\beta_0,\tilde\beta_{1})] \stackrel{\longrightarrow}{\tiny\mbox{approx}} \chi^2_1,
+$$
+en fait $\max_{\beta_0,\beta_1}\ell(\beta_0,\beta_1)$ est la log-vraisemblance maximale sous $H_1$ ($\beta_0$ et $\beta_1$ libres), là où $\max_{\beta_0}\ell(\beta_0,\tilde\beta_{1})$ est la log-vraisemblance maximale sous $H_0$ ($\beta_1$ contraint à être égale à $\tilde\beta_1$, et $\beta_0$ libre).
+
+En reprenant les notations précédentes on a :
+$$
+2[\ell(\hat\beta_0,\hat\beta_1)  - \ell^p_{1}(\tilde\beta_{1})] \stackrel{\longrightarrow}{\tiny\mbox{approx}} \chi^2_1.
+$$
+
+
+On ne rejette pas $H_0$ si 
+$$
+2[\ell(\hat\beta_0,\hat\beta_1)  - \ell^p_{1}(\tilde\beta_{1})] \leq \chi^2_{1;1-\alpha}
+$$
+
+C'est-à-dire si 
+$$
+\ell^p_{1}(\tilde\beta_{1}) \geq \ell(\hat\beta_0,\hat\beta_1) - \frac{1}{2}\chi^2_{1;1-\alpha}
+$$
+
+Ainsi on détermine l'ensemble des valeurs $\tilde\beta_1$ telles que l'inégalité précédente soit vérifiée.
+```{r}
+plot(b1,sapply(b1,lp),main = "Vraisemblance profilée",ylab = "lp",type = "l")
+abline(h = l - 0.5*qchisq(1-0.05,1), col = "red")
+```
+Il s'agit de l'ensemble de valeurs conduisant à une vraisemblance profilée au dessus du trait rouge.
+
+On trouve les bornes de l'intervalle en annulant la fonction $g(\tilde\beta)$ 
+$$
+g(\tilde\beta_1) = \ell(\hat\beta_0,\hat\beta_1)  - \ell^p_{1}(\tilde\beta_{1}) -  \frac{1}{2}\chi^2_{1;1-\alpha}
+$$
+
+```{r}
+g <- function(b1){
+  return(l - lp(b1) - 0.5*qchisq(1-0.05,1))
+}
+uniroot(g, c(0,1.5))$root # Recherche de la première racine (entre 0 et 1,5)
+uniroot(g, c(1.5,3))$root # Recherche de la deuxième racine (entre 1,5 et 3)
+```
+On retrouve donc à peu de choses près l'intervalle retourné par la fonction confint à savoir $[0.5635285 ; 2.7352318]$. Finalement c'est plus simple d'utiliser confint ...
+```{r}
+confint(model1)
+```
+Mais vous connaissez maintenant la signification du message : "Waiting for profiling to be done..."  !!!
+
+# Ajustement de modèles à plusieurs variables explicatives
+
+## Prédiction de PREMATURE à partir de GEMEL et EFFACE
+
+**Réponse 12 :** On ajuste le modèle 3
+
+```{r}
+model3 <- glm(PREMATURE ~ GEMEL + EFFACE, family = "binomial",
+              data = prema)
+summary(model3)
+```
+
+**Réponse 13 :** Remarquons que le modèle 2 est emboîté dans le modèle 3, on peut donc appliquer le test du rapport des vraisemblances maximales pour tester $H_{0} : {Y|X=x \mbox{ est issu du modèle 2}}$ contre $H_1 : {Y|X=x \mbox{ est issu du modèle 3}}$, où plus précisement on teste la nullité du coeffcient additionnel de $M3$ par rapport à $M2$, c'est à dire le coefficent $\beta_{GEMELMultiple}$.
+
+La commande 
+```{r}
+anova(model2,model3,test="LRT")
+pchisq(7.7192,df = 1,lower.tail = F) # p-value
+```
+permet de faire le test de modèles emboîtés. 
+
+**Réponse 14 :** Ici on conserve le modèle 3 car le coefficent additionnel associé à GEMEL est significativement différent de 0 (probabilité critique faible : $0,005464$). En fait pour préciser on a $D_{\mbox{modèle  2}} = 439,51$ et $D_{\mbox{modèle  3}} = 431,80$. Sous $H_0$, $D_{\mbox{modèle  2}} - D_{\mbox{modèle  3}}$ est issu d'un $\chi^2_1$ (car un paramètre en plus pour le modèle 3). Ici  $D_{\mbox{modèle  2}} - D_{\mbox{modèle  3}} = 439,51 - 431,80 = 7,7192$, d'où le calcul précédent de la p-value.
+
+# Ajustement du modèle complet
+
+## Détail de la démarche
+
+**Réponses 15 et 16:** On ajuste maintenant le modèle complet
+```{r}
+fullmodel <- glm(PREMATURE ~ ., family = "binomial", data = prema)
+summary(fullmodel)
+```
+
+On sélectionne un modèle réduit par optimisation du critère AIC
+```{r}
+reduced<-step(fullmodel)
+```
+
+```{r}
+summary(reduced)
+```
+
+Le modèle réduit est emboîté dans le modèle complet. On teste la nullité des coefficients supplémentaires du modèle complet.
+```{r}
+anova(reduced, fullmodel, test="LRT")
+```
+Ici ces coefficients supplémentaires ne sont pas significativement différents de 0. Donc on retient le modèle réduit. Le calcul détaillé de la p-value est le suivant
+```{r}
+Dreduced = 352.04
+Dfull = 349.28
+LRT = Dreduced - Dfull
+pchisq(LRT,df = 7, lower.tail = FALSE)
+```
+
+**Réponse 17 :** On obtient les intervalles de confiance suivants sur les odds-ratio (passage à l'exponentielle des bornes des intervalles de confiance sur les coefficents)
+```{r}
+exp(cbind(OR=coef(reduced), confint(reduced)))
+```
+
+Ces intervalles de confiance sont représentés ci-dessous : 
+```{r}
+library("ggplot2")
+plot_odds<-function(x, title = NULL){
+tmp<-data.frame(cbind(exp(coef(x)), exp(confint(x))))
+odds<-tmp[-1,]
+names(odds)<-c('OR', 'lower', 'upper')
+odds$vars<-row.names(odds)
+ticks<-c(seq(.1, 1, by =.1), seq(0, 10, by =1), seq(10, 100, by =10))
+
+ggplot(odds, aes(y= OR, x = reorder(vars, OR))) +
+geom_point() +
+geom_errorbar(aes(ymin=lower, ymax=upper), width=.2) +
+scale_y_log10(breaks=ticks, labels = ticks) +
+geom_hline(yintercept = 1, linetype=2) +
+coord_flip() +
+labs(title = title, x = 'Variables', y = 'OR') +
+theme_bw()
+}
+plot_odds(reduced)
+```
+Le variables pour lesquelles l'intervalle de confiance est inférieur à 1 sont des facteurs protecteurs. Les variables pour lesquelles l'intervalle de confiance est supérieur à 1 sont des facteurs de risque. Si l'intervalle de confiance coupe 1, alors le facteur n'est ni un facteur protecteur, ni un facteur de risque.
+
+
+## Précisions sur la notion de contraste
+
+Prudence par contre pour les variables qualitatives à plus de deux modalités !!! Par exemple MEMBRANNon, est un facteur protecteur, mais par rapport à la modalité de référence qui est ici MEMBRANOui. Si on veux tester l'effet de MEMBRANNon par rapport à MEMBRANIncertain c'est là que les choses se compliquent ... Il s'agit en fait de tester des contrastes (nullité de combinaisons linéaires de coeffcients), ici par exemple $H_0  : \{\beta_{MEMBRANNon} - \beta_{MEMBRANIncertain} = 0\}$. 
+
+Cela implique de connaitre la distribution de  $\hat\beta_{MEMBRANNon} - \hat\beta_{MEMBRANIncertain}$. En fait, on sait que $\hat\beta \approx \mathcal{N}(\beta, \Sigma_{\beta})$ où un estimateur de $\Sigma_{\beta}$ peut être obtenu à l'aide de la fonction `vcov`.
+```{r}
+Sigma = vcov(reduced)[c("MEMBRANNon","MEMBRANIncertain"),c("MEMBRANNon","MEMBRANIncertain")]
+Sigma
+```
+On peut aussi la visualiser comme suit 
+```{r}
+confidenceEllipse(reduced,which.coef = c("MEMBRANNon","MEMBRANIncertain"))
+```
+
+Enfin il est facile d'obtenir la distribution de $\hat\beta_{MEMBRANNon} - \hat\beta_{MEMBRANIncertain}$ puisque la combinaison linéaire d'un vecteur gaussien a lui aussi une distribution gaussienne. Sa variance est obtenue simplement comme suit 
+```{r}
+a = matrix(c(1,-1),2,1) # coefficients de la combinaison linéaire
+a
+s2 = t(a) %*% Sigma %*% a # ici on obtient la variance du contraste considéré
+s2
+sqrt(s2) # éart-type de l'estimateur (Std. Error)
+coef(reduced)["MEMBRANNon"] - coef(reduced)["MEMBRANIncertain"] # Valeur estimée (Estimate) 
+```
+Ainsi la variance de $\hat\beta_{MEMBRANNon} - \hat\beta_{MEMBRANIncertain}$ est égale à $0,5336854$ (écart-type $0,73$), et sa distribution est gaussienne. Cela permet alors de construire des intervalles de confiance sur  $\beta_{MEMBRANNon} - \beta_{MEMBRANIncertain}$, ainsi que de faire des tests d'hypothèse. Dans R on peut utiliser la fonction `glht` du package `multcomp` : 
+```{r}
+library("multcomp")
+summary(glht(reduced,mcp(MEMBRAN = c("Non - Incertain = 0"))))
+# On retrouve les différents résultats dans la partie Linear Hypotheses
+```
+Ici la différence entre l'effet de la modalité Non et l'effet de la modalité Incertain n'est pas significatif (p-value de 0.283).
+
+On aurait aussi pu tester l'ensemble des contrastes deux à deux possibles pour la variable MEMBRAN
+```{r}
+contrMat(table(MEMBRAN),type = "Tukey") # Matrice des contastes
+# On obtient l'ensemble des test 2 à 2 : 
+summary(glht(reduced,mcp(MEMBRAN = contrMat(table(MEMBRAN),type = "Tukey"))))
+```
+Seule la différence Non - Oui apparait comme significative. Cependant attention aux questions de tests multiples ... (https://math.unice.fr/~reynaudb/etienne.pdf), mais on arrête ici les digressions.
+
+
+# Evaluation du modèle final
+
+**Réponse 18 :** On peut calculer les valeurs prédites à l'aide de la fonction `predict`
+```{r}
+S=predict(reduced, prema, type="response")
+head(S)
+boxplot(S~prema$PREMATURE)
+```
+
+**Réponse 19 :** En prenant le seuil de 0,5 on obtient les résultats suivants : 
+```{r}
+Y_hat=as.factor(ifelse(S>=0.5, "positif", "negatif"))
+MatConf=table(Y_reel = prema$PREMATURE,Y_predit = Y_hat)
+MatConf
+```
+
+**Réponse 20 :** Si on prend comme seuil celui associé à la probabilité du dernier individu du tableau de données on obtient
+```{r}
+seuil=S[length(S)]
+seuil
+decision=ifelse(S>=seuil,"positif","negatif") 
+ta=table(real=PREMATURE,decision)
+ta
+VP=ta[2,2]
+FP=ta[1,2]
+VN=ta[1,1]
+FN=ta[2,1]
+Se=VP/(VP+FN)
+Se # Sensibilité (Taux de vrais positifs)
+Sp=VN/(VN+FP)
+Sp # Spécificité (Taux de vrais négatifs)
+1-Sp # Taux de faux positifs
+```
+
+**Réponse 21 :** Enfin on peut tracer la courbe ROC`
+```{r}
+library(ROCR)
+pred=prediction(S, prema$PREMATURE)
+# Coordonnées de courbe ROC
+perf=performance(pred, "tpr", "fpr")
+# Plot courbe ROC
+plot(perf)
+```
+
+Ou en utilisant le package plotROC
+```{r}
+library("plotROC")
+Score = cbind.data.frame(Y = ifelse(PREMATURE == "positif",1,0),S = S)
+ggplot(Score, aes(d = Y, m = S)) + geom_roc()
+```
+
+**Réponse 23 :** L'aire sous la courbe est obtenues par le code suivant
+```{r}
+AUC = performance(pred, "auc")
+attr(AUC, "y.values")[[1]]
+```
+
+**Réponse 22 :** Interprétation des valeurs
+```{r}
+vx = perf@x.values[[1]] # 1 - Sp
+vy = perf@y.values[[1]] # Se
+va = perf@alpha.values[[1]] # seuils
+```
+
+Pour comprendre les valeurs de alpha on lance
+```{r}
+max(abs(sort(unique(S),decreasing=TRUE)-va[-1]))
+```
+
+```{r}
+sort(S,decreasing=TRUE)[1:10]
+perf@alpha.values[[1]][2:11]
+```
+On remarque que les alpha correspondent aux valeurs uniques de S triées de la plus grande à la plus petite.
+
+vx et vy donnent les valeurs de Se et 1-Sp. On retrouve les valeurs calculées précédemment
+```{r}
+vx[which(va==seuil)]
+vy[which(va==seuil)]
+```
+
+**Réponse 24 :** Pour déterminer le seuil idéal au sens de la règle du coin on lance
+```{r}
+dist = sqrt(vx^2+(1-vy)^2)
+head(dist)
+seuilideal=va[which.min(dist)]
+seuilideal
+```
+
+Les résultats obtenus sont alors les suivants
+```{r}
+taideal=table(real=PREMATURE,ifelse(S>=seuilideal,"positif","negatif"))
+ta
+taideal
+```
+
+On peut comparer les courbes ROC des différents modèles
+```{r}
+library("plotROC")
+Score = cbind.data.frame(Y = ifelse(PREMATURE == "positif",1,0),
+                         M1 = model1$fitted.values,
+                         M2 = model2$fitted.values,
+                         M3 = model3$fitted.values,
+                         Mfull = predict(fullmodel,prema,type = "response"),
+                         Mreduced = predict(reduced,prema, type = "response"))
+longScore <- melt_roc(Score, "Y", c("M1", "M2","M3","Mfull","Mreduced"))
+head(longScore)
+
+ggplot(longScore, aes(d = D, m = M, color = name)) + geom_roc()
+```
+Ici on voit que reduced et full sont au coude à coude. reduced a été préféré par AIC car on a un ajustement comparable, tout en consommant moins de paramètres (risque de sur-ajustement moins élevé).
+
+Pour conclure il faut cependant interpréter ces résultats avec prudence. En effet, ici la courbe ROC a été réalisée sur les mêmes données que celles qui on servi à l'apprentissage ... On pourrait comparer les résultats à ceux produits par validation croisée.
+```{r}
+formule_reduced = reduced$formula
+formule_reduced
+pLOO = rep(0,nrow(prema))
+for (i in 1:nrow(prema)){
+  fit = glm(formule_reduced, family = "binomial", data = prema[-i,])
+  pLOO[i] = predict(fit,prema[i,],family = "binomial", type = "response")
+}
+
+Score = cbind.data.frame(Y = ifelse(PREMATURE == "positif",1,0),
+                         Mreduced = predict(reduced,prema, type = "response"),
+                         Mreduced_cv = pLOO)
+longScore <- melt_roc(Score, "Y", c("Mreduced","Mreduced_cv"))
+ggplot(longScore, aes(d = D, m = M, color = name)) + geom_roc()
+```
+Ici on voit que les performances estimées par validation croisées sont sensiblement moins bonnes que les performances sur l'échantillon d'apprentissage.
+
+En réalité il se pourrait que les performances réelles soient encore moins bonnes, puisque toutes les données ont participé à la sélection de variables. La validation croisée réalisée à posteriori sur le modèle retenu ne corrige qu'en partie ce biais.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
